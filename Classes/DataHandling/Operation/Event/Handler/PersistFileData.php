@@ -369,6 +369,7 @@ class PersistFileData implements RecordOperationEventHandlerInterface
             $fileContent = '';
         }
 
+        // @extensionScannerIgnoreLine
         if ($fileContent === '' || ($file !== null && $file->getSize() > 0)) {
             $this->handleEmptyFile();
         }

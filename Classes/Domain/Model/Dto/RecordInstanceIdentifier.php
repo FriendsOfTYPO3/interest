@@ -175,12 +175,15 @@ class RecordInstanceIdentifier
     {
         if (
             !TcaUtility::isLocalizable($this->getTable())
+            // @extensionScannerIgnoreLine
             || $this->getLanguage() === null
+            // @extensionScannerIgnoreLine
             || $this->getLanguage()->getLanguageId() === 0
         ) {
             return $this->remoteId;
         }
 
+        // @extensionScannerIgnoreLine
         $languageAspect = self::LANGUAGE_ASPECT_PREFIX . $this->getLanguage()->getLanguageId();
 
         if (strpos($this->remoteId, $languageAspect) !== false) {
@@ -234,6 +237,7 @@ class RecordInstanceIdentifier
         $siteLanguages = array_reduce($siteLanguages, function (array $uniqueSiteLanguages, SiteLanguage $item) {
             /** @var SiteLanguage $siteLanguage */
             foreach ($uniqueSiteLanguages as $siteLanguage) {
+                // @extensionScannerIgnoreLine
                 if ($siteLanguage->getLanguageId() === $item->getLanguageId()) {
                     return $uniqueSiteLanguages;
                 }

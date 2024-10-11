@@ -19,10 +19,14 @@ class SetContentObjectRendererLanguage implements RecordOperationEventHandlerInt
      */
     public function __invoke(AbstractRecordOperationEvent $event): void
     {
+        // @extensionScannerIgnoreLine
         if ($event->getRecordOperation()->getLanguage() === null) {
+            // @extensionScannerIgnoreLine
             $event->getRecordOperation()->getContentObjectRenderer()->data['language'] = null;
         } else {
+            // @extensionScannerIgnoreLine
             $event->getRecordOperation()->getContentObjectRenderer()->data['language']
+                // @extensionScannerIgnoreLine
                 = $event->getRecordOperation()->getLanguage()->getHreflang();
         }
     }

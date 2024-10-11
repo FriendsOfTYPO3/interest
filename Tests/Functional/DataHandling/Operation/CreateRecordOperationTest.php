@@ -408,7 +408,9 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         $file = GeneralUtility::makeInstance(ResourceFactory::class)->getFileObject($fileId);
 
         self::assertIsObject($file, 'File object was found');
+        // @extensionScannerIgnoreLine
         self::assertEquals(0, $file->getSize(), 'File size is zero');
+        // @extensionScannerIgnoreLine
         self::assertEmpty($file->getSize(), 'File content is empty');
     }
 }

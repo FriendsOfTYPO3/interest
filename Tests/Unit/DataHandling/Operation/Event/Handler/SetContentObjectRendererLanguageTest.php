@@ -44,6 +44,7 @@ class SetContentObjectRendererLanguageTest extends UnitTestCase
 
             (new SetContentObjectRendererLanguage())($event);
 
+            // @extensionScannerIgnoreLine
             self::assertNull($mockContentObjectRenderer->data['language']);
         }
     }
@@ -84,6 +85,7 @@ class SetContentObjectRendererLanguageTest extends UnitTestCase
 
             (new SetContentObjectRendererLanguage())($event);
 
+            // @extensionScannerIgnoreLine
             self::assertEquals('hreflangValue', $mockContentObjectRenderer->data['language']);
         }
     }

@@ -279,7 +279,9 @@ class HttpRequestRouter
         if (!isset($GLOBALS['TSFE']) || !$GLOBALS['TSFE'] instanceof TypoScriptFrontendController) {
             $GLOBALS['TSFE'] = $controller;
         }
+        // @extensionScannerIgnoreLine
         if (!$GLOBALS['TSFE']->sys_page instanceof PageRepository) {
+            // @extensionScannerIgnoreLine
             $GLOBALS['TSFE']->sys_page = GeneralUtility::makeInstance(PageRepository::class);
         }
     }

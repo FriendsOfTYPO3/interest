@@ -242,6 +242,7 @@ class PendingRelationsCommandController extends Command
             $progressBar->advance();
         }
 
+        // @extensionScannerIgnoreLine
         $progressBar->finish();
 
         return 0;

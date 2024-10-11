@@ -160,6 +160,7 @@ abstract class AbstractRecordOperation
             $this->getDataForDataHandler(),
             $this->getTable(),
             $this->getRemoteId(),
+            // @extensionScannerIgnoreLine
             $this->getLanguage() === null ? null : $this->getLanguage()->getHreflang(),
             null,
             $this->getMetaData(),
@@ -173,6 +174,7 @@ abstract class AbstractRecordOperation
     {
         $contentObjectRenderer = GeneralUtility::makeInstance(ContentObjectRenderer::class);
 
+        // @extensionScannerIgnoreLine
         $contentObjectRenderer->data = [
             'table' => $this->getTable(),
             'remoteId' => $this->getRemoteId(),
@@ -302,6 +304,7 @@ abstract class AbstractRecordOperation
      */
     public function getLanguage(): ?SiteLanguage
     {
+        // @extensionScannerIgnoreLine
         return $this->getRecordRepresentation()->getRecordInstanceIdentifier()->getLanguage();
     }
 
