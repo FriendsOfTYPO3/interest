@@ -43,7 +43,7 @@ class CreateCommandController extends AbstractReceiveCommandController
      *
      * @throws IdentityConflictException
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $exceptions = [];
 

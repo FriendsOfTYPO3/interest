@@ -144,8 +144,6 @@ class RelationUtility
         /** @var RelationHandler $relationHandler */
         $relationHandler = GeneralUtility::makeInstance(RelationHandler::class);
 
-        $relationHandler->setFetchAllFields(true);
-
         $relationHandler->start(
             $localUid,
             $localTable,
