@@ -22,7 +22,7 @@ class Context
     /**
      * @param bool $updateReferenceIndex
      */
-    public static function setDisableReferenceIndex(bool $updateReferenceIndex)
+    public static function setDisableReferenceIndex(bool $updateReferenceIndex): void
     {
         self::$disableReferenceIndex = $updateReferenceIndex;
     }

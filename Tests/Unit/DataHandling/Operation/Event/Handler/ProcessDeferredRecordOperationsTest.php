@@ -26,7 +26,7 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnEarlyIfDeleteOperation()
+    public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -42,7 +42,7 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
     /**
      * @test
      */
-    public function deferredDeleteOperationsAreJustDeleted()
+    public function deferredDeleteOperationsAreJustDeleted(): void
     {
         $deferredRecordDbRow = [
             'uid' => 123,
@@ -79,7 +79,7 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
      *
      * @dataProvider recordOperationClassCombinationsDataProvider
      */
-    public function deferredOperationsAreInvoked(string $operationClass, string $deferredOperationClass)
+    public function deferredOperationsAreInvoked(string $operationClass, string $deferredOperationClass): void
     {
         $deferredRecordDbRow = $this->getDeferredRecordDbRow($deferredOperationClass);
 
@@ -132,7 +132,7 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
     /**
      * @test
      */
-    public function convertsDeferredCreateOperationWithConflictToUpdateOperation()
+    public function convertsDeferredCreateOperationWithConflictToUpdateOperation(): void
     {
         $deferredOperationClass = CreateRecordOperation::class;
 

@@ -17,7 +17,7 @@ class SanitizeFieldValuesTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnEarlyIfDeleteOperation()
+    public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -33,7 +33,7 @@ class SanitizeFieldValuesTest extends UnitTestCase
     /**
      * @test
      */
-    public function csvRelationalFieldsAreExploded()
+    public function csvRelationalFieldsAreExploded(): void
     {
         $dataForDataHandler = [
             'arrayRelationField' => ['relation1RemoteId', 'relation2RemoteId', 'relation3RemoteId'],
@@ -71,7 +71,7 @@ class SanitizeFieldValuesTest extends UnitTestCase
     /**
      * @test
      */
-    public function floatIntegerAndStringAreNotModified()
+    public function floatIntegerAndStringAreNotModified(): void
     {
         $dataForDataHandler = [
             'floatField' => 1.234,
@@ -110,7 +110,7 @@ class SanitizeFieldValuesTest extends UnitTestCase
      * @test
      * @dataProvider unsupportedValueTypeDataProvider
      */
-    public function unsupportedValueTypeThrowsException(array $dataForDataHandler)
+    public function unsupportedValueTypeThrowsException(array $dataForDataHandler): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);

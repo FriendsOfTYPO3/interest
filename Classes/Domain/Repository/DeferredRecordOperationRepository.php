@@ -19,7 +19,7 @@ class DeferredRecordOperationRepository extends AbstractRepository
      * @param string $dependentRemoteId
      * @param AbstractRecordOperation $operation
      */
-    public function add(string $dependentRemoteId, AbstractRecordOperation $operation)
+    public function add(string $dependentRemoteId, AbstractRecordOperation $operation): void
     {
         $queryBuilder = $this->getQueryBuilder();
 
@@ -88,7 +88,7 @@ class DeferredRecordOperationRepository extends AbstractRepository
      *
      * @param int $uid
      */
-    public function delete(int $uid)
+    public function delete(int $uid): void
     {
         $queryBuilder = $this->getQueryBuilder();
 

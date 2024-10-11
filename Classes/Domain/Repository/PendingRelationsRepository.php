@@ -74,7 +74,7 @@ class PendingRelationsRepository extends AbstractRepository
      * @param int $uid
      * @param string $remoteId
      */
-    public function setSingle(string $table, string $field, int $uid, string $remoteId)
+    public function setSingle(string $table, string $field, int $uid, string $remoteId): void
     {
         $queryBuilder = $this->getQueryBuilder();
 

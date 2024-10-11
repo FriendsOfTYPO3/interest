@@ -12,7 +12,7 @@ use TYPO3\CMS\Core\Resource\AbstractFile;
  */
 class DeleteRemoteIdForDeletedFileSlot
 {
-    public function __invoke(AbstractFile $file)
+    public function __invoke(AbstractFile $file): void
     {
         DeleteRemoteIdForDeletedFile::removeRemoteIdForFile($file);
     }

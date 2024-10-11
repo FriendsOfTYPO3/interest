@@ -12,7 +12,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class DeleteRemoteIdForDeletedFile
 {
-    public function __invoke(AfterFileDeletedEvent $event)
+    public function __invoke(AfterFileDeletedEvent $event): void
     {
         static::removeRemoteIdForFile($event->getFile());
     }

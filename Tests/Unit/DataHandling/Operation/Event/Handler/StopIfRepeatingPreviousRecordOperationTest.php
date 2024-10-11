@@ -19,7 +19,7 @@ class StopIfRepeatingPreviousRecordOperationTest extends UnitTestCase
     /**
      * @test
      */
-    public function throwsExceptionIfSameAsPrevious()
+    public function throwsExceptionIfSameAsPrevious(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
 
@@ -44,7 +44,7 @@ class StopIfRepeatingPreviousRecordOperationTest extends UnitTestCase
     /**
      * @test
      */
-    public function throwsNoExceptionIfDifferentToPrevious()
+    public function throwsNoExceptionIfDifferentToPrevious(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
 

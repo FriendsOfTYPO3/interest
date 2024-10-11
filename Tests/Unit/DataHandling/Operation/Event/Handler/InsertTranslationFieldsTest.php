@@ -27,7 +27,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnsEarlyIfLanguageIsNull()
+    public function returnsEarlyIfLanguageIsNull(): void
     {
         foreach ($this->classNames as $className) {
             $mockOperation = $this->createMock($className);
@@ -49,7 +49,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnsEarlyIfLanguageIsZero()
+    public function returnsEarlyIfLanguageIsZero(): void
     {
         foreach ($this->classNames as $className) {
             $mockLanguage = $this->createMock(SiteLanguage::class);
@@ -77,7 +77,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnsEarlyIfTableNotTranslatable()
+    public function returnsEarlyIfTableNotTranslatable(): void
     {
         foreach ($this->classNames as $className) {
             $mockOperation = $this->createMock($className);
@@ -103,7 +103,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnsEarlyIfLanguageFieldIsSet()
+    public function returnsEarlyIfLanguageFieldIsSet(): void
     {
         foreach ($this->classNames as $className) {
             $mockOperation = $this->createMock($className);
@@ -135,7 +135,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
      *
      * @dataProvider provideDataForInsertsCorrectTranslationFields
      */
-    public function insertsCorrectTranslationFields(callable $configureTca, array $setDataFieldForDataHandlerExpects)
+    public function insertsCorrectTranslationFields(callable $configureTca, array $setDataFieldForDataHandlerExpects): void
     {
         $configureTca();
 

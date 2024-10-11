@@ -29,7 +29,7 @@ class FixSortingPositionsOnRemoteRelationRecordsTest extends UnitTestCase
         array $mmFieldConfiguration,
         array $foreignSideOrderReturns,
         array $persistDataArgument
-    ) {
+    ): void {
         $mappingRepositoryMock = $this->createMock(RemoteIdMappingRepository::class);
 
         GeneralUtility::setSingletonInstance(RemoteIdMappingRepository::class, $mappingRepositoryMock);

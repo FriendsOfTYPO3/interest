@@ -18,7 +18,7 @@ class SetContentObjectRendererLanguageTest extends UnitTestCase
     /**
      * @test
      */
-    public function setsNullLanguageToNull()
+    public function setsNullLanguageToNull(): void
     {
         foreach (
             [
@@ -51,7 +51,7 @@ class SetContentObjectRendererLanguageTest extends UnitTestCase
     /**
      * @test
      */
-    public function correctlySetsHreflang()
+    public function correctlySetsHreflang(): void
     {
         foreach (
             [

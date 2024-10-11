@@ -17,7 +17,7 @@ class ProcessDatamapTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnEarlyWhenEmptyDatamap()
+    public function returnEarlyWhenEmptyDatamap(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             $mockDataHandler = $this->createMock(DataHandler::class);
@@ -44,7 +44,7 @@ class ProcessDatamapTest extends UnitTestCase
     /**
      * @test
      */
-    public function willProcessDatamapAndSetStatus()
+    public function willProcessDatamapAndSetStatus(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             foreach ([['iAmAnError'], []] as $errorLogKey => $errorLog) {

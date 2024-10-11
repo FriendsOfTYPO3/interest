@@ -62,7 +62,7 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
     /**
      * @test
      */
-    public function createOperationResultsInCorrectRecord()
+    public function createOperationResultsInCorrectRecord(): void
     {
         $data = $this->recordRepresentationAndCorrespondingRowDataProvider();
 
@@ -179,7 +179,7 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
     /**
      * @test
      */
-    public function createAdvancedInlineMmRelationsInDifferentOrder()
+    public function createAdvancedInlineMmRelationsInDifferentOrder(): void
     {
         $fileData = base64_encode(file_get_contents(__DIR__ . '/Fixtures/Image.jpg'));
 
@@ -363,7 +363,7 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
     /**
      * @test
      */
-    public function createEmptyFileIsHandledAsConfigured()
+    public function createEmptyFileIsHandledAsConfigured(): void
     {
         $createEmptySysFile = function () {
             (new CreateRecordOperation(

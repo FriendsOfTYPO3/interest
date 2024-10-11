@@ -16,7 +16,7 @@ class SetPidTest extends UnitTestCase
     /**
      * @test
      */
-    public function setsPidOnCreateOperationIfNotAlreadySet()
+    public function setsPidOnCreateOperationIfNotAlreadySet(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
 
@@ -44,7 +44,7 @@ class SetPidTest extends UnitTestCase
     /**
      * @test
      */
-    public function doesNotSetPidOnNonCreateOperation()
+    public function doesNotSetPidOnNonCreateOperation(): void
     {
         foreach ([UpdateRecordOperation::class, DeleteRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);
@@ -72,7 +72,7 @@ class SetPidTest extends UnitTestCase
     /**
      * @test
      */
-    public function doesNotSetPidIfAlreadySet()
+    public function doesNotSetPidIfAlreadySet(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
 

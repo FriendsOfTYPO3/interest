@@ -22,7 +22,7 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
     /**
      * @test
      */
-    public function updatingPageChangesFields()
+    public function updatingPageChangesFields(): void
     {
         $data = [
             'title' => 'INTEREST',
@@ -52,7 +52,7 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
     /**
      * @test
      */
-    public function updateOperationResultsInCorrectRecord()
+    public function updateOperationResultsInCorrectRecord(): void
     {
         $data = $this->recordRepresentationAndCorrespondingRowDataProvider();
 
@@ -68,7 +68,7 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
     /**
      * @test
      */
-    public function updatingForeignFieldRemovesNonExistingRelationsAndUseCorrectSorting()
+    public function updatingForeignFieldRemovesNonExistingRelationsAndUseCorrectSorting(): void
     {
         $mappingRepository = new RemoteIdMappingRepository();
 

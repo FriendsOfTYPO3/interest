@@ -18,7 +18,7 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnEarlyWhenNotUpdateOperation()
+    public function returnEarlyWhenNotUpdateOperation(): void
     {
         foreach ([DeleteRecordOperation::class, CreateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);
@@ -36,7 +36,7 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
     /**
      * @test
      */
-    public function processWhenUpdateOperationAndReturnWhenNoMessages()
+    public function processWhenUpdateOperationAndReturnWhenNoMessages(): void
     {
         $mockOperation = $this->createMock(UpdateRecordOperation::class);
 
@@ -53,7 +53,7 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
     /**
      * @test
      */
-    public function correctlySetsCmdmap()
+    public function correctlySetsCmdmap(): void
     {
         $messageValues = [
             ['tablename1', 'firstField', 123, [1, 2]],

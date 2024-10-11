@@ -17,7 +17,7 @@ class ValidateFieldNamesTest extends UnitTestCase
     /**
      * @test
      */
-    public function willExitEarlyOnDeleteOperation()
+    public function willExitEarlyOnDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -33,7 +33,7 @@ class ValidateFieldNamesTest extends UnitTestCase
     /**
      * @test
      */
-    public function willThrowExceptionIfFieldDoesNotExistInTca()
+    public function willThrowExceptionIfFieldDoesNotExistInTca(): void
     {
         $GLOBALS['TCA']['tablename']['columns'] = [
             'definedField1' => [],
@@ -70,7 +70,7 @@ class ValidateFieldNamesTest extends UnitTestCase
     /**
      * @test
      */
-    public function willNotThrowExceptionIfAllFieldsExistInTca()
+    public function willNotThrowExceptionIfAllFieldsExistInTca(): void
     {
         $GLOBALS['TCA']['tablename']['columns'] = [
             'definedField1' => [],

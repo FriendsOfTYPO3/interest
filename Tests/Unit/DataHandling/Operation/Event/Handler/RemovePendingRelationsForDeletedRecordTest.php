@@ -20,7 +20,7 @@ class RemovePendingRelationsForDeletedRecordTest extends UnitTestCase
     /**
      * @test
      */
-    public function doesNotProceedIfOperationWasUnsuccessful()
+    public function doesNotProceedIfOperationWasUnsuccessful(): void
     {
         $mockRepository = $this->createMock(PendingRelationsRepository::class);
 
@@ -45,7 +45,7 @@ class RemovePendingRelationsForDeletedRecordTest extends UnitTestCase
     /**
      * @test
      */
-    public function doesNotProceedWhenUpdateOrDeleteOperation()
+    public function doesNotProceedWhenUpdateOrDeleteOperation(): void
     {
         $mockRepository = $this->createMock(PendingRelationsRepository::class);
 
@@ -72,7 +72,7 @@ class RemovePendingRelationsForDeletedRecordTest extends UnitTestCase
     /**
      * @test
      */
-    public function removeRemoteIsCalledWithTableAndUidAndNoField()
+    public function removeRemoteIsCalledWithTableAndUidAndNoField(): void
     {
         $mockRepository = $this->createMock(PendingRelationsRepository::class);
 

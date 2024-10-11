@@ -21,7 +21,7 @@ class HttpRequestRouterTest extends UnitTestCase
     /**
      * @test
      */
-    public function routesRequestToCorrectAction()
+    public function routesRequestToCorrectAction(): void
     {
         $eventDispatcherMock = $this->createMock(EventDispatcher::class);
 

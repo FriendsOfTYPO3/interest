@@ -9,7 +9,7 @@ $EM_CONF['interest'] = [
     'category' => 'plugin',
     'constraints' => [
         'depends' => [
-            'typo3' => '11.5.8-12.4.99',
+            'typo3' => '13.3.1-13.4.99',
         ],
     ],
     'autoload' => [

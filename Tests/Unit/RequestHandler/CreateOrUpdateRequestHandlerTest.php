@@ -13,7 +13,7 @@ class CreateOrUpdateRequestHandlerTest extends UnitTestCase
     /**
      * @test
      */
-    public function emptyRequestBodyWillFail()
+    public function emptyRequestBodyWillFail(): void
     {
         $stream = fopen('php://memory', 'r+');
         fwrite($stream, '');

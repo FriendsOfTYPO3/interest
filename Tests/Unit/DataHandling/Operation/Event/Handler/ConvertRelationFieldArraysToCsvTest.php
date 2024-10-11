@@ -18,7 +18,7 @@ class ConvertRelationFieldArraysToCsvTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnsEarlyIfDeleteRecordOperation()
+    public function returnsEarlyIfDeleteRecordOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -34,7 +34,7 @@ class ConvertRelationFieldArraysToCsvTest extends UnitTestCase
     /**
      * @test
      */
-    public function callsStdWrapWithCorrectArguments()
+    public function callsStdWrapWithCorrectArguments(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);

@@ -122,7 +122,7 @@ abstract class AbstractRecordOperation
      */
     protected array $updatedForeignFieldValues = [];
 
-    public function __invoke()
+    public function __invoke(): void
     {
         if ($this->operationStopped) {
             return;
@@ -212,7 +212,7 @@ abstract class AbstractRecordOperation
     /**
      * @param array $dataForDataHandler
      */
-    public function setDataForDataHandler(array $dataForDataHandler)
+    public function setDataForDataHandler(array $dataForDataHandler): void
     {
         $this->dataForDataHandler = $dataForDataHandler;
     }
@@ -234,7 +234,7 @@ abstract class AbstractRecordOperation
      * @param string $fieldName
      * @param string|int|float|array $value
      */
-    public function setDataFieldForDataHandler(string $fieldName, $value)
+    public function setDataFieldForDataHandler(string $fieldName, $value): void
     {
         $this->dataForDataHandler[$fieldName] = $value;
     }
@@ -255,7 +255,7 @@ abstract class AbstractRecordOperation
      *
      * @param string $fieldName
      */
-    public function unsetDataField(string $fieldName)
+    public function unsetDataField(string $fieldName): void
     {
         unset($this->dataForDataHandler[$fieldName]);
     }
@@ -271,7 +271,7 @@ abstract class AbstractRecordOperation
     /**
      * @param int $uid
      */
-    public function setUid(int $uid)
+    public function setUid(int $uid): void
     {
         $this->recordRepresentation->getRecordInstanceIdentifier()->setUid($uid);
     }
@@ -292,7 +292,7 @@ abstract class AbstractRecordOperation
     /**
      * @param int $storagePid
      */
-    public function setStoragePid(int $storagePid)
+    public function setStoragePid(int $storagePid): void
     {
         $this->storagePid = $storagePid;
     }
@@ -334,7 +334,7 @@ abstract class AbstractRecordOperation
     /**
      * @param string $hash
      */
-    public function setHash(string $hash)
+    public function setHash(string $hash): void
     {
         $this->hash = $hash;
     }
@@ -358,7 +358,7 @@ abstract class AbstractRecordOperation
     /**
      * Checks if there's an update in the DataHandler success status.
      */
-    private function retrieveSuccessMessage()
+    private function retrieveSuccessMessage(): void
     {
         /** @var DataHandlerSuccessMessage $message */
         $message = $this->retrieveMessage(DataHandlerSuccessMessage::class);
@@ -405,7 +405,7 @@ abstract class AbstractRecordOperation
      *
      * @param MessageInterface $message
      */
-    public function dispatchMessage(MessageInterface $message)
+    public function dispatchMessage(MessageInterface $message): void
     {
         if ($message instanceof ReplacesPreviousMessageInterface) {
             $this->messageQueue[get_class($message)] = [$message];

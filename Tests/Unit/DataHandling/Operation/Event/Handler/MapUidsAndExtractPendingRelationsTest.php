@@ -21,7 +21,7 @@ class MapUidsAndExtractPendingRelationsTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnEarlyIfDeleteOperation()
+    public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -37,7 +37,7 @@ class MapUidsAndExtractPendingRelationsTest extends UnitTestCase
     /**
      * @test
      */
-    public function setsExistingUidsAndIssuesPendingRelationMessagesForOthers()
+    public function setsExistingUidsAndIssuesPendingRelationMessagesForOthers(): void
     {
         $testData = [
             'textField' => 'textFieldContent',

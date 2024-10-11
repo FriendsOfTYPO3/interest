@@ -17,7 +17,7 @@ class ProcessCmdmapTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnEarlyWhenEmptyCmdmap()
+    public function returnEarlyWhenEmptyCmdmap(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             $mockDataHandler = $this->createMock(DataHandler::class);
@@ -44,7 +44,7 @@ class ProcessCmdmapTest extends UnitTestCase
     /**
      * @test
      */
-    public function willProcessCmdmapAndSetStatus()
+    public function willProcessCmdmapAndSetStatus(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             foreach ([['iAmAnError'], []] as $errorLogKey => $errorLog) {

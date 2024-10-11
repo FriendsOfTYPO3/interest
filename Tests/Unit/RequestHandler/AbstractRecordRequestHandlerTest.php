@@ -16,7 +16,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
      * @test
      * @dataProvider correctlyCompliesDataProvider
      */
-    public function correctlyCompliesData(array $entryPoints, array $body, array $expectedConsecutive)
+    public function correctlyCompliesData(array $entryPoints, array $body, array $expectedConsecutive): void
     {
         $body = json_encode($body);
 

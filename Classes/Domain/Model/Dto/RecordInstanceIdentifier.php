@@ -145,7 +145,7 @@ class RecordInstanceIdentifier
     /**
      * @param int $uid
      */
-    public function setUid(int $uid)
+    public function setUid(int $uid): void
     {
         $this->uid = $uid;
     }

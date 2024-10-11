@@ -29,7 +29,7 @@ class TokenRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function createTokenReturnsHashWithExpiryGreaterThanCreationDate()
+    public function createTokenReturnsHashWithExpiryGreaterThanCreationDate(): void
     {
         $token = $this->subject->createTokenForBackendUser(1);
 

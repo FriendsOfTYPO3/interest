@@ -322,7 +322,7 @@ class RemoteIdMappingRepository extends AbstractRepository
      *
      * @param AbstractRecordOperation $recordOperation
      */
-    public function update(AbstractRecordOperation $recordOperation)
+    public function update(AbstractRecordOperation $recordOperation): void
     {
         $queryBuilder = $this->getQueryBuilder();
 
@@ -446,7 +446,7 @@ class RemoteIdMappingRepository extends AbstractRepository
      * @param string $key
      * @param string|float|int|array|null $value
      */
-    public function setMetaDataValue(string $remoteId, string $key, $value)
+    public function setMetaDataValue(string $remoteId, string $key, $value): void
     {
         $recordExists = $this->exists($remoteId);
 

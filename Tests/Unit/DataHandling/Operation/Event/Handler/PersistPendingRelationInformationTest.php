@@ -21,7 +21,7 @@ class PersistPendingRelationInformationTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnEarlyIfDeleteOperation()
+    public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -37,7 +37,7 @@ class PersistPendingRelationInformationTest extends UnitTestCase
     /**
      * @test
      */
-    public function persistDataFromEachPendingRelationMessage()
+    public function persistDataFromEachPendingRelationMessage(): void
     {
         $pendingRelationMessage1 = new PendingRelationMessage(
             'tablename1',
@@ -106,7 +106,7 @@ class PersistPendingRelationInformationTest extends UnitTestCase
     /**
      * @test
      */
-    public function noPendingRelationMessagesMeansNoDatabaseSet()
+    public function noPendingRelationMessagesMeansNoDatabaseSet(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);

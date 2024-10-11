@@ -15,7 +15,7 @@ class ProcessCmdmapTest extends UnitTestCase
     /**
      * @test
      */
-    public function deletesRemoteIdIfOwnerRecordHasBeenDeleted()
+    public function deletesRemoteIdIfOwnerRecordHasBeenDeleted(): void
     {
         $this->resetSingletonInstances = true;
 
@@ -58,7 +58,7 @@ class ProcessCmdmapTest extends UnitTestCase
     /**
      * @test
      */
-    public function keepsRemoteIdIfOwnerRecordHasNotBeenDeleted()
+    public function keepsRemoteIdIfOwnerRecordHasNotBeenDeleted(): void
     {
         $this->resetSingletonInstances = true;
 

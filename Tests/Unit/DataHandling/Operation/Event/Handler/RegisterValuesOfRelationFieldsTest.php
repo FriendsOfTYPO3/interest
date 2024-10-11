@@ -19,7 +19,7 @@ class RegisterValuesOfRelationFieldsTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnEarlyWhenNotUpdateOperation()
+    public function returnEarlyWhenNotUpdateOperation(): void
     {
         foreach ([DeleteRecordOperation::class, CreateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);
@@ -37,7 +37,7 @@ class RegisterValuesOfRelationFieldsTest extends UnitTestCase
     /**
      * @test
      */
-    public function attemptToProcessDatamapWhenUpdateOperation()
+    public function attemptToProcessDatamapWhenUpdateOperation(): void
     {
         $tableName = 'tablename';
 
@@ -64,7 +64,7 @@ class RegisterValuesOfRelationFieldsTest extends UnitTestCase
     /**
      * @test
      */
-    public function correctlyDispatchRelationFieldValueMessage()
+    public function correctlyDispatchRelationFieldValueMessage(): void
     {
         $tableName = 'tablename';
 

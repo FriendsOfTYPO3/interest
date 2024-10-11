@@ -16,7 +16,7 @@ class UpdateCountOnForeignSideOfInlineRecordTest extends UnitTestCase
     /**
      * @test
      */
-    public function willNotExecuteOnCreateAndUpdateOperation()
+    public function willNotExecuteOnCreateAndUpdateOperation(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);
@@ -39,7 +39,7 @@ class UpdateCountOnForeignSideOfInlineRecordTest extends UnitTestCase
     /**
      * @test
      */
-    public function willExecuteOnDeleteOperation()
+    public function willExecuteOnDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 

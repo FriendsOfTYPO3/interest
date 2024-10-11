@@ -22,7 +22,7 @@ class MapNewUidToRemoteIdTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnEarlyIfDeleteOperation()
+    public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -38,7 +38,7 @@ class MapNewUidToRemoteIdTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnEarlyIfUnsuccessfulOperation()
+    public function returnEarlyIfUnsuccessfulOperation(): void
     {
         $mappingRepository = $this->createMock(RemoteIdMappingRepository::class);
 
@@ -65,7 +65,7 @@ class MapNewUidToRemoteIdTest extends UnitTestCase
     /**
      * @test
      */
-    public function setsUidOnCreateOperation()
+    public function setsUidOnCreateOperation(): void
     {
         $remoteId = 'theRemoteId';
 
@@ -143,7 +143,7 @@ class MapNewUidToRemoteIdTest extends UnitTestCase
     /**
      * @test
      */
-    public function executesMappingRepositoryUpdateOnUpdateOperation()
+    public function executesMappingRepositoryUpdateOnUpdateOperation(): void
     {
         $mockOperation = $this->createMock(UpdateRecordOperation::class);
 

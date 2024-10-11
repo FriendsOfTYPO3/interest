@@ -78,16 +78,6 @@ $tca = [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',
                 'default' => 1,
-                'items' => [
-                    [
-                        'label' => '',
-                        'value' => 0,
-                    ],
-                    [
-                        'label' => '',
-                        'value' => 1,
-                    ],
-                ],
             ],
         ],
         'metadata' => [

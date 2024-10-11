@@ -25,7 +25,7 @@ class RelationUtility
         array $pendingRelation,
         string $foreignTable,
         $foreignUid
-    ) {
+    ): void {
         /** @var RelationHandler $relationHandler */
         $relationHandler = GeneralUtility::makeInstance(RelationHandler::class);
 
@@ -189,7 +189,7 @@ class RelationUtility
         string $localTable,
         int $localUid,
         int $countModifier = 0
-    ) {
+    ): void {
         $inlineRelations = TcaUtility::getInlineRelationsToTable($localTable);
 
         if (count($inlineRelations) === 0) {

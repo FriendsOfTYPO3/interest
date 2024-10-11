@@ -13,7 +13,7 @@ class DeleteRequestHandlerTest extends UnitTestCase
     /**
      * @test
      */
-    public function emptyRequestBodyIsNoProblem()
+    public function emptyRequestBodyIsNoProblem(): void
     {
         $stream = fopen('php://memory', 'r+');
         fwrite($stream, '');

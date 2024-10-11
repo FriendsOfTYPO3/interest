@@ -16,7 +16,7 @@ class RemoveEmptyValuesFromRelationFieldArraysTest extends UnitTestCase
     /**
      * @test
      */
-    public function returnEarlyIfDeleteOperation()
+    public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -32,7 +32,7 @@ class RemoveEmptyValuesFromRelationFieldArraysTest extends UnitTestCase
     /**
      * @test
      */
-    public function correctlyRemovesEmptyValuesFromRelationArrays()
+    public function correctlyRemovesEmptyValuesFromRelationArrays(): void
     {
         $dataForDataHandler = [
             'nonRelationField' => 'nonRelationFieldValue',

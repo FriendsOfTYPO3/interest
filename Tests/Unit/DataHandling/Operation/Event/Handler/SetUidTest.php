@@ -18,7 +18,7 @@ class SetUidTest extends UnitTestCase
     /**
      * @test
      */
-    public function setsUidOnCreateOperationIfNotAlreadySet()
+    public function setsUidOnCreateOperationIfNotAlreadySet(): void
     {
         $mockDataHandler = $this->createMock(DataHandler::class);
 
@@ -57,7 +57,7 @@ class SetUidTest extends UnitTestCase
     /**
      * @test
      */
-    public function doesNotSetUidIfOperationUnsuccessful()
+    public function doesNotSetUidIfOperationUnsuccessful(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
 
@@ -86,7 +86,7 @@ class SetUidTest extends UnitTestCase
     /**
      * @test
      */
-    public function doesNotSetUidIfUidIsSet()
+    public function doesNotSetUidIfUidIsSet(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
 
@@ -116,7 +116,7 @@ class SetUidTest extends UnitTestCase
     /**
      * @test
      */
-    public function doesNotSetUidIfOperationIsNotCreate()
+    public function doesNotSetUidIfOperationIsNotCreate(): void
     {
         foreach ([UpdateRecordOperation::class, DeleteRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);

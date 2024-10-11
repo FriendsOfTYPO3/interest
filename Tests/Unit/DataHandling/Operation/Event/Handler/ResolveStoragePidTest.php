@@ -14,7 +14,7 @@ class ResolveStoragePidTest extends UnitTestCase
     /**
      * @test
      */
-    public function resolveStoragePidReturnsZeroIfRootLevelIsOne()
+    public function resolveStoragePidReturnsZeroIfRootLevelIsOne(): void
     {
         $tableName = 'testtable';
 

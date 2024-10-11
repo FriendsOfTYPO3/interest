@@ -19,7 +19,7 @@ class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
     /**
      * @test
      */
-    public function deletingPageSetsDeletedField()
+    public function deletingPageSetsDeletedField(): void
     {
         $mappingRepository = new RemoteIdMappingRepository();
 
@@ -49,7 +49,7 @@ class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
     /**
      * @test
      */
-    public function deletingContentSetsDeletedField()
+    public function deletingContentSetsDeletedField(): void
     {
         (new DeleteRecordOperation(
             new RecordRepresentation(
@@ -75,7 +75,7 @@ class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
     /**
      * @test
      */
-    public function deletingTranslationOfContentSetsDeletedField()
+    public function deletingTranslationOfContentSetsDeletedField(): void
     {
         (new DeleteRecordOperation(
             new RecordRepresentation(
