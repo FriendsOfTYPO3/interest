@@ -107,7 +107,7 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         $mockEventHandler($event);
     }
 
-    public function recordOperationClassCombinationsDataProvider(): array
+    public static function recordOperationClassCombinationsDataProvider(): array
     {
         return [
             [

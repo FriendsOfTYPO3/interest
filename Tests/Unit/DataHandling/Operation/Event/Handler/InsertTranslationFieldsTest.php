@@ -182,7 +182,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
         }
     }
 
-    public function provideDataForInsertsCorrectTranslationFields(): array
+    public static function provideDataForInsertsCorrectTranslationFields(): array
     {
         return [
             [

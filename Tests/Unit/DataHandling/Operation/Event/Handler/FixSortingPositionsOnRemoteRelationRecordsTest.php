@@ -74,7 +74,7 @@ class FixSortingPositionsOnRemoteRelationRecordsTest extends UnitTestCase
     /**
      * @return array
      */
-    public function invokingGeneratesCorrectSortingDataDataProvider(): array
+    public static function invokingGeneratesCorrectSortingDataDataProvider(): array
     {
         return [
             'Single group' => [

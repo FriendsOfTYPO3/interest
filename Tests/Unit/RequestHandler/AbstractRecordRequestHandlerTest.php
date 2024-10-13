@@ -51,7 +51,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
         $subjectMock->handle();
     }
 
-    public function correctlyCompliesDataProvider()
+    public static function correctlyCompliesDataProvider()
     {
         return [
             'Single record' => [

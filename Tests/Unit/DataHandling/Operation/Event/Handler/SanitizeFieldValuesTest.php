@@ -141,7 +141,7 @@ class SanitizeFieldValuesTest extends UnitTestCase
         }
     }
 
-    public function unsupportedValueTypeDataProvider(): array
+    public static function unsupportedValueTypeDataProvider(): array
     {
         return [
             [['objectField' => new \stdClass()]],
