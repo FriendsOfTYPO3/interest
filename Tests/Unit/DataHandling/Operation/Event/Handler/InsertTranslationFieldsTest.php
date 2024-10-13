@@ -171,10 +171,16 @@ class InsertTranslationFieldsTest extends UnitTestCase
                     ...array_fill(0, count($setDataFieldForDataHandlerExpects), false)
                 );
 
+            $invocationCount = self::exactly(count($setDataFieldForDataHandlerExpects));
+
             $mockOperation
-                ->expects(self::exactly(count($setDataFieldForDataHandlerExpects)))
+                ->expects($invocationCount)
                 ->method('setDataFieldForDataHandler')
-                ->withConsecutive(...$setDataFieldForDataHandlerExpects);
+                ->willReturnCallback(function ($parameters) use ($invocationCount, $setDataFieldForDataHandlerExpects) {
+                    $this->assertSame($setDataFieldForDataHandlerExpects[$invocationCount->numberOfInvocations() - 1], $parameters);
+
+                    return $invocationCount->numberOfInvocations();
+                });
 
             $event = new RecordOperationSetupEvent($mockOperation);
 

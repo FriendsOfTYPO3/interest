@@ -118,20 +118,27 @@ class MapUidsAndExtractPendingRelationsTest extends UnitTestCase
                 ->method('getDataForDataHandler')
                 ->willReturn($testData);
 
+            $invocationCount = self::exactly(2);
+
             $mockOperation
-                ->expects(self::exactly(2))
+                ->expects($invocationCount)
                 ->method('setDataFieldForDataHandler')
-                ->withConsecutive(
-                    ['relationField1', [4, 6]],
-                    ['relationField2', ['tablename_6']]
-                );
+                ->willReturnCallback(function ($parameters) use ($invocationCount) {
+                    match ($invocationCount->numberOfInvocations()) {
+                        1 => $this->assertSame(['relationField1', [4, 6]], $parameters),
+                        2 => $this->assertSame(['relationField2', ['tablename_6']], $parameters),
+                        default => $this->fail(),
+                    };
 
-            $dispatchCount = self::exactly(2);
+                    return $invocationCount->numberOfInvocations();
+                });
+
+            $invocationCount = self::exactly(2);
 
             $mockOperation
-                ->expects($dispatchCount)
+                ->expects($invocationCount)
                 ->method('dispatchMessage')
-                ->with(self::callback(function (PendingRelationMessage $message) use ($dispatchCount, $table) {
+                ->with(self::callback(function (PendingRelationMessage $message) use ($invocationCount, $table) {
                     $expected = [
                         ['relationField1', ['relation1']],
                         ['relationField2', ['relation4', 'relation5']],
@@ -140,19 +147,19 @@ class MapUidsAndExtractPendingRelationsTest extends UnitTestCase
                     self::assertEquals(
                         $table,
                         $message->getTable(),
-                        'Tablename invocation #' . $dispatchCount->getInvocationCount()
+                        'Tablename invocation #' . $invocationCount->numberOfInvocations()
                     );
 
                     self::assertEquals(
-                        $expected[$dispatchCount->getInvocationCount() - 1][0],
+                        $expected[$invocationCount->numberOfInvocations() - 1][0],
                         $message->getField(),
-                        'Field name invocation #' . $dispatchCount->getInvocationCount()
+                        'Field name invocation #' . $invocationCount->numberOfInvocations()
                     );
 
                     self::assertEquals(
-                        $expected[$dispatchCount->getInvocationCount() - 1][1],
+                        $expected[$invocationCount->numberOfInvocations() - 1][1],
                         $message->getRemoteIds(),
-                        'Remote IDs invocation #' . $dispatchCount->getInvocationCount()
+                        'Remote IDs invocation #' . $invocationCount->numberOfInvocations()
                     );
 
                     return true;

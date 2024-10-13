@@ -52,10 +52,20 @@ class RemoveFieldsWithNullValueTest extends UnitTestCase
                 ->method('getDataForDataHandler')
                 ->willReturn($dataForDataHandler);
 
+            $invocationCount = self::exactly(2);
+
             $mockOperation
-                ->expects(self::exactly(2))
+                ->expects($invocationCount)
                 ->method('unsetDataField')
-                ->withConsecutive(['nullValueField1'], ['nullValueField2']);
+                ->willReturnCallback(function ($parameters) use ($invocationCount) {
+                    match ($invocationCount->numberOfInvocations()) {
+                        1 => $this->assertSame(['nullValueField1'], $parameters),
+                        2 => $this->assertSame(['nullValueField2'], $parameters),
+                        default => $this->fail(),
+                    };
+
+                    return $invocationCount->numberOfInvocations();
+                });
 
             $event = new RecordOperationSetupEvent($mockOperation);
 

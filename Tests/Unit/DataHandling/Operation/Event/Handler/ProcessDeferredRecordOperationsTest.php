@@ -153,16 +153,19 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
 
         $invocationCount = self::exactly(2);
 
+        $consecutiveParameters = [
+            [$deferredOperationClass, $deferredRecordDbRow['arguments']],
+            [UpdateRecordOperation::class, $deferredRecordDbRow['arguments']],
+        ];
+
         $mockEventHandler
             ->expects($invocationCount)
             ->method('createRecordOperation')
-            ->withConsecutive(
-                [$deferredOperationClass, $deferredRecordDbRow['arguments']],
-                [UpdateRecordOperation::class, $deferredRecordDbRow['arguments']]
-            )
             ->willReturnCallback(
-                function () use ($invocationCount, $mockUpdateOperation) {
-                    switch ($invocationCount->getInvocationCount()) {
+                function ($parameters) use ($invocationCount, $mockUpdateOperation, $consecutiveParameters) {
+                    $this->assertSame($consecutiveParameters[$invocationCount->numberOfInvocations()], $parameters);
+
+                    switch ($invocationCount->numberOfInvocations()) {
                         case 1:
                             throw new IdentityConflictException();
                         case 2:

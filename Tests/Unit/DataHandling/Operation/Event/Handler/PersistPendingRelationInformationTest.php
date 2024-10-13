@@ -74,23 +74,36 @@ class PersistPendingRelationInformationTest extends UnitTestCase
 
             $repositoryMock = $this->createMock(PendingRelationsRepository::class);
 
+            $invocationCount = self::exactly(2);
+
             $repositoryMock
-                ->expects(self::exactly(2))
+                ->expects($invocationCount)
                 ->method('set')
-                ->withConsecutive(
-                    [
-                        $pendingRelationMessage2->getTable(),
-                        $pendingRelationMessage2->getField(),
-                        456,
-                        $pendingRelationMessage2->getRemoteIds(),
-                    ],
-                    [
-                        $pendingRelationMessage1->getTable(),
-                        $pendingRelationMessage1->getField(),
-                        123,
-                        $pendingRelationMessage1->getRemoteIds(),
-                    ]
-                );
+                ->willReturnCallback(function ($parameters) use ($invocationCount, $pendingRelationMessage1, $pendingRelationMessage2) {
+                    match ($invocationCount->numberOfInvocations()) {
+                        1 => $this->assertSame(
+                            [
+                                $pendingRelationMessage2->getTable(),
+                                $pendingRelationMessage2->getField(),
+                                456,
+                                $pendingRelationMessage2->getRemoteIds(),
+                            ],
+                            $parameters
+                        ),
+                        2 => $this->assertSame(
+                            [
+                                $pendingRelationMessage1->getTable(),
+                                $pendingRelationMessage1->getField(),
+                                123,
+                                $pendingRelationMessage1->getRemoteIds(),
+                            ],
+                            $parameters
+                        ),
+                        default => $this->fail(),
+                    };
+
+                    return $invocationCount->numberOfInvocations();
+                });;
 
             GeneralUtility::setSingletonInstance(
                 PendingRelationsRepository::class,

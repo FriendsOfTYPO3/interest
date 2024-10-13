@@ -43,10 +43,16 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
             ['handleSingleOperation']
         );
 
+        $invocationCount = self::exactly(count($expectedConsecutive));
+
         $subjectMock
-            ->expects(self::exactly(count($expectedConsecutive)))
+            ->expects($invocationCount)
             ->method('handleSingleOperation')
-            ->withConsecutive(...$expectedConsecutive);
+            ->willReturnCallback(function ($parameters) use ($invocationCount, $expectedConsecutive) {
+            $this->assertSame($expectedConsecutive[$invocationCount->numberOfInvocations() - 1], $parameters);
+
+            return $invocationCount->numberOfInvocations();
+        });
 
         $subjectMock->handle();
     }

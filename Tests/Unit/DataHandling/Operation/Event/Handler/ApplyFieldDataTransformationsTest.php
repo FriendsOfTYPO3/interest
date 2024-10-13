@@ -69,25 +69,31 @@ class ApplyFieldDataTransformationsTest extends UnitTestCase
 
             $mockContentObjectRenderer = $this->createMock(ContentObjectRenderer::class);
 
+            $invocationCount = self::exactly(2);
+
             $mockContentObjectRenderer
-                ->expects(self::exactly(2))
+                ->expects($invocationCount)
                 ->method('stdWrap')
-                ->withConsecutive(
-                    [$dataArray['field1'], $field1],
-                    [$dataArray['field2'], $field2]
-                )
-                ->willReturnOnConsecutiveCalls(
-                    'field1return',
-                    'field2return'
-                );
+                ->willReturnCallback(function ($parameters) use ($invocationCount, $dataArray) {
+                    $this->assertSame($dataArray[$invocationCount->numberOfInvocations() - 1], $parameters);
+
+                    return $invocationCount->numberOfInvocations();
+                });
+
+            $invocationCount = self::exactly(2);
 
             $mockOperation
-                ->expects(self::exactly(2))
+                ->expects($invocationCount)
                 ->method('setDataFieldForDataHandler')
-                ->withConsecutive(
-                    ['field1', 'field1return'],
-                    ['field2', 'field2return'],
-                );
+                ->willReturnCallback(function ($parameters) use ($invocationCount) {
+                    match ($invocationCount->numberOfInvocations()) {
+                        1 => $this->assertSame(['field1', 'field1return'], $parameters),
+                        2 => $this->assertSame(['field2', 'field2return'], $parameters),
+                        default => $this->fail(),
+                    };
+
+                    return $invocationCount->numberOfInvocations();
+                });
 
             $mockOperation
                 ->method('getContentObjectRenderer')
