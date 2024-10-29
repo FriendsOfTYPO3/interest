@@ -123,12 +123,19 @@ class MapUidsAndExtractPendingRelationsTest extends UnitTestCase
             $mockOperation
                 ->expects($invocationCount)
                 ->method('setDataFieldForDataHandler')
-                ->willReturnCallback(function ($parameters) use ($invocationCount) {
-                    match ($invocationCount->numberOfInvocations()) {
-                        1 => $this->assertSame(['relationField1', [4, 6]], $parameters),
-                        2 => $this->assertSame(['relationField2', ['tablename_6']], $parameters),
-                        default => $this->fail(),
-                    };
+                ->willReturnCallback(function ($parameter1, $parameter2) use ($invocationCount) {
+                    switch ($invocationCount->numberOfInvocations()) {
+                        case 1:
+                            self::assertSame('relationField1', $parameter1);
+                            self::assertSame([4, 6], $parameter2);
+                            break;
+                        case 2:
+                            self::assertSame('relationField2', $parameter1);
+                            self::assertSame(['tablename_6'], $parameter2);
+                            break;
+                        default:
+                            self::fail();
+                    }
 
                     return $invocationCount->numberOfInvocations();
                 });

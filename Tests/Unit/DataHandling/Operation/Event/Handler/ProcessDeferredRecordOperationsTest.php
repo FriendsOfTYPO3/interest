@@ -162,8 +162,22 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
             ->expects($invocationCount)
             ->method('createRecordOperation')
             ->willReturnCallback(
-                function ($parameters) use ($invocationCount, $mockUpdateOperation, $consecutiveParameters) {
-                    $this->assertSame($consecutiveParameters[$invocationCount->numberOfInvocations()], $parameters);
+                function (
+                    $parameter1,
+                    $parameter2
+                ) use (
+                    $invocationCount,
+                    $mockUpdateOperation,
+                    $consecutiveParameters
+                ) {
+                    self::assertSame(
+                        $consecutiveParameters[$invocationCount->numberOfInvocations() - 1][0],
+                        $parameter1
+                    );
+                    self::assertSame(
+                        $consecutiveParameters[$invocationCount->numberOfInvocations() - 1][1],
+                        $parameter2
+                    );
 
                     switch ($invocationCount->numberOfInvocations()) {
                         case 1:

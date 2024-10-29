@@ -79,31 +79,52 @@ class PersistPendingRelationInformationTest extends UnitTestCase
             $repositoryMock
                 ->expects($invocationCount)
                 ->method('set')
-                ->willReturnCallback(function ($parameters) use ($invocationCount, $pendingRelationMessage1, $pendingRelationMessage2) {
-                    match ($invocationCount->numberOfInvocations()) {
-                        1 => $this->assertSame(
-                            [
-                                $pendingRelationMessage2->getTable(),
-                                $pendingRelationMessage2->getField(),
-                                456,
-                                $pendingRelationMessage2->getRemoteIds(),
-                            ],
-                            $parameters
-                        ),
-                        2 => $this->assertSame(
-                            [
-                                $pendingRelationMessage1->getTable(),
-                                $pendingRelationMessage1->getField(),
-                                123,
-                                $pendingRelationMessage1->getRemoteIds(),
-                            ],
-                            $parameters
-                        ),
-                        default => $this->fail(),
-                    };
+                ->willReturnCallback(
+                    function (
+                        $parameter1,
+                        $parameter2,
+                        $parameter3,
+                        $parameter4
+                    ) use (
+                        $invocationCount,
+                        $pendingRelationMessage1,
+                        $pendingRelationMessage2
+                    ) {
+                        match ($invocationCount->numberOfInvocations()) {
+                            1 => self::assertSame(
+                                [
+                                    $pendingRelationMessage2->getTable(),
+                                    $pendingRelationMessage2->getField(),
+                                    456,
+                                    $pendingRelationMessage2->getRemoteIds(),
+                                ],
+                                [
+                                    $parameter1,
+                                    $parameter2,
+                                    $parameter3,
+                                    $parameter4,
+                                ]
+                            ),
+                            2 => self::assertSame(
+                                [
+                                    $pendingRelationMessage1->getTable(),
+                                    $pendingRelationMessage1->getField(),
+                                    123,
+                                    $pendingRelationMessage1->getRemoteIds(),
+                                ],
+                                [
+                                    $parameter1,
+                                    $parameter2,
+                                    $parameter3,
+                                    $parameter4,
+                                ]
+                            ),
+                            default => self::fail(),
+                        };
 
-                    return $invocationCount->numberOfInvocations();
-                });;
+                        return $invocationCount->numberOfInvocations();
+                    }
+                );
 
             GeneralUtility::setSingletonInstance(
                 PendingRelationsRepository::class,

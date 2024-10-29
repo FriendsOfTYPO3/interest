@@ -102,10 +102,10 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
 
         $mockOperation = $this->createMock(UpdateRecordOperation::class);
 
-        $messages = [];
+        $expectedParameters = [];
 
         foreach ($messageValues as $messageValueSet) {
-            $messages[] = new RelationFieldValueMessage(... $messageValueSet);
+            $expectedParameters[] = new RelationFieldValueMessage(... $messageValueSet);
         }
 
         $mockOperation
@@ -125,19 +125,12 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
 
         $invocationCount = self::exactly(count($messageValues));
 
-        $expectedParameters = array_reduce(
-            $messages,
-            // Wrap each $message in an array.
-            fn (array $carry, RelationFieldValueMessage $message): array => [... $carry, [$message]],
-            []
-        );
-
         $partialMockEventHandler
             ->expects($invocationCount)
             ->method('getRelationsFromMessage')
             ->willReturnCallback(
                 function ($parameters) use ($invocationCount, $expectedParameters, $relationReturns) {
-                    $this->assertSame($expectedParameters[$invocationCount->numberOfInvocations() - 1], $parameters);
+                    self::assertSame($expectedParameters[$invocationCount->numberOfInvocations() - 1], $parameters);
 
                     return $relationReturns[$invocationCount->numberOfInvocations() - 1];
                 }

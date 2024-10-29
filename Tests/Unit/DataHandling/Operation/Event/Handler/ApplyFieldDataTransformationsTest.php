@@ -75,7 +75,10 @@ class ApplyFieldDataTransformationsTest extends UnitTestCase
                 ->expects($invocationCount)
                 ->method('stdWrap')
                 ->willReturnCallback(function ($parameters) use ($invocationCount, $dataArray) {
-                    $this->assertSame($dataArray[$invocationCount->numberOfInvocations() - 1], $parameters);
+                    self::assertSame(
+                        $dataArray[array_keys($dataArray)[$invocationCount->numberOfInvocations() - 1]],
+                        $parameters
+                    );
 
                     return $invocationCount->numberOfInvocations();
                 });
@@ -86,13 +89,16 @@ class ApplyFieldDataTransformationsTest extends UnitTestCase
                 ->expects($invocationCount)
                 ->method('setDataFieldForDataHandler')
                 ->willReturnCallback(function ($parameters) use ($invocationCount) {
-                    match ($invocationCount->numberOfInvocations()) {
-                        1 => $this->assertSame(['field1', 'field1return'], $parameters),
-                        2 => $this->assertSame(['field2', 'field2return'], $parameters),
-                        default => $this->fail(),
-                    };
+                    switch ($invocationCount->numberOfInvocations()) {
+                        case 1:
+                            self::assertSame('field1', $parameters);
+                            return 'field1return';
+                        case 2:
+                            self::assertSame('field2', $parameters);
+                            return 'field2return';
+                    }
 
-                    return $invocationCount->numberOfInvocations();
+                    self::fail();
                 });
 
             $mockOperation

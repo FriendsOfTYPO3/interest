@@ -62,11 +62,22 @@ class RemoveEmptyValuesFromRelationFieldArraysTest extends UnitTestCase
             $mockOperation
                 ->expects($invocationCount)
                 ->method('setDataFieldForDataHandler')
-                ->willReturnCallback(function ($parameters) use ($invocationCount, $expectedSetDataFieldForDataHandlerArguments) {
-                    $this->assertSame($expectedSetDataFieldForDataHandlerArguments[$invocationCount->numberOfInvocations() - 1], $parameters);
+                ->willReturnCallback(
+                    function (
+                        $parameter1,
+                        $parameter2,
+                    ) use (
+                        $invocationCount,
+                        $expectedSetDataFieldForDataHandlerArguments
+                    ) {
+                        $i = $invocationCount->numberOfInvocations() - 1;
 
-                    return $invocationCount->numberOfInvocations();
-                });
+                        self::assertSame($expectedSetDataFieldForDataHandlerArguments[$i][0], $parameter1);
+                        self::assertSame($expectedSetDataFieldForDataHandlerArguments[$i][1], $parameter2);
+
+                        return $invocationCount->numberOfInvocations();
+                    }
+                );
 
             $event = new RecordOperationSetupEvent($mockOperation);
 

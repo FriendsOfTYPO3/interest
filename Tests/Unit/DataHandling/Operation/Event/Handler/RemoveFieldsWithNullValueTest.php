@@ -59,9 +59,9 @@ class RemoveFieldsWithNullValueTest extends UnitTestCase
                 ->method('unsetDataField')
                 ->willReturnCallback(function ($parameters) use ($invocationCount) {
                     match ($invocationCount->numberOfInvocations()) {
-                        1 => $this->assertSame(['nullValueField1'], $parameters),
-                        2 => $this->assertSame(['nullValueField2'], $parameters),
-                        default => $this->fail(),
+                        1 => self::assertSame('nullValueField1', $parameters),
+                        2 => self::assertSame('nullValueField2', $parameters),
+                        default => self::fail(),
                     };
 
                     return $invocationCount->numberOfInvocations();
