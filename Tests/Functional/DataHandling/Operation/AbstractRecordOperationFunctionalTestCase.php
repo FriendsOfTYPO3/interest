@@ -6,6 +6,7 @@ namespace Pixelant\Interest\Tests\Functional\DataHandling\Operation;
 
 use Pixelant\Interest\Utility\CompatibilityUtility;
 use TYPO3\CMS\Core\Configuration\SiteConfiguration;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -32,24 +33,24 @@ abstract class AbstractRecordOperationFunctionalTestCase extends FunctionalTestC
 
         GeneralUtility::setIndpEnv('TYPO3_REQUEST_URL', 'http://www.example.com/');
 
-        if (CompatibilityUtility::typo3VersionIsLessThan('12.0')) {
-            $siteConfiguration = GeneralUtility::makeInstance(
-                SiteConfiguration::class,
-                GeneralUtility::getFileAbsFileName(
-                    'EXT:interest/Tests/Functional/DataHandling/Operation/Fixtures/Sites'
-                ),
-            );
-        } else {
-            $siteConfiguration = GeneralUtility::makeInstance(
-                SiteConfiguration::class,
-                GeneralUtility::getFileAbsFileName(
-                    'EXT:interest/Tests/Functional/DataHandling/Operation/Fixtures/Sites'
-                ),
-                GeneralUtility::makeInstance(EventDispatcher::class)
-            );
-        }
+        Environment::initialize(
+            Environment::getContext(),
+            Environment::isCli(),
+            Environment::isComposerMode(),
+            Environment::getProjectPath(),
+            Environment::getPublicPath(),
+            Environment::getVarPath(),
+            GeneralUtility::getFileAbsFileName(
+                'EXT:interest/Tests/Functional/DataHandling/Operation/Fixtures/Sites'
+            ),
+            Environment::getCurrentScript(),
+            Environment::isWindows() ? 'WINDOWS' : 'UNIX'
+        );
 
-        GeneralUtility::setSingletonInstance(SiteConfiguration::class, $siteConfiguration);
+        GeneralUtility::setSingletonInstance(
+            SiteConfiguration::class,
+            GeneralUtility::makeInstance(SiteConfiguration::class)
+        );
 
         $languageServiceMock = $this->createMock(LanguageService::class);
 
