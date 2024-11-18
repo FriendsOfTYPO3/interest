@@ -25,6 +25,11 @@ class CreateRequestHandlerTest extends UnitTestCase
             $stream
         );
 
+        $allClassMethods = [];
+        foreach ((new \ReflectionClass(CreateRequestHandler::class))->getMethods() as $method) {
+            $allClassMethods[] = $method->getName();
+        }
+
         $deleteHandlerMock = $this->getMockBuilder(CreateRequestHandler::class)
             ->setConstructorArgs([
                 [
@@ -33,7 +38,7 @@ class CreateRequestHandlerTest extends UnitTestCase
                 ],
                 $request,
             ])
-            ->setMethodsExcept(['handle'])
+            ->onlyMethods(array_diff($allClassMethods, ['handle']))
             ->getMock();
 
         $response = $deleteHandlerMock->handle();

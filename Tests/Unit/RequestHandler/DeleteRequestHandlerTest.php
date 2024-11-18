@@ -13,7 +13,7 @@ class DeleteRequestHandlerTest extends UnitTestCase
     /**
      * @test
      */
-    public function emptyRequestBodyIsNoProblem(): void
+    public function emptyRequestBodyReturnsUnprocessableContent(): void
     {
         $stream = fopen('php://memory', 'r+');
         fwrite($stream, '');
@@ -25,6 +25,11 @@ class DeleteRequestHandlerTest extends UnitTestCase
             $stream
         );
 
+        $allClassMethods = [];
+        foreach ((new \ReflectionClass(DeleteRequestHandler::class))->getMethods() as $method) {
+            $allClassMethods[] = $method->getName();
+        }
+
         $deleteHandlerMock = $this->getMockBuilder(DeleteRequestHandler::class)
             ->setConstructorArgs([
                 [
@@ -33,7 +38,7 @@ class DeleteRequestHandlerTest extends UnitTestCase
                 ],
                 $request,
             ])
-            ->setMethods(['handleSingleOperation'])
+            ->onlyMethods(array_diff($allClassMethods, ['handle']))
             ->getMock();
 
         $response = $deleteHandlerMock->handle();

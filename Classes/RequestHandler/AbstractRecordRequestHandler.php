@@ -117,7 +117,7 @@ abstract class AbstractRecordRequestHandler extends AbstractRequestHandler
      */
     public function handle(): ResponseInterface
     {
-        if ($this->data === []) {
+        if ($this->data === [] && !static::EXPECT_EMPTY_REQUEST) {
             return GeneralUtility::makeInstance(
                 JsonResponse::class,
                 [

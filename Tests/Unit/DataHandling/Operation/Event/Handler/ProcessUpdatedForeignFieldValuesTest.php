@@ -109,10 +109,10 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
         }
 
         $mockOperation
-            ->expects(self::exactly(count($messages) + 1))
+            ->expects(self::exactly(count($expectedParameters) + 1))
             ->method('retrieveMessage')
             ->with(RelationFieldValueMessage::class)
-            ->willReturnOnConsecutiveCalls(... [... $messages, null]);
+            ->willReturnOnConsecutiveCalls(... [... $expectedParameters, null]);
 
         $mockOperation
             ->method('getDataHandler')

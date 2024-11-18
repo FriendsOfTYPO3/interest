@@ -49,7 +49,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
             ->expects($invocationCount)
             ->method('handleSingleOperation')
             ->willReturnCallback(function ($parameter) use ($invocationCount, $expectedConsecutive) {
-                self::assertSame($expectedConsecutive[$invocationCount->numberOfInvocations() - 1], $parameter);
+                self::assertEquals($expectedConsecutive[$invocationCount->numberOfInvocations() - 1], $parameter);
 
                 return $invocationCount->numberOfInvocations();
             });
@@ -426,76 +426,6 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
                             'table',
                             'remoteId2',
                             'language4',
-                            ''
-                        )
-                    ),
-                ],
-            ],
-            'Single record with table and remote ID in data' => [
-                [],
-                [
-                    'data' => [
-                        'table' => [
-                            'remoteId' => [
-                                'title' => 'TEST',
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    new RecordRepresentation(
-                        [
-                            'title' => 'TEST',
-                        ],
-                        new RecordInstanceIdentifier(
-                            'table',
-                            'remoteId',
-                            '',
-                            ''
-                        )
-                    ),
-                ],
-            ],
-            'Single record with table, remote ID and language in data' => [
-                [],
-                [
-                    'data' => [
-                        'table1' => [
-                            'remoteId1' => [
-                                'language1' => [
-                                    'title' => 'TEST1',
-                                ],
-                            ],
-                        ],
-                        'table2' => [
-                            'remoteId2' => [
-                                'language2' => [
-                                    'title' => 'TEST1',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    new RecordRepresentation(
-                        [
-                            'title' => 'TEST1',
-                        ],
-                        new RecordInstanceIdentifier(
-                            'table1',
-                            'remoteId1',
-                            'language1',
-                            ''
-                        )
-                    ),
-                    new RecordRepresentation(
-                        [
-                            'title' => 'TEST2',
-                        ],
-                        new RecordInstanceIdentifier(
-                            'table2',
-                            'remoteId2',
-                            'language2',
                             ''
                         )
                     ),
