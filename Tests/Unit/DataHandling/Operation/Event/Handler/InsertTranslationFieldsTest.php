@@ -170,7 +170,10 @@ class InsertTranslationFieldsTest extends UnitTestCase
                 ->expects($invocationCount)
                 ->method('setDataFieldForDataHandler')
                 ->willReturnCallback(function ($parameters) use ($invocationCount, $setDataFieldForDataHandlerExpects) {
-                    $this->assertSame($setDataFieldForDataHandlerExpects[$invocationCount->numberOfInvocations() - 1][0], $parameters);
+                    $this->assertSame(
+                        $setDataFieldForDataHandlerExpects[$invocationCount->numberOfInvocations() - 1][0],
+                        $parameters
+                    );
 
                     return $invocationCount->numberOfInvocations();
                 });
