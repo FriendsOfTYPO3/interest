@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation;
@@ -71,11 +72,8 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider recordOperationClassCombinationsDataProvider
-     */
+    #[Test]
+    #[DataProvider('recordOperationClassCombinationsDataProvider')]
     public function deferredOperationsAreInvoked(string $operationClass, string $deferredOperationClass): void
     {
         $deferredRecordDbRow = $this->getDeferredRecordDbRow($deferredOperationClass);
@@ -190,9 +188,6 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         $mockEventHandler($event);
     }
 
-    /**
-     * @param array $deferredRecordDbRow
-     */
     protected function configureMockRepository(array $deferredRecordDbRow): void
     {
         $mockRepository = $this->createMock(DeferredRecordOperationRepository::class);
@@ -230,10 +225,6 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         return $mockOperation;
     }
 
-    /**
-     * @param string $deferredOperationClass
-     * @return array
-     */
     protected function getDeferredRecordDbRow(string $deferredOperationClass): array
     {
         return [

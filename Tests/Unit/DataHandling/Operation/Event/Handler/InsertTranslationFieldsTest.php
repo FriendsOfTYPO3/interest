@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
@@ -123,13 +124,12 @@ class InsertTranslationFieldsTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider provideDataForInsertsCorrectTranslationFields
-     */
-    public function insertsCorrectTranslationFields(callable $configureTca, array $setDataFieldForDataHandlerExpects): void
-    {
+    #[Test]
+    #[DataProvider('provideDataForInsertsCorrectTranslationFields')]
+    public function insertsCorrectTranslationFields(
+        callable $configureTca,
+        array $setDataFieldForDataHandlerExpects
+    ): void {
         $configureTca();
 
         $mockLanguage = $this->createMock(SiteLanguage::class);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
@@ -101,10 +102,8 @@ class SanitizeFieldValuesTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     * @dataProvider unsupportedValueTypeDataProvider
-     */
+    #[Test]
+    #[DataProvider('unsupportedValueTypeDataProvider')]
     public function unsupportedValueTypeThrowsException(array $dataForDataHandler): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {

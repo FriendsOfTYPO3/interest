@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\FixSortingPositionsOnRemoteRelationRecords;
 use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationInvocationEvent;
 use Pixelant\Interest\DataHandling\Operation\UpdateRecordOperation;
@@ -20,10 +22,8 @@ class FixSortingPositionsOnRemoteRelationRecordsTest extends UnitTestCase
         $this->resetSingletonInstances = true;
     }
 
-    /**
-     * @test
-     * @dataProvider invokingGeneratesCorrectSortingDataDataProvider
-     */
+    #[Test]
+    #[DataProvider('invokingGeneratesCorrectSortingDataDataProvider')]
     public function invokingGeneratesCorrectSortingData(
         array $localRecordData,
         array $mmFieldConfiguration,
@@ -71,9 +71,6 @@ class FixSortingPositionsOnRemoteRelationRecordsTest extends UnitTestCase
         $subjectMock->__invoke($event);
     }
 
-    /**
-     * @return array
-     */
     public static function invokingGeneratesCorrectSortingDataDataProvider(): array
     {
         return [

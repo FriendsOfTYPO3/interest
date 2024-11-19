@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\RequestHandler;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
 use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
 use Pixelant\Interest\RequestHandler\AbstractRecordRequestHandler;
@@ -12,10 +14,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class AbstractRecordRequestHandlerTest extends UnitTestCase
 {
-    /**
-     * @test
-     * @dataProvider correctlyCompliesDataProvider
-     */
+    #[Test]
+    #[DataProvider('correctlyCompliesDataProvider')]
     public function correctlyCompliesData(array $entryPoints, array $body, array $expectedConsecutive): void
     {
         $body = json_encode($body);
@@ -30,18 +30,14 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
             $stream
         );
 
-        $subjectMock = $this->getMockForAbstractClass(
-            AbstractRecordRequestHandler::class,
-            [
+        $subjectMock = $this
+            ->getMockBuilder(AbstractRecordRequestHandler::class)
+            ->onlyMethods(['handleSingleOperation'])
+            ->setConstructorArgs([
                 $entryPoints,
                 $request,
-            ],
-            '',
-            true,
-            true,
-            true,
-            ['handleSingleOperation']
-        );
+            ])
+            ->getMock();
 
         $invocationCount = self::exactly(count($expectedConsecutive));
 
