@@ -28,10 +28,10 @@ class RequestMiddleware implements MiddlewareInterface
             : $extensionConfiguration->get('interest', 'entryPoint');
 
         if (
-            strpos(
+            str_starts_with(
                 $request->getRequestTarget(),
                 '/' . trim($entryPoint, '/') . '/'
-            ) === 0
+            )
         ) {
             $executionStart = round(microtime(true) * 1000);
 

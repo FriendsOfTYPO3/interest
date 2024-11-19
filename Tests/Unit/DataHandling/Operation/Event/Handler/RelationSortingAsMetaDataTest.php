@@ -144,7 +144,7 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
             $partialMockEventHandler
                 ->method('getTcaFieldConfigurationAndRespectColumnsOverrides')
                 ->willReturnCallback(
-                    fn (AbstractRecordOperation $recordOperation, string $field)
+                    fn(AbstractRecordOperation $recordOperation, string $field)
                         => $GLOBALS['TCA'][$recordOperation->getTable()]['columns'][$field]['config']
                 );
 

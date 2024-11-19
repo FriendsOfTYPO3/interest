@@ -503,7 +503,7 @@ class RemoteIdMappingRepository extends AbstractRepository
         // @extensionScannerIgnoreLine
         $languageAspect = self::LANGUAGE_ASPECT_PREFIX . $recordOperation->getLanguage()->getLanguageId();
 
-        if (strpos($remoteId, $languageAspect) !== false) {
+        if (str_contains($remoteId, $languageAspect)) {
             return $remoteId;
         }
 
@@ -518,7 +518,7 @@ class RemoteIdMappingRepository extends AbstractRepository
      */
     public function removeAspectsFromRemoteId(string $remoteId): string
     {
-        if (strpos($remoteId, self::LANGUAGE_ASPECT_PREFIX) === false) {
+        if (!str_contains($remoteId, self::LANGUAGE_ASPECT_PREFIX)) {
             return $remoteId;
         }
 

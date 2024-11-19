@@ -186,7 +186,7 @@ class RecordInstanceIdentifier
         // @extensionScannerIgnoreLine
         $languageAspect = self::LANGUAGE_ASPECT_PREFIX . $this->getLanguage()->getLanguageId();
 
-        if (strpos($this->remoteId, $languageAspect) !== false) {
+        if (str_contains($this->remoteId, $languageAspect)) {
             return $this->remoteId;
         }
 
@@ -201,7 +201,7 @@ class RecordInstanceIdentifier
      */
     public function removeAspectsFromRemoteId(string $remoteId): string
     {
-        if (strpos($remoteId, self::LANGUAGE_ASPECT_PREFIX) === false) {
+        if (!str_contains($remoteId, self::LANGUAGE_ASPECT_PREFIX)) {
             return $remoteId;
         }
 

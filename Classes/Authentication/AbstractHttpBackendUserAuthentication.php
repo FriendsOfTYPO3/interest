@@ -73,7 +73,7 @@ abstract class AbstractHttpBackendUserAuthentication extends BackendUserAuthenti
 
         $authorizationData = base64_decode($authorizationData, true);
 
-        if (strpos($authorizationData, ':') === false) {
+        if (!str_contains($authorizationData, ':')) {
             throw new InvalidArgumentException(
                 'Authorization data couldn\'t be decoded. Missing ":" separating username and password.',
                 $request

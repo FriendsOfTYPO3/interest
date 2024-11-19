@@ -273,7 +273,7 @@ class TcaUtility
             $tcaConfiguration['type'] === 'group'
             && (
                 $tcaConfiguration['allowed'] === '*'
-                || strpos(',', $tcaConfiguration['allowed']) !== false
+                || str_contains(',', $tcaConfiguration['allowed'])
             )
         ) {
             $prefixWithTable = true;
