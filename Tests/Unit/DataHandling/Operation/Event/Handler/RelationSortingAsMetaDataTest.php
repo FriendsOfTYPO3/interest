@@ -18,9 +18,7 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -43,9 +41,7 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         $partialMockEventHandler($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnEarlyIfNoMmFieldConfigurations(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
@@ -75,9 +71,7 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function getSortedMmRelationFieldConfigurationsReturnsEmptyWhenNoColumns(): void
     {
         $tableName = 'tablename';
@@ -107,9 +101,7 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function getSortedMmRelationFieldConfigurationsReturnsCorrectData(): void
     {
         $tableName = 'tablename';
@@ -161,9 +153,7 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function addSortingIntentToMetaDataSetsCorrectMetaData(): void
     {
         $tableName = 'tablename';

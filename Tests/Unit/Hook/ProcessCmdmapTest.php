@@ -12,9 +12,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ProcessCmdmapTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function deletesRemoteIdIfOwnerRecordHasBeenDeleted(): void
     {
         $this->resetSingletonInstances = true;
@@ -55,9 +53,7 @@ class ProcessCmdmapTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function keepsRemoteIdIfOwnerRecordHasNotBeenDeleted(): void
     {
         $this->resetSingletonInstances = true;

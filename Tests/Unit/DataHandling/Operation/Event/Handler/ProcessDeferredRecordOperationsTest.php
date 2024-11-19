@@ -23,9 +23,7 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -39,9 +37,7 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         (new PersistPendingRelationInformation())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function deferredDeleteOperationsAreJustDeleted(): void
     {
         $deferredRecordDbRow = [
@@ -129,9 +125,7 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function convertsDeferredCreateOperationWithConflictToUpdateOperation(): void
     {
         $deferredOperationClass = CreateRecordOperation::class;

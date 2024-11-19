@@ -16,9 +16,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class RegisterValuesOfRelationFieldsTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnEarlyWhenNotUpdateOperation(): void
     {
         foreach ([DeleteRecordOperation::class, CreateRecordOperation::class] as $operationClass) {
@@ -34,9 +32,7 @@ class RegisterValuesOfRelationFieldsTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function attemptToProcessDatamapWhenUpdateOperation(): void
     {
         $tableName = 'tablename';
@@ -61,9 +57,7 @@ class RegisterValuesOfRelationFieldsTest extends UnitTestCase
         (new RegisterValuesOfRelationFields())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function correctlyDispatchRelationFieldValueMessage(): void
     {
         $tableName = 'tablename';

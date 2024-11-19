@@ -13,9 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class SetPidTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function setsPidOnCreateOperationIfNotAlreadySet(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
@@ -41,9 +39,7 @@ class SetPidTest extends UnitTestCase
         (new SetPid())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function doesNotSetPidOnNonCreateOperation(): void
     {
         foreach ([UpdateRecordOperation::class, DeleteRecordOperation::class] as $operationClass) {
@@ -69,9 +65,7 @@ class SetPidTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function doesNotSetPidIfAlreadySet(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);

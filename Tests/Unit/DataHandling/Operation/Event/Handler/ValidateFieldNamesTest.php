@@ -14,9 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ValidateFieldNamesTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function willExitEarlyOnDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -30,9 +28,7 @@ class ValidateFieldNamesTest extends UnitTestCase
         (new ValidateFieldNames())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function willThrowExceptionIfFieldDoesNotExistInTca(): void
     {
         $GLOBALS['TCA']['tablename']['columns'] = [
@@ -67,9 +63,7 @@ class ValidateFieldNamesTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function willNotThrowExceptionIfAllFieldsExistInTca(): void
     {
         $GLOBALS['TCA']['tablename']['columns'] = [

@@ -17,9 +17,7 @@ class RemovePendingRelationsForDeletedRecordTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function doesNotProceedIfOperationWasUnsuccessful(): void
     {
         $mockRepository = $this->createMock(PendingRelationsRepository::class);
@@ -42,9 +40,7 @@ class RemovePendingRelationsForDeletedRecordTest extends UnitTestCase
         (new RemovePendingRelationsForDeletedRecord())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function doesNotProceedWhenUpdateOrDeleteOperation(): void
     {
         $mockRepository = $this->createMock(PendingRelationsRepository::class);
@@ -69,9 +65,7 @@ class RemovePendingRelationsForDeletedRecordTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function removeRemoteIsCalledWithTableAndUidAndNoField(): void
     {
         $mockRepository = $this->createMock(PendingRelationsRepository::class);

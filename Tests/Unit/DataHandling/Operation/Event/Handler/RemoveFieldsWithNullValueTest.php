@@ -13,9 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class RemoveFieldsWithNullValueTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -29,9 +27,7 @@ class RemoveFieldsWithNullValueTest extends UnitTestCase
         (new RemoveFieldsWithNullValue())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function correctlyRemovesEmptyValuesFromRelationArrays(): void
     {
         $dataForDataHandler = [

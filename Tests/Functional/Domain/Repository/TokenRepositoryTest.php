@@ -26,9 +26,7 @@ class TokenRepositoryTest extends FunctionalTestCase
         $this->subject = new TokenRepository();
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function createTokenReturnsHashWithExpiryGreaterThanCreationDate(): void
     {
         $token = $this->subject->createTokenForBackendUser(1);

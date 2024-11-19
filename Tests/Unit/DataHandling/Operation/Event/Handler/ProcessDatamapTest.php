@@ -14,9 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ProcessDatamapTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnEarlyWhenEmptyDatamap(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
@@ -41,9 +39,7 @@ class ProcessDatamapTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function willProcessDatamapAndSetStatus(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {

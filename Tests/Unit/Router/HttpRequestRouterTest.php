@@ -18,9 +18,7 @@ class HttpRequestRouterTest extends UnitTestCase
         $this->resetSingletonInstances = true;
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function routesRequestToCorrectAction(): void
     {
         $eventDispatcherMock = $this->createMock(EventDispatcher::class);

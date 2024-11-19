@@ -15,9 +15,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class SetContentObjectRendererLanguageTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function setsNullLanguageToNull(): void
     {
         foreach (
@@ -49,9 +47,7 @@ class SetContentObjectRendererLanguageTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function correctlySetsHreflang(): void
     {
         foreach (

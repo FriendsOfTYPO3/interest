@@ -13,9 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class UpdateCountOnForeignSideOfInlineRecordTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function willNotExecuteOnCreateAndUpdateOperation(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
@@ -36,9 +34,7 @@ class UpdateCountOnForeignSideOfInlineRecordTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function willExecuteOnDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);

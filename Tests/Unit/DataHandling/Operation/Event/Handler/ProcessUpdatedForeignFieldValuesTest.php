@@ -15,9 +15,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnEarlyWhenNotUpdateOperation(): void
     {
         foreach ([DeleteRecordOperation::class, CreateRecordOperation::class] as $operationClass) {
@@ -33,9 +31,7 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function processWhenUpdateOperationAndReturnWhenNoMessages(): void
     {
         $mockOperation = $this->createMock(UpdateRecordOperation::class);
@@ -50,9 +46,7 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
         (new ProcessUpdatedForeignFieldValues())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function correctlySetsCmdmap(): void
     {
         $messageValues = [

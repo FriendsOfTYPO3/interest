@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Functional\DataHandling\Operation;
 
-use Pixelant\Interest\Utility\CompatibilityUtility;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\ServiceLocator;
+use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
+use TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader;
 use TYPO3\CMS\Core\Configuration\SiteConfiguration;
-use TYPO3\CMS\Core\Core\Environment;
-use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
+use TYPO3\CMS\Core\EventDispatcher\NoopEventDispatcher;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Package\Cache\PackageDependentCacheIdentifier;
+use TYPO3\CMS\Core\Settings\SettingsTypeRegistry;
+use TYPO3\CMS\Core\Site\Set\SetRegistry;
+use TYPO3\CMS\Core\Site\SiteSettingsFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -33,23 +39,34 @@ abstract class AbstractRecordOperationFunctionalTestCase extends FunctionalTestC
 
         GeneralUtility::setIndpEnv('TYPO3_REQUEST_URL', 'http://www.example.com/');
 
-        Environment::initialize(
-            Environment::getContext(),
-            Environment::isCli(),
-            Environment::isComposerMode(),
-            Environment::getProjectPath(),
-            Environment::getPublicPath(),
-            Environment::getVarPath(),
-            GeneralUtility::getFileAbsFileName(
-                'EXT:interest/Tests/Functional/DataHandling/Operation/Fixtures/Sites'
+        $siteConfigurationPath = GeneralUtility::getFileAbsFileName(
+            'EXT:interest/Tests/Functional/DataHandling/Operation/Fixtures/Sites'
+        );
+
+        $setRegistry = $this->createMock(SetRegistry::class);
+
+        $packageDependentCacheIdentifier = $this->createMock(PackageDependentCacheIdentifier::class);
+
+        $settingsTypeRegistry = new SettingsTypeRegistry($this->createMock(ServiceLocator::class));
+
+        $siteConfiguration = new SiteConfiguration(
+            $siteConfigurationPath,
+            new SiteSettingsFactory(
+                $siteConfigurationPath,
+                $setRegistry,
+                $settingsTypeRegistry,
+                $this->createMock(YamlFileLoader::class),
+                new NullFrontend('test'),
+                $packageDependentCacheIdentifier
             ),
-            Environment::getCurrentScript(),
-            Environment::isWindows() ? 'WINDOWS' : 'UNIX'
+            new NoopEventDispatcher(),
+            new NullFrontend('test'),
+            new YamlFileLoader($this->createMock(LoggerInterface::class))
         );
 
         GeneralUtility::setSingletonInstance(
             SiteConfiguration::class,
-            GeneralUtility::makeInstance(SiteConfiguration::class)
+            $siteConfiguration
         );
 
         $languageServiceMock = $this->createMock(LanguageService::class);

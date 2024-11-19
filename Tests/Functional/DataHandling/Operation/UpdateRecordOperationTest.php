@@ -19,9 +19,7 @@ use Pixelant\Interest\Utility\CompatibilityUtility;
 
 class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function updatingPageChangesFields(): void
     {
         $data = [
@@ -49,25 +47,17 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         self::assertSame($data['title'], $databaseRow['title']);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function updateOperationResultsInCorrectRecord(): void
     {
         $data = $this->recordRepresentationAndCorrespondingRowDataProvider();
 
-        $originalName = $this->getName();
-
         foreach ($data as $key => $value) {
-            $this->setName($originalName . ' (' . $key . ')');
-
             $this->updateOperationResultsInCorrectRecordDataIteration(...$value);
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function updatingForeignFieldRemovesNonExistingRelationsAndUseCorrectSorting(): void
     {
         $mappingRepository = new RemoteIdMappingRepository();
@@ -133,7 +123,7 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
                 ->getConnectionPool()
                 ->getConnectionForTable('sys_file_reference')
                 ->executeQuery($query)
-                ->fetchAll();
+                ->fetchAllAssociative();
 
             $databaseImageIds = array_column($imageSysFileReferences, 'uid_local');
 

@@ -15,9 +15,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class SetUidTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function setsUidOnCreateOperationIfNotAlreadySet(): void
     {
         $mockDataHandler = $this->createMock(DataHandler::class);
@@ -54,9 +52,7 @@ class SetUidTest extends UnitTestCase
         (new SetUid())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function doesNotSetUidIfOperationUnsuccessful(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
@@ -83,9 +79,7 @@ class SetUidTest extends UnitTestCase
         (new SetUid())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function doesNotSetUidIfUidIsSet(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
@@ -113,9 +107,7 @@ class SetUidTest extends UnitTestCase
         (new SetUid())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function doesNotSetUidIfOperationIsNotCreate(): void
     {
         foreach ([UpdateRecordOperation::class, DeleteRecordOperation::class] as $operationClass) {

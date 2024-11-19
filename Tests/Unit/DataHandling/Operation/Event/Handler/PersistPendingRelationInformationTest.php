@@ -18,9 +18,7 @@ class PersistPendingRelationInformationTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -34,9 +32,7 @@ class PersistPendingRelationInformationTest extends UnitTestCase
         (new PersistPendingRelationInformation())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function persistDataFromEachPendingRelationMessage(): void
     {
         $pendingRelationMessage1 = new PendingRelationMessage(
@@ -137,9 +133,7 @@ class PersistPendingRelationInformationTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function noPendingRelationMessagesMeansNoDatabaseSet(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {

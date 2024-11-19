@@ -22,9 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function creatingPageResultsInPageRecord(): void
     {
         $data = [
@@ -59,18 +57,12 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         self::assertSame($data['title'], $databaseRow['title']);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function createOperationResultsInCorrectRecord(): void
     {
         $data = $this->recordRepresentationAndCorrespondingRowDataProvider();
 
-        $originalName = $this->getName();
-
         foreach ($data as $key => $value) {
-            $this->setName($originalName . ' (' . $key . ')');
-
             $this->createOperationResultsInCorrectRecordDataIteration(...$value);
         }
     }
@@ -176,9 +168,7 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         ];
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function createAdvancedInlineMmRelationsInDifferentOrder(): void
     {
         $fileData = base64_encode(file_get_contents(__DIR__ . '/Fixtures/Image.jpg'));
@@ -360,9 +350,7 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function createEmptyFileIsHandledAsConfigured(): void
     {
         $createEmptySysFile = function () {

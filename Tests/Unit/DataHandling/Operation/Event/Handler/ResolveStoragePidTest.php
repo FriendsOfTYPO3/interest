@@ -11,9 +11,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ResolveStoragePidTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function resolveStoragePidReturnsZeroIfRootLevelIsOne(): void
     {
         $tableName = 'testtable';

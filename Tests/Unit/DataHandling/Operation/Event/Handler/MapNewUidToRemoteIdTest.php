@@ -19,9 +19,7 @@ class MapNewUidToRemoteIdTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -35,9 +33,7 @@ class MapNewUidToRemoteIdTest extends UnitTestCase
         (new MapNewUidToRemoteId())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnEarlyIfUnsuccessfulOperation(): void
     {
         $mappingRepository = $this->createMock(RemoteIdMappingRepository::class);
@@ -62,9 +58,7 @@ class MapNewUidToRemoteIdTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function setsUidOnCreateOperation(): void
     {
         $remoteId = 'theRemoteId';
@@ -140,9 +134,7 @@ class MapNewUidToRemoteIdTest extends UnitTestCase
         (new MapNewUidToRemoteId())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function executesMappingRepositoryUpdateOnUpdateOperation(): void
     {
         $mockOperation = $this->createMock(UpdateRecordOperation::class);

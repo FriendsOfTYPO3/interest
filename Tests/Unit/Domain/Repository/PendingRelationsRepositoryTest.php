@@ -10,9 +10,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class PendingRelationsRepositoryTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function emptyRemoteIdsAreIgnored(): void
     {
         $subject = $this->getMockBuilder(PendingRelationsRepository::class)

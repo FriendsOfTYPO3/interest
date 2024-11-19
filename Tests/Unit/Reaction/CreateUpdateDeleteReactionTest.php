@@ -31,9 +31,7 @@ class CreateUpdateDeleteReactionTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function reactRoutesToCorrectActionWithPayload(): void
     {
         if (

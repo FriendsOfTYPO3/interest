@@ -14,9 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class SanitizeFieldValuesTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -30,9 +28,7 @@ class SanitizeFieldValuesTest extends UnitTestCase
         (new SanitizeFieldValues())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function csvRelationalFieldsAreExploded(): void
     {
         $dataForDataHandler = [
@@ -68,9 +64,7 @@ class SanitizeFieldValuesTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function floatIntegerAndStringAreNotModified(): void
     {
         $dataForDataHandler = [

@@ -18,9 +18,7 @@ class MapUidsAndExtractPendingRelationsTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -34,9 +32,7 @@ class MapUidsAndExtractPendingRelationsTest extends UnitTestCase
         (new MapUidsAndExtractPendingRelations())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function setsExistingUidsAndIssuesPendingRelationMessagesForOthers(): void
     {
         $testData = [

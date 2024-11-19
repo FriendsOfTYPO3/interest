@@ -16,9 +16,7 @@ use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
 
 class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function deletingPageSetsDeletedField(): void
     {
         $mappingRepository = new RemoteIdMappingRepository();
@@ -46,9 +44,7 @@ class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         self::assertSame(1, $databaseRow['deleted']);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function deletingContentSetsDeletedField(): void
     {
         (new DeleteRecordOperation(
@@ -72,9 +68,7 @@ class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         self::assertSame(1, $databaseRow['deleted']);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function deletingTranslationOfContentSetsDeletedField(): void
     {
         (new DeleteRecordOperation(

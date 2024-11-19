@@ -10,9 +10,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class DeleteRequestHandlerTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function emptyRequestBodyReturnsUnprocessableContent(): void
     {
         $stream = fopen('php://memory', 'r+');

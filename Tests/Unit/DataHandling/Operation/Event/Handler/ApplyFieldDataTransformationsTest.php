@@ -15,9 +15,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ApplyFieldDataTransformationsTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnsEarlyIfDeleteRecordOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -31,9 +29,7 @@ class ApplyFieldDataTransformationsTest extends UnitTestCase
         (new ApplyFieldDataTransformations())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function callsStdWrapWithCorrectArguments(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {

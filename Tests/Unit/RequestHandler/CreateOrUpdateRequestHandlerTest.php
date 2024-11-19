@@ -10,9 +10,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class CreateOrUpdateRequestHandlerTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function emptyRequestBodyWillFail(): void
     {
         $stream = fopen('php://memory', 'r+');

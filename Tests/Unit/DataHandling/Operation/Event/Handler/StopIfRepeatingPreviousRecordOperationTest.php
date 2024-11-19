@@ -16,9 +16,7 @@ class StopIfRepeatingPreviousRecordOperationTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function throwsExceptionIfSameAsPrevious(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
@@ -41,9 +39,7 @@ class StopIfRepeatingPreviousRecordOperationTest extends UnitTestCase
         (new StopIfRepeatingPreviousRecordOperation())($event);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function throwsNoExceptionIfDifferentToPrevious(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);

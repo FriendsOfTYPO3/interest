@@ -24,9 +24,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
         UpdateRecordOperation::class,
     ];
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnsEarlyIfLanguageIsNull(): void
     {
         foreach ($this->classNames as $className) {
@@ -46,9 +44,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnsEarlyIfLanguageIsZero(): void
     {
         foreach ($this->classNames as $className) {
@@ -74,9 +70,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnsEarlyIfTableNotTranslatable(): void
     {
         foreach ($this->classNames as $className) {
@@ -100,9 +94,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function returnsEarlyIfLanguageFieldIsSet(): void
     {
         foreach ($this->classNames as $className) {
