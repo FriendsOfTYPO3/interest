@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
@@ -18,7 +19,7 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -41,7 +42,7 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         $partialMockEventHandler($event);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function returnEarlyIfNoMmFieldConfigurations(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
@@ -71,7 +72,7 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function getSortedMmRelationFieldConfigurationsReturnsEmptyWhenNoColumns(): void
     {
         $tableName = 'tablename';
@@ -101,7 +102,7 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function getSortedMmRelationFieldConfigurationsReturnsCorrectData(): void
     {
         $tableName = 'tablename';
@@ -153,7 +154,7 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function addSortingIntentToMetaDataSetsCorrectMetaData(): void
     {
         $tableName = 'tablename';

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Functional\DataHandling\Operation;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
 use Pixelant\Interest\DataHandling\Operation\Exception\InvalidArgumentException;
@@ -22,7 +23,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function creatingPageResultsInPageRecord(): void
     {
         $data = [
@@ -57,7 +58,7 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         self::assertSame($data['title'], $databaseRow['title']);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function createOperationResultsInCorrectRecord(): void
     {
         $data = $this->recordRepresentationAndCorrespondingRowDataProvider();
@@ -168,7 +169,7 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function createAdvancedInlineMmRelationsInDifferentOrder(): void
     {
         $fileData = base64_encode(file_get_contents(__DIR__ . '/Fixtures/Image.jpg'));
@@ -350,7 +351,7 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function createEmptyFileIsHandledAsConfigured(): void
     {
         $createEmptySysFile = function () {

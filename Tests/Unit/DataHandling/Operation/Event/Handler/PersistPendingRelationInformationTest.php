@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\Message\PendingRelationMessage;
@@ -18,7 +19,7 @@ class PersistPendingRelationInformationTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -32,7 +33,7 @@ class PersistPendingRelationInformationTest extends UnitTestCase
         (new PersistPendingRelationInformation())($event);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function persistDataFromEachPendingRelationMessage(): void
     {
         $pendingRelationMessage1 = new PendingRelationMessage(
@@ -133,7 +134,7 @@ class PersistPendingRelationInformationTest extends UnitTestCase
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function noPendingRelationMessagesMeansNoDatabaseSet(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {

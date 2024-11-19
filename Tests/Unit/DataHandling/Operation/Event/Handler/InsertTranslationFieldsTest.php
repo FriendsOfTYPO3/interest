@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\InsertTranslationFields;
@@ -24,7 +25,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
         UpdateRecordOperation::class,
     ];
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function returnsEarlyIfLanguageIsNull(): void
     {
         foreach ($this->classNames as $className) {
@@ -44,7 +45,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function returnsEarlyIfLanguageIsZero(): void
     {
         foreach ($this->classNames as $className) {
@@ -70,7 +71,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function returnsEarlyIfTableNotTranslatable(): void
     {
         foreach ($this->classNames as $className) {
@@ -94,7 +95,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function returnsEarlyIfLanguageFieldIsSet(): void
     {
         foreach ($this->classNames as $className) {

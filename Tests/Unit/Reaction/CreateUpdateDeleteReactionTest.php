@@ -2,6 +2,7 @@
 
 namespace Pixelant\Interest\Tests\Unit\Reaction;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\Reaction\CreateUpdateDeleteReaction;
 use Pixelant\Interest\Utility\CompatibilityUtility;
 use Psr\Http\Message\ResponseInterface;
@@ -31,7 +32,7 @@ class CreateUpdateDeleteReactionTest extends UnitTestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function reactRoutesToCorrectActionWithPayload(): void
     {
         if (

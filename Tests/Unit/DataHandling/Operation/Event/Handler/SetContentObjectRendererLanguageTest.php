@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\SetContentObjectRendererLanguage;
@@ -15,7 +16,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class SetContentObjectRendererLanguageTest extends UnitTestCase
 {
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function setsNullLanguageToNull(): void
     {
         foreach (
@@ -47,7 +48,7 @@ class SetContentObjectRendererLanguageTest extends UnitTestCase
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function correctlySetsHreflang(): void
     {
         foreach (

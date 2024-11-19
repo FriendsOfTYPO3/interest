@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\MapNewUidToRemoteId;
@@ -19,7 +20,7 @@ class MapNewUidToRemoteIdTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -33,7 +34,7 @@ class MapNewUidToRemoteIdTest extends UnitTestCase
         (new MapNewUidToRemoteId())($event);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function returnEarlyIfUnsuccessfulOperation(): void
     {
         $mappingRepository = $this->createMock(RemoteIdMappingRepository::class);
@@ -58,7 +59,7 @@ class MapNewUidToRemoteIdTest extends UnitTestCase
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function setsUidOnCreateOperation(): void
     {
         $remoteId = 'theRemoteId';
@@ -134,7 +135,7 @@ class MapNewUidToRemoteIdTest extends UnitTestCase
         (new MapNewUidToRemoteId())($event);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function executesMappingRepositoryUpdateOnUpdateOperation(): void
     {
         $mockOperation = $this->createMock(UpdateRecordOperation::class);

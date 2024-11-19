@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\DataHandler;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
@@ -15,7 +16,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class SetUidTest extends UnitTestCase
 {
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function setsUidOnCreateOperationIfNotAlreadySet(): void
     {
         $mockDataHandler = $this->createMock(DataHandler::class);
@@ -52,7 +53,7 @@ class SetUidTest extends UnitTestCase
         (new SetUid())($event);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function doesNotSetUidIfOperationUnsuccessful(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
@@ -79,7 +80,7 @@ class SetUidTest extends UnitTestCase
         (new SetUid())($event);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function doesNotSetUidIfUidIsSet(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
@@ -107,7 +108,7 @@ class SetUidTest extends UnitTestCase
         (new SetUid())($event);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function doesNotSetUidIfOperationIsNotCreate(): void
     {
         foreach ([UpdateRecordOperation::class, DeleteRecordOperation::class] as $operationClass) {

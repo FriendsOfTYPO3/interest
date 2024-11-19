@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\DataHandler;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\Message\DataHandlerSuccessMessage;
@@ -14,7 +15,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ProcessCmdmapTest extends UnitTestCase
 {
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function returnEarlyWhenEmptyCmdmap(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
@@ -39,7 +40,7 @@ class ProcessCmdmapTest extends UnitTestCase
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function willProcessCmdmapAndSetStatus(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {

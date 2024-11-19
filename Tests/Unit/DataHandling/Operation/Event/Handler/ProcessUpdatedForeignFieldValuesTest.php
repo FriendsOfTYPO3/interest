@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\DataHandler;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
@@ -15,7 +16,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
 {
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function returnEarlyWhenNotUpdateOperation(): void
     {
         foreach ([DeleteRecordOperation::class, CreateRecordOperation::class] as $operationClass) {
@@ -31,7 +32,7 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function processWhenUpdateOperationAndReturnWhenNoMessages(): void
     {
         $mockOperation = $this->createMock(UpdateRecordOperation::class);
@@ -46,7 +47,7 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
         (new ProcessUpdatedForeignFieldValues())($event);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function correctlySetsCmdmap(): void
     {
         $messageValues = [

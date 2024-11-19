@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Functional\Domain\Repository;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\Domain\Repository\TokenRepository;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -26,7 +27,7 @@ class TokenRepositoryTest extends FunctionalTestCase
         $this->subject = new TokenRepository();
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function createTokenReturnsHashWithExpiryGreaterThanCreationDate(): void
     {
         $token = $this->subject->createTokenForBackendUser(1);

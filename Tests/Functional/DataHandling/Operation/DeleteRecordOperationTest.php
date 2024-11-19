@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Functional\DataHandling\Operation;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
 use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
@@ -16,7 +17,7 @@ use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
 
 class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function deletingPageSetsDeletedField(): void
     {
         $mappingRepository = new RemoteIdMappingRepository();
@@ -44,7 +45,7 @@ class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         self::assertSame(1, $databaseRow['deleted']);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function deletingContentSetsDeletedField(): void
     {
         (new DeleteRecordOperation(
@@ -68,7 +69,7 @@ class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         self::assertSame(1, $databaseRow['deleted']);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function deletingTranslationOfContentSetsDeletedField(): void
     {
         (new DeleteRecordOperation(

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Functional\DataHandling\Operation;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
 use Pixelant\Interest\DataHandling\Operation\UpdateRecordOperation;
@@ -19,7 +20,7 @@ use Pixelant\Interest\Utility\CompatibilityUtility;
 
 class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function updatingPageChangesFields(): void
     {
         $data = [
@@ -47,7 +48,7 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         self::assertSame($data['title'], $databaseRow['title']);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function updateOperationResultsInCorrectRecord(): void
     {
         $data = $this->recordRepresentationAndCorrespondingRowDataProvider();
@@ -57,7 +58,7 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         }
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function updatingForeignFieldRemovesNonExistingRelationsAndUseCorrectSorting(): void
     {
         $mappingRepository = new RemoteIdMappingRepository();

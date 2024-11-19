@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
@@ -23,7 +24,7 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -37,7 +38,7 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         (new PersistPendingRelationInformation())($event);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function deferredDeleteOperationsAreJustDeleted(): void
     {
         $deferredRecordDbRow = [
@@ -125,7 +126,7 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function convertsDeferredCreateOperationWithConflictToUpdateOperation(): void
     {
         $deferredOperationClass = CreateRecordOperation::class;

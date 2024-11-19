@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\RemoveEmptyValuesFromRelationFieldArrays;
@@ -13,7 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class RemoveEmptyValuesFromRelationFieldArraysTest extends UnitTestCase
 {
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
@@ -27,7 +28,7 @@ class RemoveEmptyValuesFromRelationFieldArraysTest extends UnitTestCase
         (new RemoveEmptyValuesFromRelationFieldArrays())($event);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function correctlyRemovesEmptyValuesFromRelationArrays(): void
     {
         $dataForDataHandler = [

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\Hook;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\DataHandler;
 use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
 use Pixelant\Interest\Hook\ProcessCmdmap;
@@ -12,7 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ProcessCmdmapTest extends UnitTestCase
 {
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function deletesRemoteIdIfOwnerRecordHasBeenDeleted(): void
     {
         $this->resetSingletonInstances = true;
@@ -53,7 +54,7 @@ class ProcessCmdmapTest extends UnitTestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function keepsRemoteIdIfOwnerRecordHasNotBeenDeleted(): void
     {
         $this->resetSingletonInstances = true;
