@@ -37,7 +37,19 @@ class DeleteRequestHandlerTest extends UnitTestCase
                 ],
                 $request,
             ])
-            ->onlyMethods(array_diff($allClassMethods, ['handle']))
+            ->onlyMethods(
+                array_diff(
+                    $allClassMethods,
+                    [
+                        'handle',
+                        'compileData',
+                        'getEntryPointParts',
+                        'formatDataArray',
+                        'getRequest',
+                        'handleOperations',
+                    ]
+                )
+            )
             ->getMock();
 
         $response = $deleteHandlerMock->handle();
