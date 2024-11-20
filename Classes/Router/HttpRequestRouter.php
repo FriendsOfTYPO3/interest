@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Router;
 
+use Pixelant\Interest\Authentication\HttpBackendUserAuthentication;
 use Pixelant\Interest\Authentication\HttpBackendUserAuthenticationForTypo3v11;
 use Pixelant\Interest\Authentication\HttpBackendUserAuthenticationForTypo3v12;
 use Pixelant\Interest\DataHandling\Operation\Exception\AbstractException;
@@ -28,6 +29,7 @@ use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Http\JsonResponse;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -150,26 +152,14 @@ class HttpRequestRouter
      */
     protected static function initialize(ServerRequestInterface $request)
     {
-        if (CompatibilityUtility::typo3VersionIsLessThan('12.0')) {
-            require_once GeneralUtility::getFileAbsFileName(
-                'EXT:interest/DynamicCompatibility/Authentication/HttpBackendUserAuthenticationForTypo3v11.php'
-            );
-
-            // @phpstan-ignore-next-line
-            Bootstrap::initializeBackendUser(HttpBackendUserAuthenticationForTypo3v11::class, $request);
-        } else {
-            require_once GeneralUtility::getFileAbsFileName(
-                'EXT:interest/DynamicCompatibility/Authentication/HttpBackendUserAuthenticationForTypo3v12.php'
-            );
-
-            // @phpstan-ignore-next-line
-            Bootstrap::initializeBackendUser(HttpBackendUserAuthenticationForTypo3v12::class, $request);
-        }
+        Bootstrap::initializeBackendUser(HttpBackendUserAuthentication::class, $request);
 
         self::bootFrontendController($request);
 
-        ExtensionManagementUtility::loadExtTables();
-        Bootstrap::initializeLanguageObject();
+        Bootstrap::loadExtTables();
+
+        $GLOBALS['LANG'] = $GLOBALS['LANG']
+            ?? GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
     }
 
     /**

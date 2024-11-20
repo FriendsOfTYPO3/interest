@@ -29,6 +29,7 @@ use TYPO3\CMS\Core\Resource\OnlineMedia\Helpers\OnlineMediaHelperRegistry;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Resource\ResourceStorage;
 use TYPO3\CMS\Core\Resource\Security\FileNameValidator;
+use TYPO3\CMS\Core\Resource\StorageRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
@@ -81,7 +82,7 @@ class PersistFileData implements RecordOperationEventHandlerInterface
 
         $this->resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
 
-        $storage = $this->resourceFactory->getStorageObjectFromCombinedIdentifier($storagePath);
+        $storage = GeneralUtility::makeInstance(StorageRepository::class)->findByCombinedIdentifier($storagePath);
 
         $downloadFolder = $this->getDownloadFolder($storagePath, $storage, $settings['persistence.'], $fileBaseName);
 

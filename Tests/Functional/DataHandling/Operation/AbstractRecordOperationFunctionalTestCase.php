@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Functional\DataHandling\Operation;
 
+use Pixelant\Interest\Tests\Functional\SiteBasedTestTrait;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
@@ -20,6 +21,15 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 abstract class AbstractRecordOperationFunctionalTestCase extends FunctionalTestCase
 {
+    use SiteBasedTestTrait;
+
+    protected const LANGUAGE_PRESETS = [
+        'en' => ['id' => 0, 'title' => 'English', 'locale' => 'en_US.UTF-8'],
+        'de' => ['id' => 1, 'title' => 'German', 'locale' => 'de_DE.UTF-8'],
+        'es' => ['id' => 2, 'title' => 'Spanish', 'locale' => 'es_ES.UTF-8'],
+        'fr' => ['id' => 3, 'title' => 'French', 'locale' => 'fr_FR.UTF-8'],
+    ];
+
     /**
      * @var array<non-empty-string>
      */
@@ -33,41 +43,22 @@ abstract class AbstractRecordOperationFunctionalTestCase extends FunctionalTestC
 
         $this->importCSVDataSet(__DIR__ . '/Fixtures/Records.csv');
 
+        $this->writeSiteConfiguration(
+            'main',
+            $this->buildSiteConfiguration(1, '/'),
+            [
+                $this->buildDefaultLanguageConfiguration('en', '/'),
+                $this->buildLanguageConfiguration('de', '/de/'),
+                $this->buildLanguageConfiguration('es', '/es/'),
+                $this->buildLanguageConfiguration('fr', '/fr/'),
+            ]
+        );
+
         $this->setUpBackendUser(1);
 
         $this->setUpFrontendRootPage(1);
 
         GeneralUtility::setIndpEnv('TYPO3_REQUEST_URL', 'http://www.example.com/');
-
-        $siteConfigurationPath = GeneralUtility::getFileAbsFileName(
-            'EXT:interest/Tests/Functional/DataHandling/Operation/Fixtures/Sites'
-        );
-
-        $setRegistry = $this->createMock(SetRegistry::class);
-
-        $packageDependentCacheIdentifier = $this->createMock(PackageDependentCacheIdentifier::class);
-
-        $settingsTypeRegistry = new SettingsTypeRegistry($this->createMock(ServiceLocator::class));
-
-        $siteConfiguration = new SiteConfiguration(
-            $siteConfigurationPath,
-            new SiteSettingsFactory(
-                $siteConfigurationPath,
-                $setRegistry,
-                $settingsTypeRegistry,
-                $this->createMock(YamlFileLoader::class),
-                new NullFrontend('test'),
-                $packageDependentCacheIdentifier
-            ),
-            new NoopEventDispatcher(),
-            new NullFrontend('test'),
-            new YamlFileLoader($this->createMock(LoggerInterface::class))
-        );
-
-        GeneralUtility::setSingletonInstance(
-            SiteConfiguration::class,
-            $siteConfiguration
-        );
 
         $languageServiceMock = $this->createMock(LanguageService::class);
 

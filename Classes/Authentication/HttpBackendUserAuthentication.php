@@ -12,7 +12,7 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Authentication\LoginType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-abstract class AbstractHttpBackendUserAuthentication extends BackendUserAuthentication
+class HttpBackendUserAuthentication extends BackendUserAuthentication
 {
     /**
      * Check if user is authenticated.
@@ -39,10 +39,9 @@ abstract class AbstractHttpBackendUserAuthentication extends BackendUserAuthenti
      *
      * @param ServerRequestInterface $request
      * @return array
-     * @throws UnauthorizedAccessException
-     * @throws InvalidArgumentException
+     * @phpstan-ignore-next-line
      */
-    protected function internalGetLoginFormData(ServerRequestInterface $request)
+    public function getLoginFormData(ServerRequestInterface $request)
     {
         if (strtolower($request->getMethod()) !== 'post') {
             throw new UnauthorizedAccessException(
