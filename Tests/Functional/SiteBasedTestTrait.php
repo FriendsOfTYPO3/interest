@@ -35,6 +35,7 @@ use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
  * Be sure to set the LANGUAGE_PRESETS const in your class.
  *
  * @see \TYPO3\CMS\Core\Tests\Functional\SiteHandling\SiteBasedTestTrait
+ * @noinspection PhpUndefinedNamespaceInspection
  */
 trait SiteBasedTestTrait
 {
