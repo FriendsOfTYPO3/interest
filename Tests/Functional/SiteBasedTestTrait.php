@@ -19,7 +19,6 @@ namespace Pixelant\Interest\Tests\Functional;
 
 use TYPO3\CMS\Core\Configuration\SiteConfiguration;
 use TYPO3\CMS\Core\Configuration\SiteWriter;
-use TYPO3\CMS\Core\Tests\Functional\Fixtures\Frontend\PhpError;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\Internal\ArrayValueInstruction;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\Internal\InstructionInterface;
@@ -41,6 +40,7 @@ trait SiteBasedTestTrait
 {
     protected static function failIfArrayIsNotEmpty(array $items): void
     {
+        // @phpstan-ignore empty.notAllowed
         if (empty($items)) {
             return;
         }
@@ -58,9 +58,11 @@ trait SiteBasedTestTrait
         array $errorHandling = []
     ): void {
         $configuration = $site;
+        // @phpstan-ignore empty.notAllowed
         if (!empty($languages)) {
             $configuration['languages'] = $languages;
         }
+        // @phpstan-ignore empty.notAllowed
         if (!empty($errorHandling)) {
             $configuration['errorHandling'] = $errorHandling;
         }
@@ -70,7 +72,7 @@ trait SiteBasedTestTrait
             GeneralUtility::rmdir($this->instancePath . '/typo3conf/sites/' . $identifier, true);
             $siteWriter->write($identifier, $configuration);
         } catch (\Exception $exception) {
-            $this->markTestSkipped($exception->getMessage());
+            self::markTestSkipped($exception->getMessage());
         }
     }
 
@@ -85,7 +87,7 @@ trait SiteBasedTestTrait
         try {
             $siteWriter->write($identifier, $configuration);
         } catch (\Exception $exception) {
-            $this->markTestSkipped($exception->getMessage());
+            self::markTestSkipped($exception->getMessage());
         }
     }
 
@@ -125,9 +127,11 @@ trait SiteBasedTestTrait
             'base' => $base,
             'locale' => $preset['locale'],
             'flag' => $preset['iso'] ?? '',
+            // @phpstan-ignore empty.notAllowed
             'fallbackType' => $fallbackType ?? (empty($fallbackIdentifiers) ? 'strict' : 'fallback'),
         ];
 
+        // @phpstan-ignore empty.notAllowed
         if (!empty($fallbackIdentifiers)) {
             $fallbackIds = array_map(
                 function (string $fallbackIdentifier) {
@@ -143,54 +147,9 @@ trait SiteBasedTestTrait
         return $configuration;
     }
 
-    protected function buildErrorHandlingConfiguration(
-        string $handler,
-        array $codes
-    ): array {
-        if ($handler === 'Page') {
-            // This implies you cannot test both 404 and 403 in the same test.
-            // Fixing that requires much deeper changes to the testing harness,
-            // as the structure here is only a portion of the config array structure.
-            if (in_array(404, $codes, true)) {
-                $baseConfiguration = [
-                    'errorContentSource' => 't3://page?uid=404',
-                ];
-            } elseif (in_array(403, $codes, true)) {
-                $baseConfiguration = [
-                    'errorContentSource' => 't3://page?uid=403',
-                ];
-            }
-        } elseif ($handler === 'Fluid') {
-            $baseConfiguration = [
-                'errorFluidTemplate' => 'typo3/sysext/core/Tests/Functional/Fixtures/Frontend/FluidError.html',
-                'errorFluidTemplatesRootPath' => '',
-                'errorFluidLayoutsRootPath' => '',
-                'errorFluidPartialsRootPath' => '',
-            ];
-        } elseif ($handler === 'PHP') {
-            $baseConfiguration = [
-                'errorPhpClassFQCN' => PhpError::class,
-            ];
-        } else {
-            throw new \LogicException(
-                sprintf('Invalid handler "%s"', $handler),
-                1533894782
-            );
-        }
-
-        $baseConfiguration['errorHandler'] = $handler;
-
-        return array_map(
-            static function (int $code) use ($baseConfiguration) {
-                $baseConfiguration['errorCode'] = $code;
-                return $baseConfiguration;
-            },
-            $codes
-        );
-    }
-
     /**
      * @return mixed
+     * @throws \LogicException
      */
     protected function resolveLanguagePreset(string $identifier)
     {
@@ -203,11 +162,10 @@ trait SiteBasedTestTrait
         return static::LANGUAGE_PRESETS[$identifier];
     }
 
-    /**
-     * @todo Instruction handling should be part of Testing Framework (multiple instructions per identifier, merge in interface)
-     */
-    protected function applyInstructions(InternalRequest $request, InstructionInterface ...$instructions): InternalRequest
-    {
+    protected function applyInstructions(
+        InternalRequest $request,
+        InstructionInterface ...$instructions
+    ): InternalRequest {
         $modifiedInstructions = [];
 
         foreach ($instructions as $instruction) {
@@ -225,8 +183,10 @@ trait SiteBasedTestTrait
         return $request->withInstructions($modifiedInstructions);
     }
 
-    protected function mergeInstruction(InstructionInterface $current, InstructionInterface $other): InstructionInterface
-    {
+    protected function mergeInstruction(
+        InstructionInterface $current,
+        InstructionInterface $other
+    ): InstructionInterface {
         if (get_class($current) !== get_class($other)) {
             throw new \LogicException('Cannot merge different instruction types', 1565863174);
         }

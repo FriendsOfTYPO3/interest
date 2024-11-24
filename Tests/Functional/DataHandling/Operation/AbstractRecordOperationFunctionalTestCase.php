@@ -5,17 +5,7 @@ declare(strict_types=1);
 namespace Pixelant\Interest\Tests\Functional\DataHandling\Operation;
 
 use Pixelant\Interest\Tests\Functional\SiteBasedTestTrait;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\DependencyInjection\ServiceLocator;
-use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
-use TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader;
-use TYPO3\CMS\Core\Configuration\SiteConfiguration;
-use TYPO3\CMS\Core\EventDispatcher\NoopEventDispatcher;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Package\Cache\PackageDependentCacheIdentifier;
-use TYPO3\CMS\Core\Settings\SettingsTypeRegistry;
-use TYPO3\CMS\Core\Site\Set\SetRegistry;
-use TYPO3\CMS\Core\Site\SiteSettingsFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 

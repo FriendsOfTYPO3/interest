@@ -39,7 +39,8 @@ class HttpBackendUserAuthentication extends BackendUserAuthentication
      *
      * @param ServerRequestInterface $request
      * @return array
-     * @phpstan-ignore-next-line
+     * @throws UnauthorizedAccessException
+     * @throws InvalidArgumentException
      */
     public function getLoginFormData(ServerRequestInterface $request)
     {
