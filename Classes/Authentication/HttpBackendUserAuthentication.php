@@ -88,10 +88,6 @@ class HttpBackendUserAuthentication extends BackendUserAuthentication
             'uident' => $password,
         ];
 
-        if (CompatibilityUtility::typo3VersionIsLessThan('12.0')) {
-            return $this->processLoginData($loginData);
-        }
-
         return $this->processLoginData($loginData, $request);
     }
 
