@@ -182,10 +182,6 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
                     'fieldname' => 'image',
                 ];
 
-                if (CompatibilityUtility::typo3VersionIsLessThan('12.0')) {
-                    $recordRepresentationData['table_local'] = 'sys_file';
-                }
-
                 (new CreateRecordOperation(
                     new RecordRepresentation(
                         $recordRepresentationData,

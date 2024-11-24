@@ -35,10 +35,7 @@ class CreateUpdateDeleteReactionTest extends UnitTestCase
     #[Test]
     public function reactRoutesToCorrectActionWithPayload(): void
     {
-        if (
-            CompatibilityUtility::typo3VersionIsLessThan('12.0')
-            || !ExtensionManagementUtility::isLoaded('reactions')
-        ) {
+        if (!ExtensionManagementUtility::isLoaded('reactions')) {
             return;
         }
 

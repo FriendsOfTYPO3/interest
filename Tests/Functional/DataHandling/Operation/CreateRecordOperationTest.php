@@ -198,10 +198,6 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
                 'fieldname' => 'image',
             ];
 
-            if (CompatibilityUtility::typo3VersionIsLessThan('12.0')) {
-                $recordRepresentationData['table_local'] = 'sys_file';
-            }
-
             (new CreateRecordOperation(
                 new RecordRepresentation(
                     $recordRepresentationData,
@@ -312,10 +308,6 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
                 'uid_foreign' => $mappingRepository->get('MediaContentElement_' . $iteration),
                 'fieldname' => 'image',
             ];
-
-            if (CompatibilityUtility::typo3VersionIsLessThan('12.0')) {
-                $expectedReturnData['table_local'] = 'sys_file';
-            }
 
             $createdSysFileReference = $this
                 ->getConnectionPool()
