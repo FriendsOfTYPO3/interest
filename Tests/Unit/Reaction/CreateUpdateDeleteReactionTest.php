@@ -4,7 +4,6 @@ namespace Pixelant\Interest\Tests\Unit\Reaction;
 
 use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\Reaction\CreateUpdateDeleteReaction;
-use Pixelant\Interest\Utility\CompatibilityUtility;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\ServerRequest;
