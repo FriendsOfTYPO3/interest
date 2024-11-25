@@ -72,12 +72,16 @@ class ApplyFieldDataTransformationsTest extends UnitTestCase
                 ->expects($invocationCount)
                 ->method('stdWrap')
                 ->willReturnCallback(function ($parameters) use ($invocationCount, $dataArray) {
-                    self::assertSame(
+                    self::assertEquals(
                         $dataArray[array_keys($dataArray)[$invocationCount->numberOfInvocations() - 1]],
                         $parameters
                     );
 
-                    return $invocationCount->numberOfInvocations();
+                    return match ($invocationCount->numberOfInvocations()) {
+                        1 => 'field1return',
+                        2 => 'field2return',
+                        default => self::fail('Number of invocations does not match number of fields'),
+                    };
                 });
 
             $invocationCount = self::exactly(2);
@@ -85,14 +89,16 @@ class ApplyFieldDataTransformationsTest extends UnitTestCase
             $mockOperation
                 ->expects($invocationCount)
                 ->method('setDataFieldForDataHandler')
-                ->willReturnCallback(function ($parameters) use ($invocationCount) {
+                ->willReturnCallback(function ($parameter1, $parameter2) use ($invocationCount) {
                     switch ($invocationCount->numberOfInvocations()) {
                         case 1:
-                            self::assertSame('field1', $parameters);
-                            return 'field1return';
+                            self::assertEquals('field1', $parameter1);
+                            self::assertSame('field1return', $parameter2);
+                            return;
                         case 2:
-                            self::assertSame('field2', $parameters);
-                            return 'field2return';
+                            self::assertEquals('field2', $parameter1);
+                            self::assertSame('field2return', $parameter2);
+                            return;
                     }
 
                     self::fail();
