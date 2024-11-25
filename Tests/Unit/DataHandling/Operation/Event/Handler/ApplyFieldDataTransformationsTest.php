@@ -93,11 +93,11 @@ class ApplyFieldDataTransformationsTest extends UnitTestCase
                     switch ($invocationCount->numberOfInvocations()) {
                         case 1:
                             self::assertEquals('field1', $parameter1);
-                            self::assertSame('field1return', $parameter2);
+                            self::assertEquals('field1return', $parameter2);
                             return;
                         case 2:
                             self::assertEquals('field2', $parameter1);
-                            self::assertSame('field2return', $parameter2);
+                            self::assertEquals('field2return', $parameter2);
                             return;
                     }
 

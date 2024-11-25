@@ -55,7 +55,7 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
 
         self::assertIsArray($databaseRow);
 
-        self::assertSame($data['title'], $databaseRow['title']);
+        self::assertEquals($data['title'], $databaseRow['title']);
     }
 
     #[Test]

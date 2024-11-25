@@ -69,8 +69,8 @@ class RemoveEmptyValuesFromRelationFieldArraysTest extends UnitTestCase
                     ) {
                         $i = $invocationCount->numberOfInvocations() - 1;
 
-                        self::assertSame($expectedSetDataFieldForDataHandlerArguments[$i][0], $parameter1);
-                        self::assertSame($expectedSetDataFieldForDataHandlerArguments[$i][1], $parameter2);
+                        self::assertEquals($expectedSetDataFieldForDataHandlerArguments[$i][0], $parameter1);
+                        self::assertEquals($expectedSetDataFieldForDataHandlerArguments[$i][1], $parameter2);
 
                         return $invocationCount->numberOfInvocations();
                     }

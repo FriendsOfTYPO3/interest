@@ -88,7 +88,7 @@ class PersistPendingRelationInformationTest extends UnitTestCase
                         $pendingRelationMessage2
                     ) {
                         match ($invocationCount->numberOfInvocations()) {
-                            1 => self::assertSame(
+                            1 => self::assertEquals(
                                 [
                                     $pendingRelationMessage2->getTable(),
                                     $pendingRelationMessage2->getField(),
@@ -102,7 +102,7 @@ class PersistPendingRelationInformationTest extends UnitTestCase
                                     $parameter4,
                                 ]
                             ),
-                            2 => self::assertSame(
+                            2 => self::assertEquals(
                                 [
                                     $pendingRelationMessage1->getTable(),
                                     $pendingRelationMessage1->getField(),

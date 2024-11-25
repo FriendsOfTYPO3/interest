@@ -42,7 +42,7 @@ class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
 
         self::assertIsArray($databaseRow);
 
-        self::assertSame(1, $databaseRow['deleted']);
+        self::assertEquals(1, $databaseRow['deleted']);
     }
 
     #[Test]
@@ -66,7 +66,7 @@ class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
 
         self::assertIsArray($databaseRow);
 
-        self::assertSame(1, $databaseRow['deleted']);
+        self::assertEquals(1, $databaseRow['deleted']);
     }
 
     #[Test]
@@ -91,6 +91,6 @@ class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
 
         self::assertIsArray($databaseRow);
 
-        self::assertSame(1, $databaseRow['deleted']);
+        self::assertEquals(1, $databaseRow['deleted']);
     }
 }

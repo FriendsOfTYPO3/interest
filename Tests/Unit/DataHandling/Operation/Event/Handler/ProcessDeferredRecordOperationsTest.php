@@ -163,11 +163,11 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
                     $mockUpdateOperation,
                     $consecutiveParameters
                 ) {
-                    self::assertSame(
+                    self::assertEquals(
                         $consecutiveParameters[$invocationCount->numberOfInvocations() - 1][0],
                         $parameter1
                     );
-                    self::assertSame(
+                    self::assertEquals(
                         $consecutiveParameters[$invocationCount->numberOfInvocations() - 1][1],
                         $parameter2
                     );

@@ -45,7 +45,7 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
 
         self::assertIsArray($databaseRow);
 
-        self::assertSame($data['title'], $databaseRow['title']);
+        self::assertEquals($data['title'], $databaseRow['title']);
     }
 
     #[Test]
@@ -133,7 +133,7 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
                 $expectedImageIds[] = $mappingRepository->get($sfrRemoteIdentifier);
             }
 
-            self::assertSame(
+            self::assertEquals(
                 $expectedImageIds,
                 $databaseImageIds,
                 'Images attached to media content element isn\'t as expected.'

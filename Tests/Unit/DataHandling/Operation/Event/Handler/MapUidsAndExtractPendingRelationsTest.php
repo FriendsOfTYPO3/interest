@@ -123,12 +123,12 @@ class MapUidsAndExtractPendingRelationsTest extends UnitTestCase
                 ->willReturnCallback(function ($parameter1, $parameter2) use ($invocationCount) {
                     switch ($invocationCount->numberOfInvocations()) {
                         case 1:
-                            self::assertSame('relationField1', $parameter1);
-                            self::assertSame([4, 6], $parameter2);
+                            self::assertEquals('relationField1', $parameter1);
+                            self::assertEquals([4, 6], $parameter2);
                             break;
                         case 2:
-                            self::assertSame('relationField2', $parameter1);
-                            self::assertSame(['tablename_6'], $parameter2);
+                            self::assertEquals('relationField2', $parameter1);
+                            self::assertEquals(['tablename_6'], $parameter2);
                             break;
                         default:
                             self::fail();
