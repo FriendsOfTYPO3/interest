@@ -124,8 +124,8 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
             ->expects($invocationCount)
             ->method('getRelationsFromMessage')
             ->willReturnCallback(
-                function ($parameters) use ($invocationCount, $expectedParameters, $relationReturns) {
-                    self::assertEquals($expectedParameters[$invocationCount->numberOfInvocations() - 1], $parameters);
+                function ($parameter) use ($invocationCount, $expectedParameters, $relationReturns) {
+                    self::assertEquals($expectedParameters[$invocationCount->numberOfInvocations() - 1], $parameter);
 
                     return $relationReturns[$invocationCount->numberOfInvocations() - 1];
                 }

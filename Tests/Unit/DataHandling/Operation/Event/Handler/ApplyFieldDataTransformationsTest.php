@@ -71,10 +71,10 @@ class ApplyFieldDataTransformationsTest extends UnitTestCase
             $mockContentObjectRenderer
                 ->expects($invocationCount)
                 ->method('stdWrap')
-                ->willReturnCallback(function ($parameters) use ($invocationCount, $dataArray) {
+                ->willReturnCallback(function ($parameter) use ($invocationCount, $dataArray) {
                     self::assertEquals(
                         $dataArray[array_keys($dataArray)[$invocationCount->numberOfInvocations() - 1]],
-                        $parameters
+                        $parameter
                     );
 
                     return match ($invocationCount->numberOfInvocations()) {
