@@ -101,7 +101,7 @@ class ApplyFieldDataTransformationsTest extends UnitTestCase
                             return;
                     }
 
-                    self::fail();
+                    self::fail('Number of invocations does not match number of fields');
                 });
 
             $mockOperation
