@@ -71,6 +71,9 @@ jobs:
           - 8.2
           - 8.3
           - 8.4
+        exclude:
+          - command: "php:cs-fixer"
+            php-version: 8.4
   xliff-lint:
     name: "Xliff linter"
     runs-on: ubuntu-20.04
