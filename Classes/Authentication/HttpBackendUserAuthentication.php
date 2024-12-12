@@ -106,7 +106,6 @@ class HttpBackendUserAuthentication extends BackendUserAuthentication
      *
      * @param ServerRequestInterface $request
      * @throws UnauthorizedAccessException
-     * @throws InvalidArgumentException
      */
     protected function authenticateBearerToken(ServerRequestInterface $request): void
     {
