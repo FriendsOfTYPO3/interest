@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Authentication;
 
+use Pixelant\Interest\Domain\Repository\TokenRepository;
 use Pixelant\Interest\RequestHandler\Exception\InvalidArgumentException;
 use Pixelant\Interest\RequestHandler\Exception\UnauthorizedAccessException;
 use Psr\Http\Message\ServerRequestInterface;
@@ -20,7 +21,7 @@ class HttpBackendUserAuthentication extends BackendUserAuthentication
      */
     public function isAuthenticated(): bool
     {
-        return $this->getUserId() !== 0;
+        return $this->getUserId() !== 0 && $this->getUserId() !== null;
     }
 
     /**
@@ -31,6 +32,17 @@ class HttpBackendUserAuthentication extends BackendUserAuthentication
     public function getUserId(): int
     {
         return $this->user['uid'] ?? 0;
+    }
+
+    public function checkAuthentication(ServerRequestInterface $request)
+    {
+        $this->authenticateBearerToken($request);
+
+        if ($this->isAuthenticated()) {
+            return;
+        }
+
+        parent::checkAuthentication($request);
     }
 
     /**
@@ -82,12 +94,49 @@ class HttpBackendUserAuthentication extends BackendUserAuthentication
         [$username, $password] = explode(':', $authorizationData);
 
         $loginData = [
-            'status' => LoginType::LOGIN,
+            'status' => 'login',
             'uname'  => $username,
             'uident' => $password,
         ];
 
         return $this->processLoginData($loginData, $request);
+    }
+
+    /**
+     * Authenticates a token provided in the request.
+     *
+     * @param ServerRequestInterface $request
+     * @throws UnauthorizedAccessException
+     * @throws InvalidArgumentException
+     */
+    protected function authenticateBearerToken(ServerRequestInterface $request): void
+    {
+        $authorizationHeader = $request->getHeader('authorization')[0]
+            ?? $request->getHeader('redirect_http_authorization')[0]
+            ?? '';
+
+        [$scheme, $token] = GeneralUtility::trimExplode(' ', $authorizationHeader, true);
+
+        if (is_string($scheme) && strtolower($scheme) !== 'bearer') {
+            return;
+        }
+
+        $backendUserId = GeneralUtility::makeInstance(TokenRepository::class)
+            ->findBackendUserIdByToken($token);
+
+        if ($backendUserId === 0) {
+            throw new UnauthorizedAccessException(
+                'Invalid or expired bearer token.',
+                $request
+            );
+        }
+
+        $this->setBeUserByUid($backendUserId);
+
+        $this->unpack_uc();
+
+        $this->fetchGroupData();
+        $this->backendSetUC();
     }
 
     /**
