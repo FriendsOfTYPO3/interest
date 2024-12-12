@@ -35,6 +35,8 @@ class CreateUpdateDeleteReactionTest extends UnitTestCase
     public function reactRoutesToCorrectActionWithPayload(): void
     {
         if (!ExtensionManagementUtility::isLoaded('reactions')) {
+            self::markTestSkipped('typo3/cms-reactions not installed');
+
             return;
         }
 
