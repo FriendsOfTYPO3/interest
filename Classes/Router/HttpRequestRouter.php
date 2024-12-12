@@ -101,8 +101,6 @@ class HttpRequestRouter
         }
     }
 
-
-
     /**
      * Necessary initialization.
      */
