@@ -9,7 +9,6 @@ use Pixelant\Interest\RequestHandler\Exception\InvalidArgumentException;
 use Pixelant\Interest\RequestHandler\Exception\UnauthorizedAccessException;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Core\Authentication\LoginType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class HttpBackendUserAuthentication extends BackendUserAuthentication

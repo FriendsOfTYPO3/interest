@@ -6,14 +6,11 @@ namespace Pixelant\Interest\Router;
 
 use Pixelant\Interest\Authentication\HttpBackendUserAuthentication;
 use Pixelant\Interest\DataHandling\Operation\Exception\AbstractException;
-use Pixelant\Interest\Domain\Repository\TokenRepository;
 use Pixelant\Interest\RequestHandler\AuthenticateRequestHandler;
 use Pixelant\Interest\RequestHandler\CreateOrUpdateRequestHandler;
 use Pixelant\Interest\RequestHandler\CreateRequestHandler;
 use Pixelant\Interest\RequestHandler\DeleteRequestHandler;
 use Pixelant\Interest\RequestHandler\Exception\AbstractRequestHandlerException;
-use Pixelant\Interest\RequestHandler\Exception\InvalidArgumentException;
-use Pixelant\Interest\RequestHandler\Exception\UnauthorizedAccessException;
 use Pixelant\Interest\RequestHandler\ExceptionConverter\OperationToRequestHandlerExceptionConverter;
 use Pixelant\Interest\RequestHandler\UpdateRequestHandler;
 use Pixelant\Interest\Router\Event\HttpRequestRouterHandleByEvent;
