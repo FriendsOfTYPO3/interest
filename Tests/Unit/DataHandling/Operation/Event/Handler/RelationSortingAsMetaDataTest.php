@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
@@ -18,10 +19,8 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @test
-     */
-    public function returnEarlyIfDeleteOperation()
+    #[Test]
+    public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -43,10 +42,8 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         $partialMockEventHandler($event);
     }
 
-    /**
-     * @test
-     */
-    public function returnEarlyIfNoMmFieldConfigurations()
+    #[Test]
+    public function returnEarlyIfNoMmFieldConfigurations(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);
@@ -75,10 +72,8 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function getSortedMmRelationFieldConfigurationsReturnsEmptyWhenNoColumns()
+    #[Test]
+    public function getSortedMmRelationFieldConfigurationsReturnsEmptyWhenNoColumns(): void
     {
         $tableName = 'tablename';
 
@@ -107,10 +102,8 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function getSortedMmRelationFieldConfigurationsReturnsCorrectData()
+    #[Test]
+    public function getSortedMmRelationFieldConfigurationsReturnsCorrectData(): void
     {
         $tableName = 'tablename';
 
@@ -151,7 +144,7 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
             $partialMockEventHandler
                 ->method('getTcaFieldConfigurationAndRespectColumnsOverrides')
                 ->willReturnCallback(
-                    fn (AbstractRecordOperation $recordOperation, string $field)
+                    fn(AbstractRecordOperation $recordOperation, string $field)
                         => $GLOBALS['TCA'][$recordOperation->getTable()]['columns'][$field]['config']
                 );
 
@@ -161,10 +154,8 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function addSortingIntentToMetaDataSetsCorrectMetaData()
+    #[Test]
+    public function addSortingIntentToMetaDataSetsCorrectMetaData(): void
     {
         $tableName = 'tablename';
 

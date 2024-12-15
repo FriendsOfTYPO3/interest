@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\DataHandler;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
@@ -15,10 +16,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function returnEarlyWhenNotUpdateOperation()
+    #[Test]
+    public function returnEarlyWhenNotUpdateOperation(): void
     {
         foreach ([DeleteRecordOperation::class, CreateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);
@@ -33,10 +32,8 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function processWhenUpdateOperationAndReturnWhenNoMessages()
+    #[Test]
+    public function processWhenUpdateOperationAndReturnWhenNoMessages(): void
     {
         $mockOperation = $this->createMock(UpdateRecordOperation::class);
 
@@ -50,10 +47,8 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
         (new ProcessUpdatedForeignFieldValues())($event);
     }
 
-    /**
-     * @test
-     */
-    public function correctlySetsCmdmap()
+    #[Test]
+    public function correctlySetsCmdmap(): void
     {
         $messageValues = [
             ['tablename1', 'firstField', 123, [1, 2]],
@@ -102,17 +97,17 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
 
         $mockOperation = $this->createMock(UpdateRecordOperation::class);
 
-        $messages = [];
+        $expectedParameters = [];
 
         foreach ($messageValues as $messageValueSet) {
-            $messages[] = new RelationFieldValueMessage(... $messageValueSet);
+            $expectedParameters[] = new RelationFieldValueMessage(... $messageValueSet);
         }
 
         $mockOperation
-            ->expects(self::exactly(count($messages) + 1))
+            ->expects(self::exactly(count($expectedParameters) + 1))
             ->method('retrieveMessage')
             ->with(RelationFieldValueMessage::class)
-            ->willReturnOnConsecutiveCalls(... [... $messages, null]);
+            ->willReturnOnConsecutiveCalls(... [... $expectedParameters, null]);
 
         $mockOperation
             ->method('getDataHandler')
@@ -123,18 +118,18 @@ class ProcessUpdatedForeignFieldValuesTest extends UnitTestCase
             ['getRelationsFromMessage']
         );
 
+        $invocationCount = self::exactly(count($messageValues));
+
         $partialMockEventHandler
-            ->expects(self::exactly(count($messageValues)))
+            ->expects($invocationCount)
             ->method('getRelationsFromMessage')
-            ->withConsecutive(
-                ... array_reduce(
-                    $messages,
-                    // Wrap each $message in an array.
-                    fn (array $carry, RelationFieldValueMessage $message): array => [... $carry, [$message]],
-                    []
-                )
-            )
-            ->willReturnOnConsecutiveCalls(... $relationReturns);
+            ->willReturnCallback(
+                function ($parameter) use ($invocationCount, $expectedParameters, $relationReturns) {
+                    self::assertEquals($expectedParameters[$invocationCount->numberOfInvocations() - 1], $parameter);
+
+                    return $relationReturns[$invocationCount->numberOfInvocations() - 1];
+                }
+            );
 
         $event = new RecordOperationInvocationEvent($mockOperation);
 

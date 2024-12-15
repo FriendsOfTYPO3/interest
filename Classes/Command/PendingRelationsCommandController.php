@@ -51,7 +51,7 @@ class PendingRelationsCommandController extends Command
      * @return int
      * @throws InvalidQueryResultException
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $counts = [
             '_total' => [
@@ -242,6 +242,7 @@ class PendingRelationsCommandController extends Command
             $progressBar->advance();
         }
 
+        // @extensionScannerIgnoreLine
         $progressBar->finish();
 
         return 0;

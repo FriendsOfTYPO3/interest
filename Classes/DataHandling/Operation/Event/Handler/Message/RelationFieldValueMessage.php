@@ -38,6 +38,7 @@ class RelationFieldValueMessage implements RequiredMessageInterface
     {
         $this->table = $table;
         $this->field = $field;
+        // @extensionScannerIgnoreLine
         $this->id = $id;
         $this->value = $value;
     }
@@ -63,6 +64,7 @@ class RelationFieldValueMessage implements RequiredMessageInterface
      */
     public function getId()
     {
+        // @extensionScannerIgnoreLine
         return $this->id;
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\ApplyFieldDataTransformations;
@@ -15,10 +16,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ConvertRelationFieldArraysToCsvTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function returnsEarlyIfDeleteRecordOperation()
+    #[Test]
+    public function returnsEarlyIfDeleteRecordOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -31,10 +30,8 @@ class ConvertRelationFieldArraysToCsvTest extends UnitTestCase
         (new ApplyFieldDataTransformations())($event);
     }
 
-    /**
-     * @test
-     */
-    public function callsStdWrapWithCorrectArguments()
+    #[Test]
+    public function callsStdWrapWithCorrectArguments(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);

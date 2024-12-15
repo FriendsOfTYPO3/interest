@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
@@ -23,10 +25,8 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @test
-     */
-    public function returnEarlyIfDeleteOperation()
+    #[Test]
+    public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -39,10 +39,8 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         (new PersistPendingRelationInformation())($event);
     }
 
-    /**
-     * @test
-     */
-    public function deferredDeleteOperationsAreJustDeleted()
+    #[Test]
+    public function deferredDeleteOperationsAreJustDeleted(): void
     {
         $deferredRecordDbRow = [
             'uid' => 123,
@@ -74,12 +72,9 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider recordOperationClassCombinationsDataProvider
-     */
-    public function deferredOperationsAreInvoked(string $operationClass, string $deferredOperationClass)
+    #[Test]
+    #[DataProvider('recordOperationClassCombinationsDataProvider')]
+    public function deferredOperationsAreInvoked(string $operationClass, string $deferredOperationClass): void
     {
         $deferredRecordDbRow = $this->getDeferredRecordDbRow($deferredOperationClass);
 
@@ -107,7 +102,7 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         $mockEventHandler($event);
     }
 
-    public function recordOperationClassCombinationsDataProvider(): array
+    public static function recordOperationClassCombinationsDataProvider(): array
     {
         return [
             [
@@ -129,10 +124,8 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     */
-    public function convertsDeferredCreateOperationWithConflictToUpdateOperation()
+    #[Test]
+    public function convertsDeferredCreateOperationWithConflictToUpdateOperation(): void
     {
         $deferredOperationClass = CreateRecordOperation::class;
 
@@ -153,16 +146,33 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
 
         $invocationCount = self::exactly(2);
 
+        $consecutiveParameters = [
+            [$deferredOperationClass, $deferredRecordDbRow['arguments']],
+            [UpdateRecordOperation::class, $deferredRecordDbRow['arguments']],
+        ];
+
         $mockEventHandler
             ->expects($invocationCount)
             ->method('createRecordOperation')
-            ->withConsecutive(
-                [$deferredOperationClass, $deferredRecordDbRow['arguments']],
-                [UpdateRecordOperation::class, $deferredRecordDbRow['arguments']]
-            )
             ->willReturnCallback(
-                function () use ($invocationCount, $mockUpdateOperation) {
-                    switch ($invocationCount->getInvocationCount()) {
+                function (
+                    $parameter1,
+                    $parameter2
+                ) use (
+                    $invocationCount,
+                    $mockUpdateOperation,
+                    $consecutiveParameters
+                ) {
+                    self::assertEquals(
+                        $consecutiveParameters[$invocationCount->numberOfInvocations() - 1][0],
+                        $parameter1
+                    );
+                    self::assertEquals(
+                        $consecutiveParameters[$invocationCount->numberOfInvocations() - 1][1],
+                        $parameter2
+                    );
+
+                    switch ($invocationCount->numberOfInvocations()) {
                         case 1:
                             throw new IdentityConflictException();
                         case 2:
@@ -178,9 +188,6 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         $mockEventHandler($event);
     }
 
-    /**
-     * @param array $deferredRecordDbRow
-     */
     protected function configureMockRepository(array $deferredRecordDbRow): void
     {
         $mockRepository = $this->createMock(DeferredRecordOperationRepository::class);
@@ -218,10 +225,6 @@ class ProcessDeferredRecordOperationsTest extends UnitTestCase
         return $mockOperation;
     }
 
-    /**
-     * @param string $deferredOperationClass
-     * @return array
-     */
     protected function getDeferredRecordDbRow(string $deferredOperationClass): array
     {
         return [

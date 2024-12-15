@@ -156,6 +156,7 @@ $rules = [
     'single_blank_line_before_namespace' => true,
     'single_class_element_per_statement' => true,
     'single_line_comment_style' => true,
+    'single_line_empty_body' => true,
     'single_quote' => true,
     'space_after_semicolon' => [
         'remove_in_empty_for_expressions' => true,

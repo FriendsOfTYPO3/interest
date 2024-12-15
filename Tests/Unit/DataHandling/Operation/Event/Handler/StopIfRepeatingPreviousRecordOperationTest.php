@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\StopIfRepeatingPreviousRecordOperation;
@@ -16,10 +17,8 @@ class StopIfRepeatingPreviousRecordOperationTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @test
-     */
-    public function throwsExceptionIfSameAsPrevious()
+    #[Test]
+    public function throwsExceptionIfSameAsPrevious(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
 
@@ -41,10 +40,8 @@ class StopIfRepeatingPreviousRecordOperationTest extends UnitTestCase
         (new StopIfRepeatingPreviousRecordOperation())($event);
     }
 
-    /**
-     * @test
-     */
-    public function throwsNoExceptionIfDifferentToPrevious()
+    #[Test]
+    public function throwsNoExceptionIfDifferentToPrevious(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
 

@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\RequestHandler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\RequestHandler\DeleteRequestHandler;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class DeleteRequestHandlerTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function emptyRequestBodyIsNoProblem()
+    #[Test]
+    public function emptyRequestBodyReturnsUnprocessableContent(): void
     {
         $stream = fopen('php://memory', 'r+');
         fwrite($stream, '');
@@ -25,6 +24,11 @@ class DeleteRequestHandlerTest extends UnitTestCase
             $stream
         );
 
+        $allClassMethods = [];
+        foreach ((new \ReflectionClass(DeleteRequestHandler::class))->getMethods() as $method) {
+            $allClassMethods[] = $method->getName();
+        }
+
         $deleteHandlerMock = $this->getMockBuilder(DeleteRequestHandler::class)
             ->setConstructorArgs([
                 [
@@ -33,7 +37,19 @@ class DeleteRequestHandlerTest extends UnitTestCase
                 ],
                 $request,
             ])
-            ->setMethods(['handleSingleOperation'])
+            ->onlyMethods(
+                array_diff(
+                    $allClassMethods,
+                    [
+                        'handle',
+                        'compileData',
+                        'getEntryPointParts',
+                        'formatDataArray',
+                        'getRequest',
+                        'handleOperations',
+                    ]
+                )
+            )
             ->getMock();
 
         $response = $deleteHandlerMock->handle();

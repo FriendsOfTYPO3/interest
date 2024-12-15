@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\SetPid;
@@ -13,10 +14,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class SetPidTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function setsPidOnCreateOperationIfNotAlreadySet()
+    #[Test]
+    public function setsPidOnCreateOperationIfNotAlreadySet(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
 
@@ -41,10 +40,8 @@ class SetPidTest extends UnitTestCase
         (new SetPid())($event);
     }
 
-    /**
-     * @test
-     */
-    public function doesNotSetPidOnNonCreateOperation()
+    #[Test]
+    public function doesNotSetPidOnNonCreateOperation(): void
     {
         foreach ([UpdateRecordOperation::class, DeleteRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);
@@ -69,10 +66,8 @@ class SetPidTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function doesNotSetPidIfAlreadySet()
+    #[Test]
+    public function doesNotSetPidIfAlreadySet(): void
     {
         $mockOperation = $this->createMock(CreateRecordOperation::class);
 

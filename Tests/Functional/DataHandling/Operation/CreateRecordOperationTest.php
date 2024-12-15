@@ -9,22 +9,20 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Functional\DataHandling\Operation;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
 use Pixelant\Interest\DataHandling\Operation\Exception\InvalidArgumentException;
 use Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
 use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
 use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
-use Pixelant\Interest\Utility\CompatibilityUtility;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function creatingPageResultsInPageRecord(): void
     {
         $data = [
@@ -56,21 +54,15 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
 
         self::assertIsArray($databaseRow);
 
-        self::assertSame($data['title'], $databaseRow['title']);
+        self::assertEquals($data['title'], $databaseRow['title']);
     }
 
-    /**
-     * @test
-     */
-    public function createOperationResultsInCorrectRecord()
+    #[Test]
+    public function createOperationResultsInCorrectRecord(): void
     {
         $data = $this->recordRepresentationAndCorrespondingRowDataProvider();
 
-        $originalName = $this->getName();
-
         foreach ($data as $key => $value) {
-            $this->setName($originalName . ' (' . $key . ')');
-
             $this->createOperationResultsInCorrectRecordDataIteration(...$value);
         }
     }
@@ -176,10 +168,8 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         ];
     }
 
-    /**
-     * @test
-     */
-    public function createAdvancedInlineMmRelationsInDifferentOrder()
+    #[Test]
+    public function createAdvancedInlineMmRelationsInDifferentOrder(): void
     {
         $fileData = base64_encode(file_get_contents(__DIR__ . '/Fixtures/Image.jpg'));
 
@@ -206,10 +196,6 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
                 'uid_foreign' => 'MediaContentElement_' . $iteration,
                 'fieldname' => 'image',
             ];
-
-            if (CompatibilityUtility::typo3VersionIsLessThan('12.0')) {
-                $recordRepresentationData['table_local'] = 'sys_file';
-            }
 
             (new CreateRecordOperation(
                 new RecordRepresentation(
@@ -322,10 +308,6 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
                 'fieldname' => 'image',
             ];
 
-            if (CompatibilityUtility::typo3VersionIsLessThan('12.0')) {
-                $expectedReturnData['table_local'] = 'sys_file';
-            }
-
             $createdSysFileReference = $this
                 ->getConnectionPool()
                 ->getConnectionForTable('tt_content')
@@ -360,10 +342,8 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         }
     }
 
-    /**
-     * @test
-     */
-    public function createEmptyFileIsHandledAsConfigured()
+    #[Test]
+    public function createEmptyFileIsHandledAsConfigured(): void
     {
         $createEmptySysFile = function () {
             (new CreateRecordOperation(
@@ -408,7 +388,9 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         $file = GeneralUtility::makeInstance(ResourceFactory::class)->getFileObject($fileId);
 
         self::assertIsObject($file, 'File object was found');
+        // @extensionScannerIgnoreLine
         self::assertEquals(0, $file->getSize(), 'File size is zero');
+        // @extensionScannerIgnoreLine
         self::assertEmpty($file->getSize(), 'File content is empty');
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\DataHandler;
 use Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
@@ -16,10 +17,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class RegisterValuesOfRelationFieldsTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function returnEarlyWhenNotUpdateOperation()
+    #[Test]
+    public function returnEarlyWhenNotUpdateOperation(): void
     {
         foreach ([DeleteRecordOperation::class, CreateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);
@@ -34,10 +33,8 @@ class RegisterValuesOfRelationFieldsTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function attemptToProcessDatamapWhenUpdateOperation()
+    #[Test]
+    public function attemptToProcessDatamapWhenUpdateOperation(): void
     {
         $tableName = 'tablename';
 
@@ -61,10 +58,8 @@ class RegisterValuesOfRelationFieldsTest extends UnitTestCase
         (new RegisterValuesOfRelationFields())($event);
     }
 
-    /**
-     * @test
-     */
-    public function correctlyDispatchRelationFieldValueMessage()
+    #[Test]
+    public function correctlyDispatchRelationFieldValueMessage(): void
     {
         $tableName = 'tablename';
 

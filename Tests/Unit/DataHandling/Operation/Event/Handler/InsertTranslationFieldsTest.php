@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\InsertTranslationFields;
@@ -24,10 +26,8 @@ class InsertTranslationFieldsTest extends UnitTestCase
         UpdateRecordOperation::class,
     ];
 
-    /**
-     * @test
-     */
-    public function returnsEarlyIfLanguageIsNull()
+    #[Test]
+    public function returnsEarlyIfLanguageIsNull(): void
     {
         foreach ($this->classNames as $className) {
             $mockOperation = $this->createMock($className);
@@ -46,10 +46,8 @@ class InsertTranslationFieldsTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function returnsEarlyIfLanguageIsZero()
+    #[Test]
+    public function returnsEarlyIfLanguageIsZero(): void
     {
         foreach ($this->classNames as $className) {
             $mockLanguage = $this->createMock(SiteLanguage::class);
@@ -74,10 +72,8 @@ class InsertTranslationFieldsTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function returnsEarlyIfTableNotTranslatable()
+    #[Test]
+    public function returnsEarlyIfTableNotTranslatable(): void
     {
         foreach ($this->classNames as $className) {
             $mockOperation = $this->createMock($className);
@@ -100,10 +96,8 @@ class InsertTranslationFieldsTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function returnsEarlyIfLanguageFieldIsSet()
+    #[Test]
+    public function returnsEarlyIfLanguageFieldIsSet(): void
     {
         foreach ($this->classNames as $className) {
             $mockOperation = $this->createMock($className);
@@ -130,13 +124,12 @@ class InsertTranslationFieldsTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider provideDataForInsertsCorrectTranslationFields
-     */
-    public function insertsCorrectTranslationFields(callable $configureTca, array $setDataFieldForDataHandlerExpects)
-    {
+    #[Test]
+    #[DataProvider('provideDataForInsertsCorrectTranslationFields')]
+    public function insertsCorrectTranslationFields(
+        callable $configureTca,
+        array $setDataFieldForDataHandlerExpects
+    ): void {
         $configureTca();
 
         $mockLanguage = $this->createMock(SiteLanguage::class);
@@ -171,10 +164,19 @@ class InsertTranslationFieldsTest extends UnitTestCase
                     ...array_fill(0, count($setDataFieldForDataHandlerExpects), false)
                 );
 
+            $invocationCount = self::exactly(count($setDataFieldForDataHandlerExpects));
+
             $mockOperation
-                ->expects(self::exactly(count($setDataFieldForDataHandlerExpects)))
+                ->expects($invocationCount)
                 ->method('setDataFieldForDataHandler')
-                ->withConsecutive(...$setDataFieldForDataHandlerExpects);
+                ->willReturnCallback(function ($parameter) use ($invocationCount, $setDataFieldForDataHandlerExpects) {
+                    self::assertEquals(
+                        $setDataFieldForDataHandlerExpects[$invocationCount->numberOfInvocations() - 1][0],
+                        $parameter
+                    );
+
+                    return $invocationCount->numberOfInvocations();
+                });
 
             $event = new RecordOperationSetupEvent($mockOperation);
 
@@ -182,7 +184,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
         }
     }
 
-    public function provideDataForInsertsCorrectTranslationFields(): array
+    public static function provideDataForInsertsCorrectTranslationFields(): array
     {
         return [
             [

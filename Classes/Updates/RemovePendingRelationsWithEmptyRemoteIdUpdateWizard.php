@@ -6,8 +6,10 @@ namespace Pixelant\Interest\Updates;
 
 use Pixelant\Interest\Domain\Repository\PendingRelationsRepository;
 use Symfony\Component\Console\Output\OutputInterface;
+use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\ChattyInterface;
 
+#[UpgradeWizard('interest_removePendingRelationsWithEmptyRemoteId')]
 class RemovePendingRelationsWithEmptyRemoteIdUpdateWizard extends AbstractUpdateWizard implements ChattyInterface
 {
     public const IDENTIFIER = 'interest_removePendingRelationsWithEmptyRemoteId';

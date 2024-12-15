@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\RequestHandler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\RequestHandler\CreateRequestHandler;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class CreateRequestHandlerTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function emptyRequestBodyWillFail()
+    #[Test]
+    public function emptyRequestBodyWillFail(): void
     {
         $stream = fopen('php://memory', 'r+');
         fwrite($stream, '');
@@ -25,6 +24,11 @@ class CreateRequestHandlerTest extends UnitTestCase
             $stream
         );
 
+        $allClassMethods = [];
+        foreach ((new \ReflectionClass(CreateRequestHandler::class))->getMethods() as $method) {
+            $allClassMethods[] = $method->getName();
+        }
+
         $deleteHandlerMock = $this->getMockBuilder(CreateRequestHandler::class)
             ->setConstructorArgs([
                 [
@@ -33,7 +37,7 @@ class CreateRequestHandlerTest extends UnitTestCase
                 ],
                 $request,
             ])
-            ->setMethodsExcept(['handle'])
+            ->onlyMethods(array_diff($allClassMethods, ['handle']))
             ->getMock();
 
         $response = $deleteHandlerMock->handle();

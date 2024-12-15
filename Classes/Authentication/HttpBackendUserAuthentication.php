@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Authentication;
 
+use Pixelant\Interest\Domain\Repository\TokenRepository;
 use Pixelant\Interest\RequestHandler\Exception\InvalidArgumentException;
 use Pixelant\Interest\RequestHandler\Exception\UnauthorizedAccessException;
-use Pixelant\Interest\Utility\CompatibilityUtility;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Core\Authentication\LoginType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-abstract class AbstractHttpBackendUserAuthentication extends BackendUserAuthentication
+class HttpBackendUserAuthentication extends BackendUserAuthentication
 {
     /**
      * Check if user is authenticated.
@@ -21,7 +20,7 @@ abstract class AbstractHttpBackendUserAuthentication extends BackendUserAuthenti
      */
     public function isAuthenticated(): bool
     {
-        return $this->getUserId() !== 0;
+        return $this->getUserId() !== 0 && $this->getUserId() !== null;
     }
 
     /**
@@ -34,6 +33,17 @@ abstract class AbstractHttpBackendUserAuthentication extends BackendUserAuthenti
         return $this->user['uid'] ?? 0;
     }
 
+    public function checkAuthentication(ServerRequestInterface $request)
+    {
+        $this->authenticateBearerToken($request);
+
+        if ($this->isAuthenticated()) {
+            return;
+        }
+
+        parent::checkAuthentication($request);
+    }
+
     /**
      * Fetches login credentials from basic HTTP authentication header.
      *
@@ -42,7 +52,7 @@ abstract class AbstractHttpBackendUserAuthentication extends BackendUserAuthenti
      * @throws UnauthorizedAccessException
      * @throws InvalidArgumentException
      */
-    protected function internalGetLoginFormData(ServerRequestInterface $request)
+    public function getLoginFormData(ServerRequestInterface $request)
     {
         if (strtolower($request->getMethod()) !== 'post') {
             throw new UnauthorizedAccessException(
@@ -73,7 +83,7 @@ abstract class AbstractHttpBackendUserAuthentication extends BackendUserAuthenti
 
         $authorizationData = base64_decode($authorizationData, true);
 
-        if (strpos($authorizationData, ':') === false) {
+        if (!str_contains($authorizationData, ':')) {
             throw new InvalidArgumentException(
                 'Authorization data couldn\'t be decoded. Missing ":" separating username and password.',
                 $request
@@ -83,16 +93,48 @@ abstract class AbstractHttpBackendUserAuthentication extends BackendUserAuthenti
         [$username, $password] = explode(':', $authorizationData);
 
         $loginData = [
-            'status' => LoginType::LOGIN,
+            'status' => 'login',
             'uname'  => $username,
             'uident' => $password,
         ];
 
-        if (CompatibilityUtility::typo3VersionIsLessThan('12.0')) {
-            return $this->processLoginData($loginData);
+        return $this->processLoginData($loginData, $request);
+    }
+
+    /**
+     * Authenticates a token provided in the request.
+     *
+     * @param ServerRequestInterface $request
+     * @throws UnauthorizedAccessException
+     */
+    protected function authenticateBearerToken(ServerRequestInterface $request): void
+    {
+        $authorizationHeader = $request->getHeader('authorization')[0]
+            ?? $request->getHeader('redirect_http_authorization')[0]
+            ?? '';
+
+        [$scheme, $token] = GeneralUtility::trimExplode(' ', $authorizationHeader, true);
+
+        if (is_string($scheme) && strtolower($scheme) !== 'bearer') {
+            return;
         }
 
-        return $this->processLoginData($loginData, $request);
+        $backendUserId = GeneralUtility::makeInstance(TokenRepository::class)
+            ->findBackendUserIdByToken($token);
+
+        if ($backendUserId === 0) {
+            throw new UnauthorizedAccessException(
+                'Invalid or expired bearer token.',
+                $request
+            );
+        }
+
+        $this->setBeUserByUid($backendUserId);
+
+        $this->unpack_uc();
+
+        $this->fetchGroupData();
+        $this->backendSetUC();
     }
 
     /**

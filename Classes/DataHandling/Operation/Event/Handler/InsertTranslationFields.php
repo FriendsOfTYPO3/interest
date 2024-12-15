@@ -24,8 +24,14 @@ class InsertTranslationFields implements RecordOperationEventHandlerInterface
         $recordOperation = $event->getRecordOperation();
 
         if (
+            // @extensionScannerIgnoreLine
             $recordOperation->getLanguage() === null
-            || ($recordOperation->getLanguage() !== null && $recordOperation->getLanguage()->getLanguageId() === 0)
+            || (
+                // @extensionScannerIgnoreLine
+                $recordOperation->getLanguage() !== null
+                // @extensionScannerIgnoreLine
+                && $recordOperation->getLanguage()->getLanguageId() === 0
+            )
             || !TcaUtility::isLocalizable($recordOperation->getTable())
             || $recordOperation->isDataFieldSet(TcaUtility::getLanguageField($recordOperation->getTable()))
         ) {
@@ -38,6 +44,7 @@ class InsertTranslationFields implements RecordOperationEventHandlerInterface
 
         $recordOperation->setDataFieldForDataHandler(
             TcaUtility::getLanguageField($recordOperation->getTable()),
+            // @extensionScannerIgnoreLine
             $recordOperation->getLanguage()->getLanguageId()
         );
 

@@ -145,7 +145,7 @@ class RecordInstanceIdentifier
     /**
      * @param int $uid
      */
-    public function setUid(int $uid)
+    public function setUid(int $uid): void
     {
         $this->uid = $uid;
     }
@@ -175,15 +175,18 @@ class RecordInstanceIdentifier
     {
         if (
             !TcaUtility::isLocalizable($this->getTable())
+            // @extensionScannerIgnoreLine
             || $this->getLanguage() === null
+            // @extensionScannerIgnoreLine
             || $this->getLanguage()->getLanguageId() === 0
         ) {
             return $this->remoteId;
         }
 
+        // @extensionScannerIgnoreLine
         $languageAspect = self::LANGUAGE_ASPECT_PREFIX . $this->getLanguage()->getLanguageId();
 
-        if (strpos($this->remoteId, $languageAspect) !== false) {
+        if (str_contains($this->remoteId, $languageAspect)) {
             return $this->remoteId;
         }
 
@@ -198,7 +201,7 @@ class RecordInstanceIdentifier
      */
     public function removeAspectsFromRemoteId(string $remoteId): string
     {
-        if (strpos($remoteId, self::LANGUAGE_ASPECT_PREFIX) === false) {
+        if (!str_contains($remoteId, self::LANGUAGE_ASPECT_PREFIX)) {
             return $remoteId;
         }
 
@@ -234,6 +237,7 @@ class RecordInstanceIdentifier
         $siteLanguages = array_reduce($siteLanguages, function (array $uniqueSiteLanguages, SiteLanguage $item) {
             /** @var SiteLanguage $siteLanguage */
             foreach ($uniqueSiteLanguages as $siteLanguage) {
+                // @extensionScannerIgnoreLine
                 if ($siteLanguage->getLanguageId() === $item->getLanguageId()) {
                     return $uniqueSiteLanguages;
                 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\RemovePendingRelationsForDeletedRecord;
@@ -17,10 +18,8 @@ class RemovePendingRelationsForDeletedRecordTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @test
-     */
-    public function doesNotProceedIfOperationWasUnsuccessful()
+    #[Test]
+    public function doesNotProceedIfOperationWasUnsuccessful(): void
     {
         $mockRepository = $this->createMock(PendingRelationsRepository::class);
 
@@ -42,10 +41,8 @@ class RemovePendingRelationsForDeletedRecordTest extends UnitTestCase
         (new RemovePendingRelationsForDeletedRecord())($event);
     }
 
-    /**
-     * @test
-     */
-    public function doesNotProceedWhenUpdateOrDeleteOperation()
+    #[Test]
+    public function doesNotProceedWhenUpdateOrDeleteOperation(): void
     {
         $mockRepository = $this->createMock(PendingRelationsRepository::class);
 
@@ -69,10 +66,8 @@ class RemovePendingRelationsForDeletedRecordTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function removeRemoteIsCalledWithTableAndUidAndNoField()
+    #[Test]
+    public function removeRemoteIsCalledWithTableAndUidAndNoField(): void
     {
         $mockRepository = $this->createMock(PendingRelationsRepository::class);
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\ResolveStoragePid;
 use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationSetupEvent;
@@ -11,10 +12,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ResolveStoragePidTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function resolveStoragePidReturnsZeroIfRootLevelIsOne()
+    #[Test]
+    public function resolveStoragePidReturnsZeroIfRootLevelIsOne(): void
     {
         $tableName = 'testtable';
 

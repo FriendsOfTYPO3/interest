@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\Message\PendingRelationMessage;
@@ -18,10 +19,8 @@ class PersistPendingRelationInformationTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @test
-     */
-    public function returnEarlyIfDeleteOperation()
+    #[Test]
+    public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -34,10 +33,8 @@ class PersistPendingRelationInformationTest extends UnitTestCase
         (new PersistPendingRelationInformation())($event);
     }
 
-    /**
-     * @test
-     */
-    public function persistDataFromEachPendingRelationMessage()
+    #[Test]
+    public function persistDataFromEachPendingRelationMessage(): void
     {
         $pendingRelationMessage1 = new PendingRelationMessage(
             'tablename1',
@@ -74,22 +71,56 @@ class PersistPendingRelationInformationTest extends UnitTestCase
 
             $repositoryMock = $this->createMock(PendingRelationsRepository::class);
 
+            $invocationCount = self::exactly(2);
+
             $repositoryMock
-                ->expects(self::exactly(2))
+                ->expects($invocationCount)
                 ->method('set')
-                ->withConsecutive(
-                    [
-                        $pendingRelationMessage2->getTable(),
-                        $pendingRelationMessage2->getField(),
-                        456,
-                        $pendingRelationMessage2->getRemoteIds(),
-                    ],
-                    [
-                        $pendingRelationMessage1->getTable(),
-                        $pendingRelationMessage1->getField(),
-                        123,
-                        $pendingRelationMessage1->getRemoteIds(),
-                    ]
+                ->willReturnCallback(
+                    function (
+                        $parameter1,
+                        $parameter2,
+                        $parameter3,
+                        $parameter4
+                    ) use (
+                        $invocationCount,
+                        $pendingRelationMessage1,
+                        $pendingRelationMessage2
+                    ) {
+                        match ($invocationCount->numberOfInvocations()) {
+                            1 => self::assertEquals(
+                                [
+                                    $pendingRelationMessage2->getTable(),
+                                    $pendingRelationMessage2->getField(),
+                                    456,
+                                    $pendingRelationMessage2->getRemoteIds(),
+                                ],
+                                [
+                                    $parameter1,
+                                    $parameter2,
+                                    $parameter3,
+                                    $parameter4,
+                                ]
+                            ),
+                            2 => self::assertEquals(
+                                [
+                                    $pendingRelationMessage1->getTable(),
+                                    $pendingRelationMessage1->getField(),
+                                    123,
+                                    $pendingRelationMessage1->getRemoteIds(),
+                                ],
+                                [
+                                    $parameter1,
+                                    $parameter2,
+                                    $parameter3,
+                                    $parameter4,
+                                ]
+                            ),
+                            default => self::fail(),
+                        };
+
+                        return $invocationCount->numberOfInvocations();
+                    }
                 );
 
             GeneralUtility::setSingletonInstance(
@@ -103,10 +134,8 @@ class PersistPendingRelationInformationTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function noPendingRelationMessagesMeansNoDatabaseSet()
+    #[Test]
+    public function noPendingRelationMessagesMeansNoDatabaseSet(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);

@@ -84,7 +84,7 @@ class RelationSortingAsMetaData implements RecordOperationEventHandlerInterface
      * @param array $fieldConfigurations
      * @internal
      */
-    public function addSortingIntentToMetaData(array $fieldConfigurations)
+    public function addSortingIntentToMetaData(array $fieldConfigurations): void
     {
         $recordOperation = $this->getEvent()->getRecordOperation();
 

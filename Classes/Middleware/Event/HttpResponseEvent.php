@@ -29,7 +29,7 @@ class HttpResponseEvent
     /**
      * @param ResponseInterface $response
      */
-    public function setResponse(ResponseInterface $response)
+    public function setResponse(ResponseInterface $response): void
     {
         $this->response = $response;
     }

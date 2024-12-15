@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Functional\DataHandling\Operation;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
 use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
@@ -16,10 +17,8 @@ use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
 
 class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
-    /**
-     * @test
-     */
-    public function deletingPageSetsDeletedField()
+    #[Test]
+    public function deletingPageSetsDeletedField(): void
     {
         $mappingRepository = new RemoteIdMappingRepository();
 
@@ -43,13 +42,11 @@ class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
 
         self::assertIsArray($databaseRow);
 
-        self::assertSame(1, $databaseRow['deleted']);
+        self::assertEquals(1, $databaseRow['deleted']);
     }
 
-    /**
-     * @test
-     */
-    public function deletingContentSetsDeletedField()
+    #[Test]
+    public function deletingContentSetsDeletedField(): void
     {
         (new DeleteRecordOperation(
             new RecordRepresentation(
@@ -69,13 +66,11 @@ class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
 
         self::assertIsArray($databaseRow);
 
-        self::assertSame(1, $databaseRow['deleted']);
+        self::assertEquals(1, $databaseRow['deleted']);
     }
 
-    /**
-     * @test
-     */
-    public function deletingTranslationOfContentSetsDeletedField()
+    #[Test]
+    public function deletingTranslationOfContentSetsDeletedField(): void
     {
         (new DeleteRecordOperation(
             new RecordRepresentation(
@@ -96,6 +91,6 @@ class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
 
         self::assertIsArray($databaseRow);
 
-        self::assertSame(1, $databaseRow['deleted']);
+        self::assertEquals(1, $databaseRow['deleted']);
     }
 }

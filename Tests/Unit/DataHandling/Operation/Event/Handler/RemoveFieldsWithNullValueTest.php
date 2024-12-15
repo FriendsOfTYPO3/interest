@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\RemoveFieldsWithNullValue;
@@ -13,10 +14,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class RemoveFieldsWithNullValueTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function returnEarlyIfDeleteOperation()
+    #[Test]
+    public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -29,10 +28,8 @@ class RemoveFieldsWithNullValueTest extends UnitTestCase
         (new RemoveFieldsWithNullValue())($event);
     }
 
-    /**
-     * @test
-     */
-    public function correctlyRemovesEmptyValuesFromRelationArrays()
+    #[Test]
+    public function correctlyRemovesEmptyValuesFromRelationArrays(): void
     {
         $dataForDataHandler = [
             'nonRelationField' => 'nonRelationFieldValue',
@@ -52,10 +49,20 @@ class RemoveFieldsWithNullValueTest extends UnitTestCase
                 ->method('getDataForDataHandler')
                 ->willReturn($dataForDataHandler);
 
+            $invocationCount = self::exactly(2);
+
             $mockOperation
-                ->expects(self::exactly(2))
+                ->expects($invocationCount)
                 ->method('unsetDataField')
-                ->withConsecutive(['nullValueField1'], ['nullValueField2']);
+                ->willReturnCallback(function ($parameter) use ($invocationCount) {
+                    match ($invocationCount->numberOfInvocations()) {
+                        1 => self::assertEquals('nullValueField1', $parameter),
+                        2 => self::assertEquals('nullValueField2', $parameter),
+                        default => self::fail(),
+                    };
+
+                    return $invocationCount->numberOfInvocations();
+                });
 
             $event = new RecordOperationSetupEvent($mockOperation);
 

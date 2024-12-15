@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\UpdateCountOnForeignSideOfInlineRecord;
@@ -13,10 +14,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class UpdateCountOnForeignSideOfInlineRecordTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function willNotExecuteOnCreateAndUpdateOperation()
+    #[Test]
+    public function willNotExecuteOnCreateAndUpdateOperation(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);
@@ -36,10 +35,8 @@ class UpdateCountOnForeignSideOfInlineRecordTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function willExecuteOnDeleteOperation()
+    #[Test]
+    public function willExecuteOnDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 

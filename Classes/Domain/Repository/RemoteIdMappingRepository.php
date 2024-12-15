@@ -322,7 +322,7 @@ class RemoteIdMappingRepository extends AbstractRepository
      *
      * @param AbstractRecordOperation $recordOperation
      */
-    public function update(AbstractRecordOperation $recordOperation)
+    public function update(AbstractRecordOperation $recordOperation): void
     {
         $queryBuilder = $this->getQueryBuilder();
 
@@ -446,7 +446,7 @@ class RemoteIdMappingRepository extends AbstractRepository
      * @param string $key
      * @param string|float|int|array|null $value
      */
-    public function setMetaDataValue(string $remoteId, string $key, $value)
+    public function setMetaDataValue(string $remoteId, string $key, $value): void
     {
         $recordExists = $this->exists($remoteId);
 
@@ -492,15 +492,18 @@ class RemoteIdMappingRepository extends AbstractRepository
         if (
             $recordOperation === null
             || !TcaUtility::isLocalizable($recordOperation->getTable())
+            // @extensionScannerIgnoreLine
             || $recordOperation->getLanguage() === null
+            // @extensionScannerIgnoreLine
             || $recordOperation->getLanguage()->getLanguageId() === 0
         ) {
             return $remoteId;
         }
 
+        // @extensionScannerIgnoreLine
         $languageAspect = self::LANGUAGE_ASPECT_PREFIX . $recordOperation->getLanguage()->getLanguageId();
 
-        if (strpos($remoteId, $languageAspect) !== false) {
+        if (str_contains($remoteId, $languageAspect)) {
             return $remoteId;
         }
 
@@ -515,7 +518,7 @@ class RemoteIdMappingRepository extends AbstractRepository
      */
     public function removeAspectsFromRemoteId(string $remoteId): string
     {
-        if (strpos($remoteId, self::LANGUAGE_ASPECT_PREFIX) === false) {
+        if (!str_contains($remoteId, self::LANGUAGE_ASPECT_PREFIX)) {
             return $remoteId;
         }
 

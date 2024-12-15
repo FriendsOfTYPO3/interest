@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\SanitizeFieldValues;
@@ -14,10 +16,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class SanitizeFieldValuesTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function returnEarlyIfDeleteOperation()
+    #[Test]
+    public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -30,10 +30,8 @@ class SanitizeFieldValuesTest extends UnitTestCase
         (new SanitizeFieldValues())($event);
     }
 
-    /**
-     * @test
-     */
-    public function csvRelationalFieldsAreExploded()
+    #[Test]
+    public function csvRelationalFieldsAreExploded(): void
     {
         $dataForDataHandler = [
             'arrayRelationField' => ['relation1RemoteId', 'relation2RemoteId', 'relation3RemoteId'],
@@ -68,10 +66,8 @@ class SanitizeFieldValuesTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function floatIntegerAndStringAreNotModified()
+    #[Test]
+    public function floatIntegerAndStringAreNotModified(): void
     {
         $dataForDataHandler = [
             'floatField' => 1.234,
@@ -106,11 +102,9 @@ class SanitizeFieldValuesTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     * @dataProvider unsupportedValueTypeDataProvider
-     */
-    public function unsupportedValueTypeThrowsException(array $dataForDataHandler)
+    #[Test]
+    #[DataProvider('unsupportedValueTypeDataProvider')]
+    public function unsupportedValueTypeThrowsException(array $dataForDataHandler): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);
@@ -141,7 +135,7 @@ class SanitizeFieldValuesTest extends UnitTestCase
         }
     }
 
-    public function unsupportedValueTypeDataProvider(): array
+    public static function unsupportedValueTypeDataProvider(): array
     {
         return [
             [['objectField' => new \stdClass()]],

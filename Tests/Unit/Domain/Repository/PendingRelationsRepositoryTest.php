@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\Domain\Repository;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\Domain\Repository\PendingRelationsRepository;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class PendingRelationsRepositoryTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyRemoteIdsAreIgnored(): void
     {
         $subject = $this->getMockBuilder(PendingRelationsRepository::class)

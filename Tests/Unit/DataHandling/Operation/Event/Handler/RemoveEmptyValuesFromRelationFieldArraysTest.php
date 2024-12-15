@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\RemoveEmptyValuesFromRelationFieldArrays;
@@ -13,10 +14,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class RemoveEmptyValuesFromRelationFieldArraysTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function returnEarlyIfDeleteOperation()
+    #[Test]
+    public function returnEarlyIfDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -29,10 +28,8 @@ class RemoveEmptyValuesFromRelationFieldArraysTest extends UnitTestCase
         (new RemoveEmptyValuesFromRelationFieldArrays())($event);
     }
 
-    /**
-     * @test
-     */
-    public function correctlyRemovesEmptyValuesFromRelationArrays()
+    #[Test]
+    public function correctlyRemovesEmptyValuesFromRelationArrays(): void
     {
         $dataForDataHandler = [
             'nonRelationField' => 'nonRelationFieldValue',
@@ -57,10 +54,27 @@ class RemoveEmptyValuesFromRelationFieldArraysTest extends UnitTestCase
                 ->method('getDataForDataHandler')
                 ->willReturn($dataForDataHandler);
 
+            $invocationCount = self::exactly(count($expectedSetDataFieldForDataHandlerArguments));
+
             $mockOperation
-                ->expects(self::exactly(count($expectedSetDataFieldForDataHandlerArguments)))
+                ->expects($invocationCount)
                 ->method('setDataFieldForDataHandler')
-                ->withConsecutive(... $expectedSetDataFieldForDataHandlerArguments);
+                ->willReturnCallback(
+                    function (
+                        $parameter1,
+                        $parameter2,
+                    ) use (
+                        $invocationCount,
+                        $expectedSetDataFieldForDataHandlerArguments
+                    ) {
+                        $i = $invocationCount->numberOfInvocations() - 1;
+
+                        self::assertEquals($expectedSetDataFieldForDataHandlerArguments[$i][0], $parameter1);
+                        self::assertEquals($expectedSetDataFieldForDataHandlerArguments[$i][1], $parameter2);
+
+                        return $invocationCount->numberOfInvocations();
+                    }
+                );
 
             $event = new RecordOperationSetupEvent($mockOperation);
 

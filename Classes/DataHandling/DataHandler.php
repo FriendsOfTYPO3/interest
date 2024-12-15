@@ -32,7 +32,7 @@ class DataHandler extends Typo3DataHandler
      * @inheritDoc
      * @throws DeadlockException
      */
-    protected function processClearCacheQueue()
+    protected function processClearCacheQueue(): void
     {
         try {
             parent::processClearCacheQueue();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\ValidateFieldNames;
@@ -14,10 +15,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ValidateFieldNamesTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function willExitEarlyOnDeleteOperation()
+    #[Test]
+    public function willExitEarlyOnDeleteOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -30,10 +29,8 @@ class ValidateFieldNamesTest extends UnitTestCase
         (new ValidateFieldNames())($event);
     }
 
-    /**
-     * @test
-     */
-    public function willThrowExceptionIfFieldDoesNotExistInTca()
+    #[Test]
+    public function willThrowExceptionIfFieldDoesNotExistInTca(): void
     {
         $GLOBALS['TCA']['tablename']['columns'] = [
             'definedField1' => [],
@@ -67,10 +64,8 @@ class ValidateFieldNamesTest extends UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function willNotThrowExceptionIfAllFieldsExistInTca()
+    #[Test]
+    public function willNotThrowExceptionIfAllFieldsExistInTca(): void
     {
         $GLOBALS['TCA']['tablename']['columns'] = [
             'definedField1' => [],

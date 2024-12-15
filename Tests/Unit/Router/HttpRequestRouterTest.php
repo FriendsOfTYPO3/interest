@@ -2,6 +2,7 @@
 
 namespace Pixelant\Interest\Tests\Unit\Router;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\Router\HttpRequestRouter;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
@@ -18,10 +19,8 @@ class HttpRequestRouterTest extends UnitTestCase
         $this->resetSingletonInstances = true;
     }
 
-    /**
-     * @test
-     */
-    public function routesRequestToCorrectAction()
+    #[Test]
+    public function routesRequestToCorrectAction(): void
     {
         $eventDispatcherMock = $this->createMock(EventDispatcher::class);
 

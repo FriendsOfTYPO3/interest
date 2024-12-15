@@ -9,20 +9,18 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Functional\DataHandling\Operation;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
 use Pixelant\Interest\DataHandling\Operation\UpdateRecordOperation;
 use Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
 use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
 use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
-use Pixelant\Interest\Utility\CompatibilityUtility;
 
 class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
-    /**
-     * @test
-     */
-    public function updatingPageChangesFields()
+    #[Test]
+    public function updatingPageChangesFields(): void
     {
         $data = [
             'title' => 'INTEREST',
@@ -46,29 +44,21 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
 
         self::assertIsArray($databaseRow);
 
-        self::assertSame($data['title'], $databaseRow['title']);
+        self::assertEquals($data['title'], $databaseRow['title']);
     }
 
-    /**
-     * @test
-     */
-    public function updateOperationResultsInCorrectRecord()
+    #[Test]
+    public function updateOperationResultsInCorrectRecord(): void
     {
         $data = $this->recordRepresentationAndCorrespondingRowDataProvider();
 
-        $originalName = $this->getName();
-
         foreach ($data as $key => $value) {
-            $this->setName($originalName . ' (' . $key . ')');
-
             $this->updateOperationResultsInCorrectRecordDataIteration(...$value);
         }
     }
 
-    /**
-     * @test
-     */
-    public function updatingForeignFieldRemovesNonExistingRelationsAndUseCorrectSorting()
+    #[Test]
+    public function updatingForeignFieldRemovesNonExistingRelationsAndUseCorrectSorting(): void
     {
         $mappingRepository = new RemoteIdMappingRepository();
 
@@ -133,7 +123,7 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
                 ->getConnectionPool()
                 ->getConnectionForTable('sys_file_reference')
                 ->executeQuery($query)
-                ->fetchAll();
+                ->fetchAllAssociative();
 
             $databaseImageIds = array_column($imageSysFileReferences, 'uid_local');
 
@@ -142,7 +132,7 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
                 $expectedImageIds[] = $mappingRepository->get($sfrRemoteIdentifier);
             }
 
-            self::assertSame(
+            self::assertEquals(
                 $expectedImageIds,
                 $databaseImageIds,
                 'Images attached to media content element isn\'t as expected.'
@@ -190,10 +180,6 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
                     'uid_foreign' => $contentElementRemoteIdentifier,
                     'fieldname' => 'image',
                 ];
-
-                if (CompatibilityUtility::typo3VersionIsLessThan('12.0')) {
-                    $recordRepresentationData['table_local'] = 'sys_file';
-                }
 
                 (new CreateRecordOperation(
                     new RecordRepresentation(

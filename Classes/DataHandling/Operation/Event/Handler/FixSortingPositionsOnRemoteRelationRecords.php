@@ -151,7 +151,7 @@ class FixSortingPositionsOnRemoteRelationRecords implements RecordOperationEvent
             $fieldConfiguration['type'] === 'group'
             && (
                 $fieldConfiguration['allowed'] === '*'
-                || strpos($fieldConfiguration['foreign_table'], ',') !== false
+                || str_contains($fieldConfiguration['foreign_table'], ',')
             )
         );
 
@@ -200,7 +200,7 @@ class FixSortingPositionsOnRemoteRelationRecords implements RecordOperationEvent
             if (
                 $fieldConfiguration['type'] === 'group'
                 && $fieldConfiguration['allowed'] !== '*'
-                && strpos($fieldConfiguration['allowed'], ',') === false
+                && !str_contains($fieldConfiguration['allowed'], ',')
             ) {
                 $foreignTable = $fieldConfiguration['allowed'];
             }

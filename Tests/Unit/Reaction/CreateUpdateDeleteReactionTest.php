@@ -2,8 +2,8 @@
 
 namespace Pixelant\Interest\Tests\Unit\Reaction;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\Reaction\CreateUpdateDeleteReaction;
-use Pixelant\Interest\Utility\CompatibilityUtility;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -31,15 +31,12 @@ class CreateUpdateDeleteReactionTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function reactRoutesToCorrectActionWithPayload()
+    #[Test]
+    public function reactRoutesToCorrectActionWithPayload(): void
     {
-        if (
-            CompatibilityUtility::typo3VersionIsLessThan('12.0')
-            || !ExtensionManagementUtility::isLoaded('reactions')
-        ) {
+        if (!ExtensionManagementUtility::isLoaded('reactions')) {
+            self::markTestSkipped('typo3/cms-reactions not installed');
+
             return;
         }
 

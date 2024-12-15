@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
 use Pixelant\Interest\DataHandling\Operation\Event\Handler\ApplyFieldDataTransformations;
@@ -15,10 +16,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ApplyFieldDataTransformationsTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function returnsEarlyIfDeleteRecordOperation()
+    #[Test]
+    public function returnsEarlyIfDeleteRecordOperation(): void
     {
         $mockOperation = $this->createMock(DeleteRecordOperation::class);
 
@@ -31,10 +30,8 @@ class ApplyFieldDataTransformationsTest extends UnitTestCase
         (new ApplyFieldDataTransformations())($event);
     }
 
-    /**
-     * @test
-     */
-    public function callsStdWrapWithCorrectArguments()
+    #[Test]
+    public function callsStdWrapWithCorrectArguments(): void
     {
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
             $mockOperation = $this->createMock($operationClass);
@@ -69,25 +66,43 @@ class ApplyFieldDataTransformationsTest extends UnitTestCase
 
             $mockContentObjectRenderer = $this->createMock(ContentObjectRenderer::class);
 
+            $invocationCount = self::exactly(2);
+
             $mockContentObjectRenderer
-                ->expects(self::exactly(2))
+                ->expects($invocationCount)
                 ->method('stdWrap')
-                ->withConsecutive(
-                    [$dataArray['field1'], $field1],
-                    [$dataArray['field2'], $field2]
-                )
-                ->willReturnOnConsecutiveCalls(
-                    'field1return',
-                    'field2return'
-                );
+                ->willReturnCallback(function ($parameter) use ($invocationCount, $dataArray) {
+                    self::assertEquals(
+                        $dataArray[array_keys($dataArray)[$invocationCount->numberOfInvocations() - 1]],
+                        $parameter
+                    );
+
+                    return match ($invocationCount->numberOfInvocations()) {
+                        1 => 'field1return',
+                        2 => 'field2return',
+                        default => self::fail('Number of invocations does not match number of fields'),
+                    };
+                });
+
+            $invocationCount = self::exactly(2);
 
             $mockOperation
-                ->expects(self::exactly(2))
+                ->expects($invocationCount)
                 ->method('setDataFieldForDataHandler')
-                ->withConsecutive(
-                    ['field1', 'field1return'],
-                    ['field2', 'field2return'],
-                );
+                ->willReturnCallback(function ($parameter1, $parameter2) use ($invocationCount) {
+                    switch ($invocationCount->numberOfInvocations()) {
+                        case 1:
+                            self::assertEquals('field1', $parameter1);
+                            self::assertEquals('field1return', $parameter2);
+                            return;
+                        case 2:
+                            self::assertEquals('field2', $parameter1);
+                            self::assertEquals('field2return', $parameter2);
+                            return;
+                    }
+
+                    self::fail('Number of invocations does not match number of fields');
+                });
 
             $mockOperation
                 ->method('getContentObjectRenderer')
