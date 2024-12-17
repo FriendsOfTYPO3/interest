@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\RequestHandler;
+namespace FriendsOfTYPO3\Interest\RequestHandler;
 
-use Pixelant\Interest\Domain\Repository\TokenRepository;
-use Pixelant\Interest\RequestHandler\Exception\UnauthorizedAccessException;
+use FriendsOfTYPO3\Interest\Domain\Repository\TokenRepository;
+use FriendsOfTYPO3\Interest\RequestHandler\Exception\UnauthorizedAccessException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

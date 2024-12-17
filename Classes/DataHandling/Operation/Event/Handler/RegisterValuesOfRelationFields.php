@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event\Handler;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler;
 
-use Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\Message\RelationFieldValueMessage;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
-use Pixelant\Interest\DataHandling\Operation\UpdateRecordOperation;
-use Pixelant\Interest\Utility\TcaUtility;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\Message\RelationFieldValueMessage;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
+use FriendsOfTYPO3\Interest\Utility\TcaUtility;
 
 /**
  * Check datamap fields keeping foreign relations and send a RelationFieldValueMessage for each. After process_datamap

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event\Handler\Message;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\Message;
 
-use Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Message\ReplacesPreviousMessageInterface;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Message\ReplacesPreviousMessageInterface;
 
 /**
  * A message about a failed or successful DataHandler operation.

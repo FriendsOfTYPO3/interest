@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\RequestHandler\Exception;
+namespace FriendsOfTYPO3\Interest\RequestHandler\Exception;
 
 /**
  * Exception issued for backend user access restriction errors.

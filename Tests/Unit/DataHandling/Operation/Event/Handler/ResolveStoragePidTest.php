@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
+namespace FriendsOfTYPO3\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
 use PHPUnit\Framework\Attributes\Test;
-use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\ResolveStoragePid;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationSetupEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\ResolveStoragePid;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationSetupEvent;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ResolveStoragePidTest extends UnitTestCase

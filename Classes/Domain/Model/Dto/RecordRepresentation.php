@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Domain\Model\Dto;
+namespace FriendsOfTYPO3\Interest\Domain\Model\Dto;
 
 /**
  * DTO to handle record representation.

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\RequestHandler;
+namespace FriendsOfTYPO3\Interest\RequestHandler;
 
-use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
-use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
 
 class CreateRequestHandler extends AbstractRecordRequestHandler
 {

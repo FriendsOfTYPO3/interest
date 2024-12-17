@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Tests\Unit\RequestHandler;
+namespace FriendsOfTYPO3\Interest\Tests\Unit\RequestHandler;
 
 use PHPUnit\Framework\Attributes\Test;
-use Pixelant\Interest\RequestHandler\CreateRequestHandler;
+use FriendsOfTYPO3\Interest\RequestHandler\CreateRequestHandler;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 

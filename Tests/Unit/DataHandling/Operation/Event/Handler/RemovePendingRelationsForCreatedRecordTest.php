@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
+namespace FriendsOfTYPO3\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
 use PHPUnit\Framework\Attributes\Test;
-use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\RemovePendingRelationsForCreatedRecord;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationInvocationEvent;
-use Pixelant\Interest\DataHandling\Operation\UpdateRecordOperation;
-use Pixelant\Interest\Domain\Repository\PendingRelationsRepository;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\DeleteRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\RemovePendingRelationsForCreatedRecord;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationInvocationEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
+use FriendsOfTYPO3\Interest\Domain\Repository\PendingRelationsRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 

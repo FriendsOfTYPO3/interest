@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event;
 
-use Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation;
 
 /**
  * Event called after the completion of an AbstractRecordOperation.

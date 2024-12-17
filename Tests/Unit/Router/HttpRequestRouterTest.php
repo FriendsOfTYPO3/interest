@@ -1,9 +1,9 @@
 <?php
 
-namespace Pixelant\Interest\Tests\Unit\Router;
+namespace FriendsOfTYPO3\Interest\Tests\Unit\Router;
 
 use PHPUnit\Framework\Attributes\Test;
-use Pixelant\Interest\Router\HttpRequestRouter;
+use FriendsOfTYPO3\Interest\Router\HttpRequestRouter;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Http\ServerRequest;

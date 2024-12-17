@@ -1,8 +1,8 @@
 <?php
 
-use Pixelant\Interest\Hook\ProcessCmdmap;
+use FriendsOfTYPO3\Interest\Hook\ProcessCmdmap;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use Pixelant\Interest\Updates\RemovePendingRelationsWithEmptyRemoteIdUpdateWizard;
+use FriendsOfTYPO3\Interest\Updates\RemovePendingRelationsWithEmptyRemoteIdUpdateWizard;
 defined('TYPO3') or die('Access denied.');
 
 (static function () {

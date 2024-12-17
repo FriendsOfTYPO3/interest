@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Command;
+namespace FriendsOfTYPO3\Interest\Command;
 
 /**
  * Command for reading data from a record.

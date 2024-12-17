@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Domain\Model\Dto\Exception;
+namespace FriendsOfTYPO3\Interest\Domain\Model\Dto\Exception;
 
 class InvalidArgumentException extends AbstractException
 {

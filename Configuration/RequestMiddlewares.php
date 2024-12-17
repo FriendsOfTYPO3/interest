@@ -1,6 +1,6 @@
 <?php
 
-use Pixelant\Interest\Middleware\RequestMiddleware;
+use FriendsOfTYPO3\Interest\Middleware\RequestMiddleware;
 
 return [
     'frontend' => [
