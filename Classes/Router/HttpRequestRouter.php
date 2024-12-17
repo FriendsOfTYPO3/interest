@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Router;
+namespace FriendsOfTYPO3\Interest\Router;
 
-use Pixelant\Interest\Authentication\HttpBackendUserAuthentication;
-use Pixelant\Interest\DataHandling\Operation\Exception\AbstractException;
-use Pixelant\Interest\RequestHandler\AuthenticateRequestHandler;
-use Pixelant\Interest\RequestHandler\CreateOrUpdateRequestHandler;
-use Pixelant\Interest\RequestHandler\CreateRequestHandler;
-use Pixelant\Interest\RequestHandler\DeleteRequestHandler;
-use Pixelant\Interest\RequestHandler\Exception\AbstractRequestHandlerException;
-use Pixelant\Interest\RequestHandler\ExceptionConverter\OperationToRequestHandlerExceptionConverter;
-use Pixelant\Interest\RequestHandler\UpdateRequestHandler;
-use Pixelant\Interest\Router\Event\HttpRequestRouterHandleByEvent;
+use FriendsOfTYPO3\Interest\Authentication\HttpBackendUserAuthentication;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\AbstractException;
+use FriendsOfTYPO3\Interest\RequestHandler\AuthenticateRequestHandler;
+use FriendsOfTYPO3\Interest\RequestHandler\CreateOrUpdateRequestHandler;
+use FriendsOfTYPO3\Interest\RequestHandler\CreateRequestHandler;
+use FriendsOfTYPO3\Interest\RequestHandler\DeleteRequestHandler;
+use FriendsOfTYPO3\Interest\RequestHandler\Exception\AbstractRequestHandlerException;
+use FriendsOfTYPO3\Interest\RequestHandler\ExceptionConverter\OperationToRequestHandlerExceptionConverter;
+use FriendsOfTYPO3\Interest\RequestHandler\UpdateRequestHandler;
+use FriendsOfTYPO3\Interest\Router\Event\HttpRequestRouterHandleByEvent;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;

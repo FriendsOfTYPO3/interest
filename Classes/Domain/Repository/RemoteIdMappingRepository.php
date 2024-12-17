@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Domain\Repository;
+namespace FriendsOfTYPO3\Interest\Domain\Repository;
 
 use Doctrine\DBAL\Result;
-use Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Exception\IdentityConflictException;
-use Pixelant\Interest\Domain\Repository\Exception\InvalidQueryResultException;
-use Pixelant\Interest\Utility\DatabaseUtility;
-use Pixelant\Interest\Utility\TcaUtility;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\IdentityConflictException;
+use FriendsOfTYPO3\Interest\Domain\Repository\Exception\InvalidQueryResultException;
+use FriendsOfTYPO3\Interest\Utility\DatabaseUtility;
+use FriendsOfTYPO3\Interest\Utility\TcaUtility;
 use TYPO3\CMS\Core\Database\Connection;
 
 /**

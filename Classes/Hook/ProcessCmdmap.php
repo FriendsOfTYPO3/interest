@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Hook;
+namespace FriendsOfTYPO3\Interest\Hook;
 
-use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
+use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

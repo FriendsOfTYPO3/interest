@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
+namespace FriendsOfTYPO3\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use FriendsOfTYPO3\Interest\DataHandling\DataHandler;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\Message\DataHandlerSuccessMessage;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\ProcessCmdmap;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationInvocationEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
 use PHPUnit\Framework\Attributes\Test;
-use Pixelant\Interest\DataHandling\DataHandler;
-use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\Message\DataHandlerSuccessMessage;
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\ProcessCmdmap;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationInvocationEvent;
-use Pixelant\Interest\DataHandling\Operation\UpdateRecordOperation;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ProcessCmdmapTest extends UnitTestCase

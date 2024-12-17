@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event\Handler;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler;
 
-use Pixelant\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
-use Pixelant\Interest\DataHandling\Operation\Exception\InvalidArgumentException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\InvalidArgumentException;
 
 /**
  * Sets the language in the ContentObjectRenderer's data array.

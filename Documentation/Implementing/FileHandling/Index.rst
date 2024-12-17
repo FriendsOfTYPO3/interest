@@ -8,7 +8,7 @@ File Handling
 
 .. note::
 
-   File handling is managed in the EventHandler class :php:`\Pixelant\Interest\DataHandling\Operation\Event\Handler\PersistFileDataEventHandler`.
+   File handling is managed in the EventHandler class :php:`\FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\PersistFileDataEventHandler`.
 
 .. _implementing-files-data-source:
 

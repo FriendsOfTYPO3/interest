@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event\Handler;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler;
 
-use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
+use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Exception;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Exception;
 
 /**
  * An abstract exception for data handling operations.

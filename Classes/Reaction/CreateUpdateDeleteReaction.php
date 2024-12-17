@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Reaction;
+namespace FriendsOfTYPO3\Interest\Reaction;
 
-use Pixelant\Interest\DataHandling\Operation\Exception\AbstractException;
-use Pixelant\Interest\RequestHandler\CreateOrUpdateRequestHandler;
-use Pixelant\Interest\RequestHandler\CreateRequestHandler;
-use Pixelant\Interest\RequestHandler\DeleteRequestHandler;
-use Pixelant\Interest\RequestHandler\ExceptionConverter\OperationToRequestHandlerExceptionConverter;
-use Pixelant\Interest\RequestHandler\UpdateRequestHandler;
-use Pixelant\Interest\Router\Event\HttpRequestRouterHandleByEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\AbstractException;
+use FriendsOfTYPO3\Interest\RequestHandler\CreateOrUpdateRequestHandler;
+use FriendsOfTYPO3\Interest\RequestHandler\CreateRequestHandler;
+use FriendsOfTYPO3\Interest\RequestHandler\DeleteRequestHandler;
+use FriendsOfTYPO3\Interest\RequestHandler\ExceptionConverter\OperationToRequestHandlerExceptionConverter;
+use FriendsOfTYPO3\Interest\RequestHandler\UpdateRequestHandler;
+use FriendsOfTYPO3\Interest\Router\Event\HttpRequestRouterHandleByEvent;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;

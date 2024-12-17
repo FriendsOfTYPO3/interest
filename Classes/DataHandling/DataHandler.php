@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling;
+namespace FriendsOfTYPO3\Interest\DataHandling;
 
 use Doctrine\DBAL\Exception\DeadlockException;
-use Pixelant\Interest\Context;
+use FriendsOfTYPO3\Interest\Context;
 use TYPO3\CMS\Core\DataHandling\DataHandler as Typo3DataHandler;
 
 class DataHandler extends Typo3DataHandler

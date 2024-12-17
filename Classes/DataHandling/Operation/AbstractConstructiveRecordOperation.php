@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation;
 
-use Pixelant\Interest\Configuration\ConfigurationProvider;
-use Pixelant\Interest\DataHandling\DataHandler;
-use Pixelant\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationSetupEvent;
-use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
-use Pixelant\Interest\Domain\Repository\PendingRelationsRepository;
-use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
+use FriendsOfTYPO3\Interest\Configuration\ConfigurationProvider;
+use FriendsOfTYPO3\Interest\DataHandling\DataHandler;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationSetupEvent;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
+use FriendsOfTYPO3\Interest\Domain\Repository\PendingRelationsRepository;
+use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

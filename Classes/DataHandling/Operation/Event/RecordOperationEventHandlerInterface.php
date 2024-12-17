@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event;
 
 interface RecordOperationEventHandlerInterface
 {

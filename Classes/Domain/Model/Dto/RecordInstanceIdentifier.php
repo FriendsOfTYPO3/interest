@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Domain\Model\Dto;
+namespace FriendsOfTYPO3\Interest\Domain\Model\Dto;
 
-use Pixelant\Interest\DataHandling\Operation\Exception\ConflictException;
-use Pixelant\Interest\Domain\Model\Dto\Exception\InvalidArgumentException;
-use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
-use Pixelant\Interest\Utility\TcaUtility;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\ConflictException;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\Exception\InvalidArgumentException;
+use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
+use FriendsOfTYPO3\Interest\Utility\TcaUtility;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

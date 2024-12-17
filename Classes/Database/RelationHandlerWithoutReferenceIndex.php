@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Database;
+namespace FriendsOfTYPO3\Interest\Database;
 
 use TYPO3\CMS\Core\Database\RelationHandler;
 

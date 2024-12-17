@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\RequestHandler;
+namespace FriendsOfTYPO3\Interest\RequestHandler;
 
-use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Exception\NotFoundException;
-use Pixelant\Interest\DataHandling\Operation\UpdateRecordOperation;
-use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\NotFoundException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
 
 class CreateOrUpdateRequestHandler extends AbstractRecordRequestHandler
 {

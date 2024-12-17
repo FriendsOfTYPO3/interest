@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Tests\Unit\Hook;
+namespace FriendsOfTYPO3\Interest\Tests\Unit\Hook;
 
+use FriendsOfTYPO3\Interest\DataHandling\DataHandler;
+use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
+use FriendsOfTYPO3\Interest\Hook\ProcessCmdmap;
 use PHPUnit\Framework\Attributes\Test;
-use Pixelant\Interest\DataHandling\DataHandler;
-use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
-use Pixelant\Interest\Hook\ProcessCmdmap;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 

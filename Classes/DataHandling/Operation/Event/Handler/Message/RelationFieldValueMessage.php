@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event\Handler\Message;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\Message;
 
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\RegisterValuesOfRelationFields;
-use Pixelant\Interest\DataHandling\Operation\Message\RequiredMessageInterface;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\RegisterValuesOfRelationFields;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Message\RequiredMessageInterface;
 
 /**
  * The value of a foreign relation field.

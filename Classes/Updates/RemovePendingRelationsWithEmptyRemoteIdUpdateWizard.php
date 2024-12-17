@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Updates;
+namespace FriendsOfTYPO3\Interest\Updates;
 
-use Pixelant\Interest\Domain\Repository\PendingRelationsRepository;
+use FriendsOfTYPO3\Interest\Domain\Repository\PendingRelationsRepository;
 use Symfony\Component\Console\Output\OutputInterface;
 use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\ChattyInterface;

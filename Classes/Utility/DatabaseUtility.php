@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Utility;
+namespace FriendsOfTYPO3\Interest\Utility;
 
 use Doctrine\DBAL\Result;
-use Pixelant\Interest\Domain\Repository\Exception\InvalidQueryResultException;
+use FriendsOfTYPO3\Interest\Domain\Repository\Exception\InvalidQueryResultException;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;

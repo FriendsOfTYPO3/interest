@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\EventHandler;
+namespace FriendsOfTYPO3\Interest\EventHandler;
 
-use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
+use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use TYPO3\CMS\Core\Resource\Event\AfterFileDeletedEvent;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\FileInterface;

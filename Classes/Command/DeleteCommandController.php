@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Command;
+namespace FriendsOfTYPO3\Interest\Command;
 
-use Pixelant\Interest\Context;
-use Pixelant\Interest\Database\RelationHandlerWithoutReferenceIndex;
-use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
-use Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
-use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
-use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
+use FriendsOfTYPO3\Interest\Context;
+use FriendsOfTYPO3\Interest\Database\RelationHandlerWithoutReferenceIndex;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\DeleteRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
+use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

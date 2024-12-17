@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\RequestHandler\Exception;
+namespace FriendsOfTYPO3\Interest\RequestHandler\Exception;
 
 /**
  * Exception to throw if data required by the request could not be found on the server.

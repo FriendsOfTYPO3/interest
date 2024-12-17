@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event\Handler;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler;
 
-use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
-use Pixelant\Interest\DataHandling\Operation\Exception\ConflictException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\DeleteRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\ConflictException;
 
 /**
  * Attempts to resolve the storage PID.
