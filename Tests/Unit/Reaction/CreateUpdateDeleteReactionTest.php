@@ -2,8 +2,8 @@
 
 namespace FriendsOfTYPO3\Interest\Tests\Unit\Reaction;
 
-use PHPUnit\Framework\Attributes\Test;
 use FriendsOfTYPO3\Interest\Reaction\CreateUpdateDeleteReaction;
+use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\ServerRequest;

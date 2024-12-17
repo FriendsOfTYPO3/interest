@@ -52,12 +52,12 @@
 	"prefer-stable": true,
 	"autoload": {
 		"psr-4": {
-			"Pixelant\\Interest\\": "Classes/"
+			"FriendsOfTYPO3\\Interest\\": "Classes/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Pixelant\\Interest\\Tests\\": "Tests/"
+			"FriendsOfTYPO3\\Interest\\Tests\\": "Tests/"
 		}
 	},
 	"config": {

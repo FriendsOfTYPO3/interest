@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Tests\Unit\Domain\Repository;
 
-use PHPUnit\Framework\Attributes\Test;
 use FriendsOfTYPO3\Interest\Domain\Repository\PendingRelationsRepository;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 

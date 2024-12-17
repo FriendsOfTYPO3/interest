@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
-use PHPUnit\Framework\Attributes\Test;
 use FriendsOfTYPO3\Interest\DataHandling\DataHandler;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
@@ -13,6 +12,7 @@ use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\Message\Relatio
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\RegisterValuesOfRelationFields;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationInvocationEvent;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class RegisterValuesOfRelationFieldsTest extends UnitTestCase

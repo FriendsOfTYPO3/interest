@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\DeleteRecordOperation;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\SanitizeFieldValues;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationSetupEvent;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\InvalidArgumentException;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class SanitizeFieldValuesTest extends UnitTestCase

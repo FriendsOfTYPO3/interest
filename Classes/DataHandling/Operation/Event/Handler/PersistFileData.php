@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler;
 
-use GuzzleHttp\Exception\ClientException;
 use FriendsOfTYPO3\Interest\Configuration\ConfigurationProvider;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\DeleteRecordOperation;
@@ -15,6 +14,7 @@ use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\IdentityConflictExc
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\InvalidArgumentException;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\NotFoundException;
 use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
+use GuzzleHttp\Exception\ClientException;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Resource\Enum\DuplicationBehavior;

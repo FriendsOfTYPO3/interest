@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
-use PHPUnit\Framework\Attributes\Test;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\DeleteRecordOperation;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\Message\PendingRelationMessage;
@@ -12,6 +11,7 @@ use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\PersistPendingR
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationInvocationEvent;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
 use FriendsOfTYPO3\Interest\Domain\Repository\PendingRelationsRepository;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 

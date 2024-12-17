@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Tests\Unit\RequestHandler;
 
-use PHPUnit\Framework\Attributes\Test;
 use FriendsOfTYPO3\Interest\RequestHandler\CreateRequestHandler;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 

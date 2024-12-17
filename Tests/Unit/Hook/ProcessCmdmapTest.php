@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Tests\Unit\Hook;
 
-use PHPUnit\Framework\Attributes\Test;
 use FriendsOfTYPO3\Interest\DataHandling\DataHandler;
 use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use FriendsOfTYPO3\Interest\Hook\ProcessCmdmap;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 

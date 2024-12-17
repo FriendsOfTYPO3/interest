@@ -9,11 +9,11 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Tests\Functional\DataHandling\Operation;
 
-use PHPUnit\Framework\Attributes\Test;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\DeleteRecordOperation;
 use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
 use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
 use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
+use PHPUnit\Framework\Attributes\Test;
 
 class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
