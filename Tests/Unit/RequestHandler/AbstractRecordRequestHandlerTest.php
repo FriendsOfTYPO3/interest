@@ -9,15 +9,39 @@ use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
 use FriendsOfTYPO3\Interest\RequestHandler\AbstractRecordRequestHandler;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Cache\Frontend\PhpFrontend;
+use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Schema\FieldTypeFactory;
+use TYPO3\CMS\Core\Schema\RelationMapBuilder;
+use TYPO3\CMS\Core\Schema\TcaSchemaFactory;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class AbstractRecordRequestHandlerTest extends UnitTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $cacheMock = $this->createMock(PhpFrontend::class);
+        $cacheMock->method('has')->with(self::isType('string'))->willReturn(false);
+        $subject = new TcaSchemaFactory(
+            new RelationMapBuilder($this->createMock(FlexFormTools::class)),
+            new FieldTypeFactory(),
+            '',
+            $cacheMock
+        );
+        $subject->load(['table' => []], true);
+        GeneralUtility::addInstance(TcaSchemaFactory::class, $subject);
+    }
+
     #[Test]
     #[DataProvider('correctlyCompliesDataProvider')]
-    public function correctlyCompliesData(array $entryPoints, array $body, array $expectedConsecutive): void
+    public function correctlyCompliesData(array $entryPoints, array $body, \Closure $expectedConsecutive): void
     {
+        $expectedConsecutive = $expectedConsecutive();
+
         $body = json_encode($body);
 
         $stream = fopen('php://memory', 'r+');
@@ -66,7 +90,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
                         'title' => 'TEST',
                     ],
                 ],
-                [
+                fn() => [
                     new RecordRepresentation(
                         [
                             'title' => 'TEST',
@@ -91,7 +115,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
                         'title' => 'TEST',
                     ],
                 ],
-                [
+                fn() => [
                     new RecordRepresentation(
                         [
                             'title' => 'TEST',
@@ -117,7 +141,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
                         ],
                     ],
                 ],
-                [
+                fn() => [
                     new RecordRepresentation(
                         [
                             'title' => 'TEST',
@@ -142,7 +166,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
                         ],
                     ],
                 ],
-                [
+                fn() => [
                     new RecordRepresentation(
                         [
                             'title' => 'TEST',
@@ -169,7 +193,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
                         ],
                     ],
                 ],
-                [
+                fn() => [
                     new RecordRepresentation(
                         [
                             'title' => 'TEST',
@@ -194,7 +218,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
                         ],
                     ],
                 ],
-                [
+                fn() => [
                     new RecordRepresentation(
                         [
                             'title' => 'TEST',
@@ -221,7 +245,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
                         ],
                     ],
                 ],
-                [
+                fn() => [
                     new RecordRepresentation(
                         [
                             'title' => 'TEST',
@@ -249,7 +273,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
                         ],
                     ],
                 ],
-                [
+                fn() => [
                     new RecordRepresentation(
                         [
                             'title' => 'TEST1',
@@ -289,7 +313,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
                         ],
                     ],
                 ],
-                [
+                fn() => [
                     new RecordRepresentation(
                         [
                             'title' => 'TEST1',
@@ -330,7 +354,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
                         ],
                     ],
                 ],
-                [
+                fn() => [
                     new RecordRepresentation(
                         [
                             'title' => 'TEST1',
@@ -380,7 +404,7 @@ class AbstractRecordRequestHandlerTest extends UnitTestCase
 
                     ],
                 ],
-                [
+                fn() => [
                     new RecordRepresentation(
                         [
                             'title' => 'TEST1',

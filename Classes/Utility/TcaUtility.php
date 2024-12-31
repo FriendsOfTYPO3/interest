@@ -25,17 +25,6 @@ class TcaUtility
     protected static ?array $inlineRelationsToTablesCache = null;
 
     /**
-     * Returns true if the table is localizable.
-     *
-     * @param string $tableName
-     * @return bool
-     */
-    public static function isLocalizable(string $tableName): bool
-    {
-        return self::getLanguageField($tableName) !== null;
-    }
-
-    /**
      * Returns the name of the table's localizable field.
      *
      * @param string $tableName

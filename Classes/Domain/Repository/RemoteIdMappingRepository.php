@@ -491,7 +491,7 @@ class RemoteIdMappingRepository extends AbstractRepository
     {
         if (
             $recordOperation === null
-            || !TcaUtility::isLocalizable($recordOperation->getTable())
+            || !$recordOperation->getRecordRepresentation()->getSchema()->isLanguageAware()
             // @extensionScannerIgnoreLine
             || $recordOperation->getLanguage() === null
             // @extensionScannerIgnoreLine

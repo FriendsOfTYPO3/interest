@@ -7,7 +7,8 @@ namespace FriendsOfTYPO3\Interest\Domain\Model\Dto;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\ConflictException;
 use FriendsOfTYPO3\Interest\Domain\Model\Dto\Exception\InvalidArgumentException;
 use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
-use FriendsOfTYPO3\Interest\Utility\TcaUtility;
+use TYPO3\CMS\Core\Schema\TcaSchema;
+use TYPO3\CMS\Core\Schema\TcaSchemaFactory;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -20,39 +21,26 @@ class RecordInstanceIdentifier
 {
     public const LANGUAGE_ASPECT_PREFIX = '|||L';
 
-    /**
-     * @var string
-     */
+    private static ?TcaSchemaFactory $tcaSchemaFactory = null;
+
     protected string $table;
 
     /**
      * The original remote id from construct.
-     *
-     * @var string
      */
     protected string $remoteId;
 
     /**
      * Language to use for processing.
-     *
-     * @var SiteLanguage|null
      */
     protected ?SiteLanguage $language;
 
-    /**
-     * @var string|null
-     */
     protected ?string $workspace;
 
-    /**
-     * @var int|null
-     */
     protected ?int $uid = null;
 
     /**
      * Holds the temporary UID for DataHandler.
-     *
-     * @var string|null
      */
     protected ?string $uidPlaceholder = null;
 
@@ -74,17 +62,11 @@ class RecordInstanceIdentifier
         $this->workspace = $workspace;
     }
 
-    /**
-     * @return string
-     */
     public function getTable(): string
     {
         return $this->table;
     }
 
-    /**
-     * @return SiteLanguage|null
-     */
     public function getLanguage(): ?SiteLanguage
     {
         return $this->language;
@@ -92,8 +74,6 @@ class RecordInstanceIdentifier
 
     /**
      * Returns true if a SiteLanguage is set.
-     *
-     * @return bool
      */
     public function hasLanguage(): bool
     {
@@ -102,8 +82,6 @@ class RecordInstanceIdentifier
 
     /**
      * Returns original unmodified remote id set in construct.
-     *
-     * @return string
      */
     public function getRemoteId(): string
     {
@@ -112,8 +90,6 @@ class RecordInstanceIdentifier
 
     /**
      * Returns workspace.
-     *
-     * @return string|null
      */
     public function getWorkspace(): ?string
     {
@@ -122,17 +98,21 @@ class RecordInstanceIdentifier
 
     /**
      * Returns true if workspace is set.
-     *
-     * @return bool
      */
     public function hasWorkspace(): bool
     {
         return $this->workspace !== null;
     }
 
-    /**
-     * @return int
-     */
+    public function getSchema(): TcaSchema
+    {
+        if (self::$tcaSchemaFactory === null) {
+            self::$tcaSchemaFactory = GeneralUtility::makeInstance(TcaSchemaFactory::class);
+        }
+
+        return self::$tcaSchemaFactory->get($this->getTable());
+    }
+
     public function getUid(): int
     {
         if ($this->uid === null) {
@@ -142,9 +122,6 @@ class RecordInstanceIdentifier
         return $this->uid;
     }
 
-    /**
-     * @param int $uid
-     */
     public function setUid(int $uid): void
     {
         $this->uid = $uid;
@@ -153,8 +130,6 @@ class RecordInstanceIdentifier
     /**
      * Returns a DataHandler UID placeholder. If it has not yet been set, it will be generated as a random string
      * prefixed with "NEW".
-     *
-     * @return string
      */
     public function getUidPlaceholder(): string
     {
@@ -168,13 +143,11 @@ class RecordInstanceIdentifier
     /**
      * Returns remote id with aspects, such as language and workspace ID.
      * If language is null or language ID zero, the $remoteId is removed unchanged.
-     *
-     * @return string
      */
     public function getRemoteIdWithAspects(): string
     {
         if (
-            !TcaUtility::isLocalizable($this->getTable())
+            !$this->getSchema()->isLanguageAware()
             // @extensionScannerIgnoreLine
             || $this->getLanguage() === null
             // @extensionScannerIgnoreLine
@@ -195,10 +168,6 @@ class RecordInstanceIdentifier
         return $remoteId . $languageAspect;
     }
 
-    /**
-     * @param string $remoteId
-     * @return string
-     */
     public function removeAspectsFromRemoteId(string $remoteId): string
     {
         if (!str_contains($remoteId, self::LANGUAGE_ASPECT_PREFIX)) {
@@ -212,13 +181,11 @@ class RecordInstanceIdentifier
      * Resolves a site language. If no language is defined, the sites's default language will be returned. If the
      * storagePid has no site, null will be returned.
      *
-     * @param string|null $language
-     * @return SiteLanguage|null
      * @throws InvalidArgumentException
      */
     protected function resolveLanguage(?string $language): ?SiteLanguage
     {
-        if (!TcaUtility::isLocalizable($this->getTable()) || ($language ?? '') === '') {
+        if ($this->getSchema()->isLanguageAware() || ($language ?? '') === '') {
             return null;
         }
 
@@ -269,7 +236,6 @@ class RecordInstanceIdentifier
     /**
      * Resolves the UID for the remote ID.
      *
-     * @return int
      * @throws ConflictException
      */
     protected function resolveUid(): int
@@ -290,9 +256,6 @@ class RecordInstanceIdentifier
         return $mappingRepository->get($this->getRemoteIdWithAspects());
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->getRemoteIdWithAspects();

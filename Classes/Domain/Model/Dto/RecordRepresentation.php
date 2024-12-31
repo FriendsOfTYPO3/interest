@@ -4,46 +4,30 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Domain\Model\Dto;
 
+use TYPO3\CMS\Core\Schema\TcaSchema;
+
 /**
  * DTO to handle record representation.
  */
 class RecordRepresentation
 {
-    /**
-     * @var array
-     */
-    protected array $data;
-
-    /**
-     * @var RecordInstanceIdentifier
-     */
-    protected RecordInstanceIdentifier $recordInstanceIdentifier;
-
-    /**
-     * @param array $data
-     * @param RecordInstanceIdentifier $recordInstanceIdentifier
-     */
     public function __construct(
-        array $data,
-        RecordInstanceIdentifier $recordInstanceIdentifier
-    ) {
-        $this->data = $data;
-        $this->recordInstanceIdentifier = $recordInstanceIdentifier;
-    }
+        protected array $data,
+        protected RecordInstanceIdentifier $recordInstanceIdentifier
+    ) {}
 
-    /**
-     * @return array
-     */
     public function getData(): array
     {
         return $this->data;
     }
 
-    /**
-     * @return RecordInstanceIdentifier
-     */
     public function getRecordInstanceIdentifier(): RecordInstanceIdentifier
     {
         return $this->recordInstanceIdentifier;
+    }
+
+    public function getSchema(): TcaSchema
+    {
+        return $this->recordInstanceIdentifier->getSchema();
     }
 }

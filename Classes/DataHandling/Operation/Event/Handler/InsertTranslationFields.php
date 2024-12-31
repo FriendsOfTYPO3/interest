@@ -32,7 +32,7 @@ class InsertTranslationFields implements RecordOperationEventHandlerInterface
                 // @extensionScannerIgnoreLine
                 && $recordOperation->getLanguage()->getLanguageId() === 0
             )
-            || !TcaUtility::isLocalizable($recordOperation->getTable())
+            || !$recordOperation->getRecordRepresentation()->getSchema()->isLanguageAware()
             || $recordOperation->isDataFieldSet(TcaUtility::getLanguageField($recordOperation->getTable()))
         ) {
             return;
