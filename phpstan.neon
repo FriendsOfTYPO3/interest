@@ -22,7 +22,6 @@ parameters:
     - Tests
 
   excludePaths:
-    - Classes/Authentication/*
     - Classes/Reaction/CreateUpdateDeleteReaction.php
     - Configuration/TCA/Overrides/sys_reaction.php
     - Tests/Acceptance/

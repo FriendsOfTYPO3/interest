@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Slot;
+namespace FriendsOfTYPO3\Interest\Slot;
 
-use Pixelant\Interest\EventHandler\DeleteRemoteIdForDeletedFile;
+use FriendsOfTYPO3\Interest\EventHandler\DeleteRemoteIdForDeletedFile;
 use TYPO3\CMS\Core\Resource\AbstractFile;
 
 /**

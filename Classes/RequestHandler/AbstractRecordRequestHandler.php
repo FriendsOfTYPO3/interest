@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\RequestHandler;
+namespace FriendsOfTYPO3\Interest\RequestHandler;
 
-use Pixelant\Interest\Context;
-use Pixelant\Interest\Database\RelationHandlerWithoutReferenceIndex;
-use Pixelant\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
-use Pixelant\Interest\DataHandling\Operation\Exception\AbstractException;
-use Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
-use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
-use Pixelant\Interest\RequestHandler\ExceptionConverter\OperationToRequestHandlerExceptionConverter;
+use FriendsOfTYPO3\Interest\Context;
+use FriendsOfTYPO3\Interest\Database\RelationHandlerWithoutReferenceIndex;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\AbstractException;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
+use FriendsOfTYPO3\Interest\RequestHandler\ExceptionConverter\OperationToRequestHandlerExceptionConverter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;

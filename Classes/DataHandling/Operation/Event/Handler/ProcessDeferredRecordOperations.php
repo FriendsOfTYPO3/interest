@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event\Handler;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler;
 
-use Pixelant\Interest\DataHandling\Operation\AbstractConstructiveRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
-use Pixelant\Interest\DataHandling\Operation\Event\Exception\BeforeRecordOperationEventException;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
-use Pixelant\Interest\DataHandling\Operation\Exception\IdentityConflictException;
-use Pixelant\Interest\DataHandling\Operation\UpdateRecordOperation;
-use Pixelant\Interest\Domain\Repository\DeferredRecordOperationRepository;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractConstructiveRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\DeleteRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Exception\BeforeRecordOperationEventException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\IdentityConflictException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
+use FriendsOfTYPO3\Interest\Domain\Repository\DeferredRecordOperationRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ProcessDeferredRecordOperations implements RecordOperationEventHandlerInterface

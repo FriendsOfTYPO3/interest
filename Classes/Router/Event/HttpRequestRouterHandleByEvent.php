@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Router\Event;
+namespace FriendsOfTYPO3\Interest\Router\Event;
 
 use Psr\Http\Message\ServerRequestInterface;
 

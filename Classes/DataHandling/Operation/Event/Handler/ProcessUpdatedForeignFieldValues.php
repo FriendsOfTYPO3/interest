@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event\Handler;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler;
 
-use Pixelant\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\Message\RelationFieldValueMessage;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
-use Pixelant\Interest\DataHandling\Operation\UpdateRecordOperation;
-use Pixelant\Interest\Utility\RelationUtility;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\Message\RelationFieldValueMessage;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
+use FriendsOfTYPO3\Interest\Utility\RelationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**

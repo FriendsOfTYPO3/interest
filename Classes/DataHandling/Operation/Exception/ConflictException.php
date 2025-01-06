@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Exception;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Exception;
 
 class ConflictException extends AbstractException
 {

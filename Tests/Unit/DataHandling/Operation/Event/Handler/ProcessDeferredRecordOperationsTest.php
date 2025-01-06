@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
+namespace FriendsOfTYPO3\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\DeleteRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\PersistPendingRelationInformation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\ProcessDeferredRecordOperations;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationInvocationEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\IdentityConflictException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
+use FriendsOfTYPO3\Interest\Domain\Repository\DeferredRecordOperationRepository;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
-use Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\PersistPendingRelationInformation;
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\ProcessDeferredRecordOperations;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationInvocationEvent;
-use Pixelant\Interest\DataHandling\Operation\Exception\IdentityConflictException;
-use Pixelant\Interest\DataHandling\Operation\UpdateRecordOperation;
-use Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
-use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
-use Pixelant\Interest\Domain\Repository\DeferredRecordOperationRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 

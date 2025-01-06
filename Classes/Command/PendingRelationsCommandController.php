@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Command;
+namespace FriendsOfTYPO3\Interest\Command;
 
 use Doctrine\DBAL\Driver\Result;
-use Pixelant\Interest\DataHandling\DataHandler;
-use Pixelant\Interest\Domain\Repository\Exception\InvalidQueryResultException;
-use Pixelant\Interest\Domain\Repository\PendingRelationsRepository;
-use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
-use Pixelant\Interest\Utility\RelationUtility;
+use FriendsOfTYPO3\Interest\DataHandling\DataHandler;
+use FriendsOfTYPO3\Interest\Domain\Repository\Exception\InvalidQueryResultException;
+use FriendsOfTYPO3\Interest\Domain\Repository\PendingRelationsRepository;
+use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
+use FriendsOfTYPO3\Interest\Utility\RelationUtility;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\Table;

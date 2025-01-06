@@ -1,10 +1,10 @@
 <?php
 
-namespace Pixelant\Interest\Middleware;
+namespace FriendsOfTYPO3\Interest\Middleware;
 
-use Pixelant\Interest\Configuration\ConfigurationProvider;
-use Pixelant\Interest\Middleware\Event\HttpResponseEvent;
-use Pixelant\Interest\Router\HttpRequestRouter;
+use FriendsOfTYPO3\Interest\Configuration\ConfigurationProvider;
+use FriendsOfTYPO3\Interest\Middleware\Event\HttpResponseEvent;
+use FriendsOfTYPO3\Interest\Router\HttpRequestRouter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Tests\Functional\DataHandling\Operation;
+namespace FriendsOfTYPO3\Interest\Tests\Functional\DataHandling\Operation;
 
-use Pixelant\Interest\Tests\Functional\SiteBasedTestTrait;
+use FriendsOfTYPO3\Interest\Tests\Functional\SiteBasedTestTrait;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;

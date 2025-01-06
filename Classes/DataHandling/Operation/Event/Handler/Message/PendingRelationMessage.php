@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event\Handler\Message;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\Message;
 
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\MapUidsAndExtractPendingRelations;
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\PersistPendingRelationInformation;
-use Pixelant\Interest\DataHandling\Operation\Message\RequiredMessageInterface;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\MapUidsAndExtractPendingRelations;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\PersistPendingRelationInformation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Message\RequiredMessageInterface;
 
 /**
  * A message concerning pending relations to be persisted.

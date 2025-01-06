@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation;
 
-use Pixelant\Interest\DataHandling\Operation\Exception\IdentityConflictException;
-use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
-use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\IdentityConflictException;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
+use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event\Handler;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler;
 
-use Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
-use Pixelant\Interest\DataHandling\Operation\Exception\InvalidArgumentException;
-use Pixelant\Interest\Utility\TcaUtility;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\DeleteRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\InvalidArgumentException;
+use FriendsOfTYPO3\Interest\Utility\TcaUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**

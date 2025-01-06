@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Updates;
+namespace FriendsOfTYPO3\Interest\Updates;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
