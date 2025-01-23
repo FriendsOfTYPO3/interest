@@ -44,7 +44,8 @@
 		"typo3/testing-framework": "dev-main"
 	},
 	"replace": {
-		"typo3-ter/interest": "self.version"
+		"typo3-ter/interest": "self.version",
+		"pixelant/interest": "*"
 	},
 	"suggest": {
 		"typo3/cms-reactions": "To use TYPO3 reactions as entry point and for authentication."
