@@ -12,14 +12,4 @@ $EM_CONF['interest'] = [
             'typo3' => '13.4.1-13.4.99',
         ],
     ],
-    'autoload' => [
-        'psr-4' => [
-            'Pixelant\\Interest\\' => 'Classes/',
-        ],
-    ],
-    'autoload-dev' => [
-        'psr-4' => [
-            'Pixelant\\Interest\\Tests\\' => 'Tests/',
-        ],
-    ],
 ];
