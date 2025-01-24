@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Command;
+namespace FriendsOfTYPO3\Interest\Command;
 
-use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
-use Pixelant\Interest\DataHandling\Operation\Exception\NotFoundException;
-use Pixelant\Interest\DataHandling\Operation\UpdateRecordOperation;
-use Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
-use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\NotFoundException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;

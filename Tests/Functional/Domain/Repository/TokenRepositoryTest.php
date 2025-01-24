@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Tests\Functional\Domain\Repository;
+namespace FriendsOfTYPO3\Interest\Tests\Functional\Domain\Repository;
 
+use FriendsOfTYPO3\Interest\Domain\Repository\TokenRepository;
 use PHPUnit\Framework\Attributes\Test;
-use Pixelant\Interest\Domain\Repository\TokenRepository;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class TokenRepositoryTest extends FunctionalTestCase

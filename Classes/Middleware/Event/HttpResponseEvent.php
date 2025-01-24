@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Middleware\Event;
+namespace FriendsOfTYPO3\Interest\Middleware\Event;
 
 use Psr\Http\Message\ResponseInterface;
 

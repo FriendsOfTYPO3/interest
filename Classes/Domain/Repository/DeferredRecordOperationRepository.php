@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Domain\Repository;
+namespace FriendsOfTYPO3\Interest\Domain\Repository;
 
 use Doctrine\DBAL\Result;
-use Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation;
-use Pixelant\Interest\Domain\Repository\Exception\InvalidQueryResultException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation;
+use FriendsOfTYPO3\Interest\Domain\Repository\Exception\InvalidQueryResultException;
 use TYPO3\CMS\Core\Database\Connection;
 
 class DeferredRecordOperationRepository extends AbstractRepository

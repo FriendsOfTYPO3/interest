@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Message;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Message;
 
 /**
  * Indicates that there should only be a zero or one message of each class with this interface in the queue at any given

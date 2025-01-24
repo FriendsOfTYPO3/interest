@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Authentication;
+namespace FriendsOfTYPO3\Interest\Authentication;
 
-use Pixelant\Interest\Domain\Repository\TokenRepository;
-use Pixelant\Interest\RequestHandler\Exception\InvalidArgumentException;
-use Pixelant\Interest\RequestHandler\Exception\UnauthorizedAccessException;
+use FriendsOfTYPO3\Interest\Domain\Repository\TokenRepository;
+use FriendsOfTYPO3\Interest\RequestHandler\Exception\InvalidArgumentException;
+use FriendsOfTYPO3\Interest\RequestHandler\Exception\UnauthorizedAccessException;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

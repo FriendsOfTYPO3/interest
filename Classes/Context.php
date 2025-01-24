@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest;
+namespace FriendsOfTYPO3\Interest;
 
 class Context
 {

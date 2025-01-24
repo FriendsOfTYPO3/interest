@@ -7,15 +7,15 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Tests\Functional\DataHandling\Operation;
+namespace FriendsOfTYPO3\Interest\Tests\Functional\DataHandling\Operation;
 
+use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
+use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use PHPUnit\Framework\Attributes\Test;
-use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
-use Pixelant\Interest\DataHandling\Operation\UpdateRecordOperation;
-use Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
-use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
-use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
 
 class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {

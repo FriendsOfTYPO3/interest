@@ -2,34 +2,34 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\RequestHandler\ExceptionConverter;
+namespace FriendsOfTYPO3\Interest\RequestHandler\ExceptionConverter;
 
-use Pixelant\Interest\DataHandling\Operation\Exception\AbstractException;
-use Pixelant\Interest\DataHandling\Operation\Exception\ConflictException as OperationConflictException;
-use Pixelant\Interest\DataHandling\Operation\Exception\DataHandlerErrorException as OperationDataHandlerErrorException;
-use Pixelant\Interest\DataHandling\Operation\Exception\IdentityConflictException as OperationIdentityConflictException;
-use Pixelant\Interest\DataHandling\Operation\Exception\IncompleteOperationException as OpIncompleteOperationException;
-use Pixelant\Interest\DataHandling\Operation\Exception\InvalidArgumentException as OperationInvalidArgumentException;
-use Pixelant\Interest\DataHandling\Operation\Exception\MissingArgumentException as OperationMissingArgumentException;
-use Pixelant\Interest\DataHandling\Operation\Exception\NotFoundException as OperationNotFoundException;
-use Pixelant\Interest\RequestHandler\Exception\ConflictException;
-use Pixelant\Interest\RequestHandler\Exception\DataHandlerErrorException;
-use Pixelant\Interest\RequestHandler\Exception\IncompleteOperationException;
-use Pixelant\Interest\RequestHandler\Exception\InvalidArgumentException;
-use Pixelant\Interest\RequestHandler\Exception\MissingArgumentException;
-use Pixelant\Interest\RequestHandler\Exception\NotFoundException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\AbstractException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\ConflictException as OpConflictException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\DataHandlerErrorException as OpDataHandlerErrorException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\IdentityConflictException as OpIdentityConflictException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\IncompleteOperationException as OpIncompleteOpException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\InvalidArgumentException as OpInvalidArgumentException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\MissingArgumentException as OpMissingArgumentException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\NotFoundException as OpNotFoundException;
+use FriendsOfTYPO3\Interest\RequestHandler\Exception\ConflictException;
+use FriendsOfTYPO3\Interest\RequestHandler\Exception\DataHandlerErrorException;
+use FriendsOfTYPO3\Interest\RequestHandler\Exception\IncompleteOperationException;
+use FriendsOfTYPO3\Interest\RequestHandler\Exception\InvalidArgumentException;
+use FriendsOfTYPO3\Interest\RequestHandler\Exception\MissingArgumentException;
+use FriendsOfTYPO3\Interest\RequestHandler\Exception\NotFoundException;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class OperationToRequestHandlerExceptionConverter
 {
     private const EXCEPTION_MAP = [
-        OperationConflictException::class => ConflictException::class,
-        OperationDataHandlerErrorException::class => DataHandlerErrorException::class,
-        OperationIdentityConflictException::class => ConflictException::class,
-        OpIncompleteOperationException::class => IncompleteOperationException::class,
-        OperationInvalidArgumentException::class => InvalidArgumentException::class,
-        OperationNotFoundException::class => NotFoundException::class,
-        OperationMissingArgumentException::class => MissingArgumentException::class,
+        OpConflictException::class => ConflictException::class,
+        OpDataHandlerErrorException::class => DataHandlerErrorException::class,
+        OpIdentityConflictException::class => ConflictException::class,
+        OpIncompleteOpException::class => IncompleteOperationException::class,
+        OpInvalidArgumentException::class => InvalidArgumentException::class,
+        OpNotFoundException::class => NotFoundException::class,
+        OpMissingArgumentException::class => MissingArgumentException::class,
     ];
 
     /**

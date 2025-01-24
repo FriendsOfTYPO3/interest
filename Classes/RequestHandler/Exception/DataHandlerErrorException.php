@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\RequestHandler\Exception;
+namespace FriendsOfTYPO3\Interest\RequestHandler\Exception;
 
 /**
- * @see \Pixelant\Interest\DataHandling\Operation\Exception\DataHandlerErrorException
+ * @see \FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\DataHandlerErrorException
  */
 class DataHandlerErrorException extends AbstractRequestHandlerException
 {

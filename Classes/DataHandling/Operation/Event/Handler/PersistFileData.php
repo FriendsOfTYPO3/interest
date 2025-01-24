@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event\Handler;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler;
 
+use FriendsOfTYPO3\Interest\Configuration\ConfigurationProvider;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\DeleteRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\IdentityConflictException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\InvalidArgumentException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\NotFoundException;
+use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use GuzzleHttp\Exception\ClientException;
-use Pixelant\Interest\Configuration\ConfigurationProvider;
-use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
-use Pixelant\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
-use Pixelant\Interest\DataHandling\Operation\Exception\IdentityConflictException;
-use Pixelant\Interest\DataHandling\Operation\Exception\InvalidArgumentException;
-use Pixelant\Interest\DataHandling\Operation\Exception\NotFoundException;
-use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Resource\Enum\DuplicationBehavior;

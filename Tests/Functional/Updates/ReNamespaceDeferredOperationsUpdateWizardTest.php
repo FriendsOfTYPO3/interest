@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Tests\Functional\Updates;
+namespace FriendsOfTYPO3\Interest\Tests\Functional\Updates;
 
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
+use FriendsOfTYPO3\Interest\Domain\Repository\DeferredRecordOperationRepository;
+use FriendsOfTYPO3\Interest\Tests\Functional\SiteBasedTestTrait;
+use FriendsOfTYPO3\Interest\Updates\ReNamespaceDeferredOperationsUpdateWizard;
 use PHPUnit\Framework\Attributes\Test;
-use Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
-use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
-use Pixelant\Interest\Domain\Repository\DeferredRecordOperationRepository;
-use Pixelant\Interest\Tests\Functional\SiteBasedTestTrait;
-use Pixelant\Interest\Updates\ReSerializeDeferredOperationsUpdateWizard;
 use Symfony\Component\Console\Output\NullOutput;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-class ReSerializeDeferredOperationsUpdateWizardTest extends FunctionalTestCase
+class ReNamespaceDeferredOperationsUpdateWizardTest extends FunctionalTestCase
 {
     use SiteBasedTestTrait;
 
@@ -42,7 +42,7 @@ class ReSerializeDeferredOperationsUpdateWizardTest extends FunctionalTestCase
     #[Test]
     public function deferredOperationsAreReNamespacedAndUpdatedTest()
     {
-        $updateWizard = GeneralUtility::makeInstance(ReSerializeDeferredOperationsUpdateWizard::class);
+        $updateWizard = GeneralUtility::makeInstance(ReNamespaceDeferredOperationsUpdateWizard::class);
 
         $updateWizard->setOutput(new NullOutput());
 
@@ -55,6 +55,8 @@ class ReSerializeDeferredOperationsUpdateWizardTest extends FunctionalTestCase
         $deferredOperations = $deferredOperationsRepository->get('dependentRemoteId');
 
         foreach ($deferredOperations as $row) {
+            $row['class'] = 'FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation';
+
             $arguments = $row['arguments'];
 
             self::assertTrue(

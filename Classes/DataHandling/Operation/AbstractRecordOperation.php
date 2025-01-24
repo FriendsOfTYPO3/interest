@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation;
 
-use Pixelant\Interest\Configuration\ConfigurationProvider;
-use Pixelant\Interest\DataHandling\DataHandler;
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\Message\DataHandlerSuccessMessage;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationInvocationEvent;
-use Pixelant\Interest\DataHandling\Operation\Exception\DataHandlerErrorException;
-use Pixelant\Interest\DataHandling\Operation\Exception\IncompleteOperationException;
-use Pixelant\Interest\DataHandling\Operation\Message\MessageInterface;
-use Pixelant\Interest\DataHandling\Operation\Message\ReplacesPreviousMessageInterface;
-use Pixelant\Interest\DataHandling\Operation\Message\RequiredMessageInterface;
-use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
-use Pixelant\Interest\Domain\Repository\PendingRelationsRepository;
-use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
+use FriendsOfTYPO3\Interest\Configuration\ConfigurationProvider;
+use FriendsOfTYPO3\Interest\DataHandling\DataHandler;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\Message\DataHandlerSuccessMessage;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationInvocationEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\DataHandlerErrorException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\IncompleteOperationException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Message\MessageInterface;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Message\ReplacesPreviousMessageInterface;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Message\RequiredMessageInterface;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
+use FriendsOfTYPO3\Interest\Domain\Repository\PendingRelationsRepository;
+use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

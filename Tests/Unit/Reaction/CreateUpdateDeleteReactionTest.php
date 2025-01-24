@@ -1,9 +1,9 @@
 <?php
 
-namespace Pixelant\Interest\Tests\Unit\Reaction;
+namespace FriendsOfTYPO3\Interest\Tests\Unit\Reaction;
 
+use FriendsOfTYPO3\Interest\Reaction\CreateUpdateDeleteReaction;
 use PHPUnit\Framework\Attributes\Test;
-use Pixelant\Interest\Reaction\CreateUpdateDeleteReaction;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\ServerRequest;

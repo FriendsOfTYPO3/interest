@@ -20,13 +20,13 @@ Events
 
 The events are listed in order of execution.
 
-.. php:namespace:: Pixelant\Interest\Router\Event
+.. php:namespace:: FriendsOfTYPO3\Interest\Router\Event
 
 .. php:class:: HttpRequestRouterHandleByEvent
 
    Called in :php:`HttpRequestRouter::handleByMethod()`. Can be used to modify the request and entry point parts before they are passed on to a RequestHandler.
 
-   EventHandlers for this event should implement :php:`Pixelant\Interest\Router\Event\HttpRequestRouterHandleByEventHandlerInterface`.
+   EventHandlers for this event should implement :php:`FriendsOfTYPO3\Interest\Router\Event\HttpRequestRouterHandleByEventHandlerInterface`.
 
    .. php:method:: getEntryPointParts()
 
@@ -46,45 +46,45 @@ The events are listed in order of execution.
 
       :param Psr\Http\Message\ServerRequestInterface $request:
 
-.. php:namespace::  Pixelant\Interest\DataHandling\Operation\Event
+.. php:namespace::  FriendsOfTYPO3\Interest\DataHandling\Operation\Event
 
 .. php:class:: RecordOperationSetupEvent
 
    Called inside the :php:`AbstractRecordOperation::__construct()` when a :php:`*RecordOperation` object has been initialized, but before data validations.
 
-   EventHandlers for this event should implement :php:`Pixelant\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface`.
+   EventHandlers for this event should implement :php:`FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface`.
 
    EventHandlers for this event can throw these exceptions:
 
-   :php:`Pixelant\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException`
+   :php:`FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Exception\StopRecordOperationException`
       To quietly stop the record operation. This exception is only logged as informational and the operation will be treated as successful. E.g. used when deferring an operation.
 
-   :php:`Pixelant\Interest\DataHandling\Operation\Event\Exception\BeforeRecordOperationEventException`
+   :php:`FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Exception\BeforeRecordOperationEventException`
       Will stop the record operation and log as an error. The operation will be treated as unsuccessful.
 
    .. php:method:: getRecordOperation()
 
-      :returntype: Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation
+      :returntype: FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation
 
-.. php:namespace::  Pixelant\Interest\DataHandling\Operation\Event
+.. php:namespace::  FriendsOfTYPO3\Interest\DataHandling\Operation\Event
 
 .. php:class:: RecordOperationInvocationEvent
 
    Called as the last thing inside the :php:`AbstractRecordOperation::__invoke()` method, after all data persistence and pending relations have been resolved.
 
-   EventHandlers for this event should implement :php:`Pixelant\Interest\DataHandling\Operation\Event\AfterRecordOperationEventHandlerInterface`.
+   EventHandlers for this event should implement :php:`FriendsOfTYPO3\Interest\DataHandling\Operation\Event\AfterRecordOperationEventHandlerInterface`.
 
    .. php:method:: getRecordOperation()
 
-      :returntype: Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation
+      :returntype: FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation
 
-.. php:namespace::  Pixelant\Interest\Middleware\Event
+.. php:namespace::  FriendsOfTYPO3\Interest\Middleware\Event
 
 .. php:class:: HttpResponseEvent
 
    Called in the middleware, just before control is handled back over to TYPO3 during an HTTP request. Allows modification of the response object.
 
-   EventHandlers for this event should implement :php:`Pixelant\Interest\Middleware\Event\HttpResponseEventHandlerInterface`.
+   EventHandlers for this event should implement :php:`FriendsOfTYPO3\Interest\Middleware\Event\HttpResponseEventHandlerInterface`.
 
    .. php:method:: getResponse()
 
@@ -106,15 +106,15 @@ Internal representation and identity
 
 Inside the extension, a record's state and identity is maintained by two data transfer object classes:
 
-* **A record's unique identity** from creation to deletion is represented by :php:`Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier`.
-* **A record's current state**, including the data that should be written to the database is represented by :php:`Pixelant\Interest\Domain\Model\Dto\RecordRepresentation`.
+* **A record's unique identity** from creation to deletion is represented by :php:`FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier`.
+* **A record's current state**, including the data that should be written to the database is represented by :php:`FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation`.
 
 When creating a :php:`RecordRepresentation`, you must also supply a :php:`RecordInstanceIdentifier`:
 
 .. code-block::
 
-   use Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
-   use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
+   use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
+   use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
 
    new RecordRepresentation(
        [
@@ -152,23 +152,23 @@ There are three record operations:
 * Update
 * Delete
 
-All are subclasses of :php:`Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation`, and share its API. :php:`CreateRecordOperation` and :php:`CreateRecordOperation` are direct subclasses of :php:`AbstractConstructiveRecordOperation`, which adds a more complex constructor.
+All are subclasses of :php:`FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation`, and share its API. :php:`CreateRecordOperation` and :php:`CreateRecordOperation` are direct subclasses of :php:`AbstractConstructiveRecordOperation`, which adds a more complex constructor.
 
-.. php:namespace:: Pixelant\Interest\DataHandling\Operation
+.. php:namespace:: FriendsOfTYPO3\Interest\DataHandling\Operation
 
 .. php:class:: AbstractConstructiveRecordOperation
 
-.. php:currentnamespace:: Pixelant\Interest\DataHandling\Operation
+.. php:currentnamespace:: FriendsOfTYPO3\Interest\DataHandling\Operation
 
 .. php:class:: CreateRecordOperation
 
-.. php:currentnamespace:: Pixelant\Interest\DataHandling\Operation
+.. php:currentnamespace:: FriendsOfTYPO3\Interest\DataHandling\Operation
 
 .. php:class:: UpdateRecordOperation
 
    .. php:method:: __construct($recordRepresentation, $metaData)
 
-      :param Pixelant\Interest\Domain\Model\Dto\RecordRepresentation $recordRepresentation:
+      :param FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation $recordRepresentation:
 
       :param array $metaData:
 
@@ -191,7 +191,7 @@ All are subclasses of :php:`Pixelant\Interest\DataHandling\Operation\AbstractRec
 
    .. php:method:: dispatchMessage($message)
 
-      :param \Pixelant\Interest\DataHandling\Operation\Message\MessageInterface $message:
+      :param \FriendsOfTYPO3\Interest\DataHandling\Operation\Message\MessageInterface $message:
 
       Dispatch a message, to be picked up later, in another part of the operation's execution flow.
 
@@ -215,7 +215,7 @@ All are subclasses of :php:`Pixelant\Interest\DataHandling\Operation\AbstractRec
 
       Returns the internal DataHandler object used in the operation.
 
-      :returntype: \Pixelant\Interest\DataHandling\DataHandler
+      :returntype: \FriendsOfTYPO3\Interest\DataHandling\DataHandler
 
    .. php:method:: getHash()
 
@@ -249,11 +249,11 @@ All are subclasses of :php:`Pixelant\Interest\DataHandling\Operation\AbstractRec
 
    .. php:method:: getRecordRepresentation()
 
-      :returntype: Pixelant\Interest\Domain\Model\Dto\RecordRepresentation
+      :returntype: FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation
 
    .. php:method:: getStoragePid()
 
-      Gets the PID of the record as originally set during object construction, usually by the :php:`\Pixelant\Interest\DataHandling\Operation\Event\Handler\ResolveStoragePid` event.
+      Gets the PID of the record as originally set during object construction, usually by the :php:`\FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\ResolveStoragePid` event.
 
       :returntype: void
 
@@ -301,7 +301,7 @@ All are subclasses of :php:`Pixelant\Interest\DataHandling\Operation\AbstractRec
 
       Pick the last message of class :php:`$messageFqcn` from the message queue. Returns null if no messages are left in the queue.
 
-      :returntype: \Pixelant\Interest\DataHandling\Operation\Message\MessageInterface|null
+      :returntype: \FriendsOfTYPO3\Interest\DataHandling\Operation\Message\MessageInterface|null
 
    .. php:method:: setDataFieldForDataHandler($fieldName, $value)
 
@@ -337,7 +337,7 @@ All are subclasses of :php:`Pixelant\Interest\DataHandling\Operation\AbstractRec
 
       :param int $storagePid:
 
-      Sets the storage PID. This might override a PID set by the :php:`\Pixelant\Interest\DataHandling\Operation\Event\Handler\ResolveStoragePid` event, which usually handles this task.
+      Sets the storage PID. This might override a PID set by the :php:`\FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\ResolveStoragePid` event, which usually handles this task.
 
       :returntype: void
 
@@ -365,7 +365,7 @@ All are subclasses of :php:`Pixelant\Interest\DataHandling\Operation\AbstractRec
 
       :returntype: void
 
-.. php:currentnamespace:: Pixelant\Interest\DataHandling\Operation
+.. php:currentnamespace:: FriendsOfTYPO3\Interest\DataHandling\Operation
 
 .. php:class:: DeleteRecordOperation
 
@@ -373,18 +373,18 @@ All are subclasses of :php:`Pixelant\Interest\DataHandling\Operation\AbstractRec
 
       You cannot send metadata information to a delete operation.
 
-      :param Pixelant\Interest\Domain\Model\Dto\RecordRepresentation $recordRepresentation:
+      :param FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation $recordRepresentation:
 
 .. _extending-record-operation-messages:
 
 Record Operation Messages
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Classes implementing :php:`\Pixelant\Interest\DataHandling\Operation\Message\MessageInterface` can be used to carry information within the execution flow of an instance of :php:`\Pixelant\Interest\DataHandling\Operation\AbstractRecordOperation`. This is especially useful between EventHandlers.
+Classes implementing :php:`\FriendsOfTYPO3\Interest\DataHandling\Operation\Message\MessageInterface` can be used to carry information within the execution flow of an instance of :php:`\FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation`. This is especially useful between EventHandlers.
 
-For example, :php:`\Pixelant\Interest\DataHandling\Operation\Event\Handler\Message\PendingRelationMessage` is used to carry information about pending relations between the event that discovers them and the event that persists the information to the database — if the record operation was successful.
+For example, :php:`\FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\Message\PendingRelationMessage` is used to carry information about pending relations between the event that discovers them and the event that persists the information to the database — if the record operation was successful.
 
-Sending a message in :php:`\Pixelant\Interest\DataHandling\Operation\Event\Handler\MapUidsAndExtractPendingRelations`:
+Sending a message in :php:`\FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\MapUidsAndExtractPendingRelations`:
 
 .. code-block: php
 
@@ -398,7 +398,7 @@ Sending a message in :php:`\Pixelant\Interest\DataHandling\Operation\Event\Handl
        );
    }
 
-Retrieving messages and using the message data to persist the information to the database in :php:`\Pixelant\Interest\DataHandling\Operation\Event\Handler\PersistPendingRelationInformation`:
+Retrieving messages and using the message data to persist the information to the database in :php:`\FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\PersistPendingRelationInformation`:
 
 .. code-block: php
 
@@ -441,7 +441,7 @@ The time the record was last touched can help you verify that a request was proc
 Relevant methods
 ^^^^^^^^^^^^^^^^
 
-.. php:namespace:: Pixelant\Interest\Domain\Repository
+.. php:namespace:: FriendsOfTYPO3\Interest\Domain\Repository
 
 .. php:class:: RemoteIdMappingRepository
 
@@ -488,10 +488,10 @@ Fetching all remote IDs that have not been touched since the same time yesterday
 
 .. code-block:: php
 
-   use Pixelant\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
-   use Pixelant\Interest\Domain\Model\Dto\RecordRepresentation;
-   use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
-   use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
+   use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
+   use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
+   use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
+   use FriendsOfTYPO3\Interest\DataHandling\Operation\DeleteRecordOperation;
    use TYPO3\CMS\Core\Utility\GeneralUtility;
 
    $mappingRepository = GeneralUtility::makeInstance(RemoteIdMappingRepository::class);
@@ -514,8 +514,8 @@ The mapping table also contains a field that can contain serialized meta informa
 
 Here's two existing use cases:
 
-* **Foreign relation sorting order** by :php:`\Pixelant\Interest\DataHandling\Operation\Event\Handler\ForeignRelationSortingEventHandler`
-* **File modification info** by :php:`\Pixelant\Interest\DataHandling\Operation\Event\Handler\PersistFileDataEventHandler`
+* **Foreign relation sorting order** by :php:`\FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\ForeignRelationSortingEventHandler`
+* **File modification info** by :php:`\FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\PersistFileDataEventHandler`
 
 .. warning::
 
@@ -530,7 +530,7 @@ Here's two existing use cases:
 Relevant methods
 ^^^^^^^^^^^^^^^^
 
-.. php:namespace:: Pixelant\Interest\Domain\Repository
+.. php:namespace:: FriendsOfTYPO3\Interest\Domain\Repository
 
 .. php:class:: RemoteIdMappingRepository
 
@@ -572,7 +572,7 @@ This simplified excerpt from :php:`PersistFileDataEventHandler` shows how metada
 .. code-block:: php
 
    use GuzzleHttp\Client;
-   use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
+   use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 
    $mappingRepository = GeneralUtility::makeInstance(RemoteIdMappingRepository::class);
 

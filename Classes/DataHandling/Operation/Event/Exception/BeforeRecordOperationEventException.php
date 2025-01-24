@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Event\Exception;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Exception;
 
-use Pixelant\Interest\DataHandling\Operation\Exception\AbstractException;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\AbstractException;
 
 /**
  * An exception thrown to stop execution of a record operation.

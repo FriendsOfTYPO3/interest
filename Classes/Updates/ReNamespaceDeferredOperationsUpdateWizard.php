@@ -2,21 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Updates;
+namespace FriendsOfTYPO3\Interest\Updates;
 
-use Pixelant\Interest\Domain\Repository\DeferredRecordOperationRepository;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
+use FriendsOfTYPO3\Interest\Domain\Repository\DeferredRecordOperationRepository;
 use Symfony\Component\Console\Output\OutputInterface;
 use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\ChattyInterface;
 
-#[UpgradeWizard('interest_reSerializeDeferredOperations')]
-class ReSerializeDeferredOperationsUpdateWizard extends AbstractUpdateWizard implements ChattyInterface
+#[UpgradeWizard('interest_reNamespaceDeferredOperations')]
+class ReNamespaceDeferredOperationsUpdateWizard extends AbstractUpdateWizard implements ChattyInterface
 {
-    public const IDENTIFIER = 'interest_reSerializeDeferredOperations';
+    public const IDENTIFIER = 'interest_reNamespaceDeferredOperations';
 
-    public const TITLE = 'Re-Serialize Deferred Operations';
+    public const TITLE = 'Re-Namespace Deferred Operations';
 
-    public const DESCRIPTION = 'Re-serialize deferred operations to reduce database size.';
+    public const DESCRIPTION = 'Changes namespace of deferred operations to FriendsOfTYPO3\\Interest.';
 
     protected ?OutputInterface $output = null;
 
@@ -40,6 +42,16 @@ class ReSerializeDeferredOperationsUpdateWizard extends AbstractUpdateWizard imp
             ->from(DeferredRecordOperationRepository::TABLE_NAME)
             ->executeQuery();
 
+        class_alias(
+            RecordRepresentation::class,
+            'Pixelant\\Interest\\Domain\\Model\\Dto\\RecordRepresentation'
+        );
+
+        class_alias(
+            RecordInstanceIdentifier::class,
+            'Pixelant\\Interest\\Domain\\Model\\Dto\\RecordInstanceIdentifier'
+        );
+
         $recordCount = 0;
 
         foreach ($result->iterateAssociative() as $row) {
@@ -49,6 +61,8 @@ class ReSerializeDeferredOperationsUpdateWizard extends AbstractUpdateWizard imp
             // Using @unserialize here to catch deprecation errors.
             // phpcs:ignore
             $updatedRow['arguments'] = serialize(@unserialize($row['arguments']));
+
+            $updatedRow['class'] = str_replace('Pixelant\\Interest\\', 'FriendsOfTYPO3\\Interest\\', $row['class']);
 
             $updateQuery = $this->getQueryBuilderForTable(DeferredRecordOperationRepository::TABLE_NAME);
 

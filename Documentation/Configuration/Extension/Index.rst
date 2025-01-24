@@ -64,9 +64,9 @@ Behavior
    **0**
       Treat as any other file. You can also use this option if you want to
       handle empty files with a custom
-      :php:`Pixelant\Interest\DataHandling\Operation\Event\BeforeRecordOperationEvent`.
+      :php:`FriendsOfTYPO3\Interest\DataHandling\Operation\Event\BeforeRecordOperationEvent`.
       Just make sure your EventHandler it is executed after
-      :php:`\Pixelant\Interest\DataHandling\Operation\Event\Handler\PersistFileDataEventHandler`.
+      :php:`\FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\PersistFileDataEventHandler`.
    **1**
       Stop processing the record. This might result in pending relation records
       that will never be resolved in the database, but if that's OK for you it

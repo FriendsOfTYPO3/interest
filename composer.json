@@ -1,5 +1,5 @@
 {
-	"name": "pixelant/interest",
+	"name": "friendsoftypo3/interest",
 	"description": "REST and CLI API for adding, updating, and deleting records in TYPO3. Tracks relations so records can be inserted in any order. Uses remote ID mapping so you don't have to keep track of what UID a record has gotten after import. Data is inserted using backend APIs as if a real human did it, so you can can inspect the record history and undo actions.",
 	"license": "GPL-2.0-or-later",
 	"type": "typo3-cms-extension",
@@ -44,6 +44,7 @@
 		"typo3/testing-framework": "dev-main"
 	},
 	"replace": {
+		"pixelant/interest": "*",
 		"typo3-ter/interest": "self.version"
 	},
 	"suggest": {
@@ -52,12 +53,12 @@
 	"prefer-stable": true,
 	"autoload": {
 		"psr-4": {
-			"Pixelant\\Interest\\": "Classes/"
+			"FriendsOfTYPO3\\Interest\\": "Classes/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Pixelant\\Interest\\Tests\\": "Tests/"
+			"FriendsOfTYPO3\\Interest\\Tests\\": "Tests/"
 		}
 	},
 	"config": {

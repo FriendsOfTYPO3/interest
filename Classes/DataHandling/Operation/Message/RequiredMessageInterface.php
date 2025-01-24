@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\DataHandling\Operation\Message;
+namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Message;
 
 /**
  * A message that must be retrieved. If left in the queue when the record operation completes, the record operation

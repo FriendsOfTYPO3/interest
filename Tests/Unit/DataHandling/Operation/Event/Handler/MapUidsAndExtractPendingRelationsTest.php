@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Pixelant\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
+namespace FriendsOfTYPO3\Interest\Tests\Unit\DataHandling\Operation\Event\Handler;
 
+use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\DeleteRecordOperation;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\MapUidsAndExtractPendingRelations;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler\Message\PendingRelationMessage;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationSetupEvent;
+use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
+use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use PHPUnit\Framework\Attributes\Test;
-use Pixelant\Interest\DataHandling\Operation\CreateRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\DeleteRecordOperation;
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\MapUidsAndExtractPendingRelations;
-use Pixelant\Interest\DataHandling\Operation\Event\Handler\Message\PendingRelationMessage;
-use Pixelant\Interest\DataHandling\Operation\Event\RecordOperationSetupEvent;
-use Pixelant\Interest\DataHandling\Operation\UpdateRecordOperation;
-use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
