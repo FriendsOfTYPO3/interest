@@ -58,7 +58,7 @@ Publicly accessible URL
 Normal URL
 ^^^^^^^^^^
 
-The default behavior is that the file specified in the `url` field is downloaded to the download location specified in the :ref:`persistence.fileUploadFolderPath` UserTS configuration parameter.
+The default behavior is that the file specified in the `url` field is downloaded to the download location specified in the :ref:`persistence.fileUploadFolderPath <confval-persistence-fileuploadfolderpath>` UserTS configuration parameter.
 
 With the extension's default configuration, this example will download the file at `https://example.com/image.png` to :file:`fileadmin/tx_interest/image.png`.
 

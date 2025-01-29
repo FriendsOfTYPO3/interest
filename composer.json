@@ -44,6 +44,7 @@
 		"typo3/testing-framework": "dev-main"
 	},
 	"replace": {
+		"pixelant/interest": "*",
 		"typo3-ter/interest": "self.version"
 	},
 	"suggest": {

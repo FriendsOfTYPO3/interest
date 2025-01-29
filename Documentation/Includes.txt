@@ -14,4 +14,3 @@
 .. role:: yaml(code)
 
 .. default-role:: code
-.. highlight:: guess

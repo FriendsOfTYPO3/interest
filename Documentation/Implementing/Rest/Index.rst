@@ -65,7 +65,7 @@ will be "testuser:test1234" and the Base64-encoded version:
         -H 'Authorization: basic dGVzdHVzZXI6dGVzdDEyMzQ=' \
         -v 'https://example.org/rest/authenticate'
 
-.. info::
+.. note::
 
    `authenticate` is a special endpoint used only for basic authentication
    requests.

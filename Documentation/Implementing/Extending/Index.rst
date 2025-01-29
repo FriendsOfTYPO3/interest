@@ -158,11 +158,7 @@ All are subclasses of :php:`FriendsOfTYPO3\Interest\DataHandling\Operation\Abstr
 
 .. php:class:: AbstractConstructiveRecordOperation
 
-.. php:currentnamespace:: FriendsOfTYPO3\Interest\DataHandling\Operation
-
 .. php:class:: CreateRecordOperation
-
-.. php:currentnamespace:: FriendsOfTYPO3\Interest\DataHandling\Operation
 
 .. php:class:: UpdateRecordOperation
 
@@ -364,8 +360,6 @@ All are subclasses of :php:`FriendsOfTYPO3\Interest\DataHandling\Operation\Abstr
          $this->setDataForDataHandler($data);
 
       :returntype: void
-
-.. php:currentnamespace:: FriendsOfTYPO3\Interest\DataHandling\Operation
 
 .. php:class:: DeleteRecordOperation
 
