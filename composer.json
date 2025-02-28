@@ -10,9 +10,16 @@
 	"authors": [
 		{
 			"name": "Pixelant",
-			"email": "info@pixelant.net",
-			"homepage": "https://www.pixelant.net",
+			"role": "Former developer"
+		},
+		{
+			"name": "Mathias Bolt Lesniak",
+			"email": "git@mabolek.dev",
 			"role": "Developer"
+		},
+		{
+			"name": "Contributors",
+			"homepage": "https://github.com/FriendsOfTYPO3/interest/graphs/contributors"
 		}
 	],
 	"require": {
@@ -78,11 +85,6 @@
 	"extra": {
 		"branch-alias": {
 			"dev-master": "0.0.x-dev"
-		},
-		"patches": {
-			"localheinz/diff": {
-				"fix: deprecation implicit nullable PHP 8.4": "https://patch-diff.githubusercontent.com/raw/localheinz/diff/pull/72.patch"
-			}
 		},
 		"typo3/cms": {
 			"app-dir": ".Build",
