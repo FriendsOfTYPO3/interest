@@ -43,7 +43,7 @@ class InsertTranslationFields implements RecordOperationEventHandlerInterface
         $baseLanguageRemoteId = $mappingRepository->removeAspectsFromRemoteId($recordOperation->getRemoteId());
 
         $recordOperation->setDataFieldForDataHandler(
-            TcaUtility::getLanguageField($recordOperation->getTable()),
+            $recordOperation->getRecordRepresentation()->getSchema()->getRawConfiguration()['languageField'],
             // @extensionScannerIgnoreLine
             $recordOperation->getLanguage()->getLanguageId()
         );

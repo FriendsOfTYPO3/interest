@@ -12,6 +12,11 @@ use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
 use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Cache\Frontend\PhpFrontend;
+use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
+use TYPO3\CMS\Core\Schema\FieldTypeFactory;
+use TYPO3\CMS\Core\Schema\RelationMapBuilder;
+use TYPO3\CMS\Core\Schema\TcaSchemaFactory;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -127,10 +132,26 @@ class InsertTranslationFieldsTest extends UnitTestCase
     #[Test]
     #[DataProvider('provideDataForInsertsCorrectTranslationFields')]
     public function insertsCorrectTranslationFields(
-        callable $configureTca,
+        array $tca,
         array $setDataFieldForDataHandlerExpects
     ): void {
-        $configureTca();
+        $cacheMock = $this->createMock(PhpFrontend::class);
+        $cacheMock->method('has')->with(self::isType('string'))->willReturn(false);
+        $schemaFactory = new TcaSchemaFactory(
+            new RelationMapBuilder($this->createMock(FlexFormTools::class)),
+            new FieldTypeFactory(),
+            '',
+            $cacheMock
+        );
+
+        $schemaFactory->load(
+            [
+                'tablename' => [
+                    'ctrl' => $tca,
+                ]
+            ],
+            true
+        );
 
         $mockLanguage = $this->createMock(SiteLanguage::class);
 
@@ -188,35 +209,29 @@ class InsertTranslationFieldsTest extends UnitTestCase
     {
         return [
             [
-                function () {
-                    $GLOBALS['TCA']['tablename']['ctrl'] = [
-                        'languageField' => 'languageField1',
-                    ];
-                },
+                [
+                    'languageField' => 'languageField1',
+                ],
                 [
                     ['languageField1', 12],
                 ],
             ],
             [
-                function () {
-                    $GLOBALS['TCA']['tablename']['ctrl'] = [
-                        'languageField' => 'languageField2',
-                        'transOrigPointerField' => 'transOrigPointerField2',
-                    ];
-                },
+                [
+                    'languageField' => 'languageField2',
+                    'transOrigPointerField' => 'transOrigPointerField2',
+                ],
                 [
                     ['languageField2', 12],
                     ['transOrigPointerField2', 'baseLanguageRemoteId'],
                 ],
             ],
             [
-                function () {
-                    $GLOBALS['TCA']['tablename']['ctrl'] = [
-                        'languageField' => 'languageField3',
-                        'transOrigPointerField' => 'transOrigPointerField3',
-                        'translationSource' => 'translationSource3',
-                    ];
-                },
+                [
+                    'languageField' => 'languageField3',
+                    'transOrigPointerField' => 'transOrigPointerField3',
+                    'translationSource' => 'translationSource3',
+                ],
                 [
                     ['languageField3', 12],
                     ['transOrigPointerField3', 'baseLanguageRemoteId'],
