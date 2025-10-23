@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FriendsOfTYPO3\Interest\Hook;
 
 use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
+use FriendsOfTYPO3\Interest\Utility\DatabaseUtility;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -33,7 +34,7 @@ class ProcessCmdmap
         $pasteUpdate,
         $pasteDatamap
     ): void {
-        if ($command === 'delete' && $dataHandler->hasDeletedRecord($table, $id)) {
+        if ($command === 'delete' && DatabaseUtility::getRecord($table, $id) === null) {
             /** @var RemoteIdMappingRepository $mappingRepository */
             $mappingRepository = GeneralUtility::makeInstance(RemoteIdMappingRepository::class);
 
