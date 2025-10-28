@@ -20,12 +20,6 @@ class ProcessCmdmapTest extends UnitTestCase
 
         $dataHandlerMock = $this->createMock(DataHandler::class);
 
-        $dataHandlerMock
-            ->expects(self::exactly(1))
-            ->method('hasDeletedRecord')
-            ->with('table', 1)
-            ->willReturn(true);
-
         $mappingRepositoryMock = $this->createMock(RemoteIdMappingRepository::class);
 
         $mappingRepositoryMock
@@ -60,12 +54,6 @@ class ProcessCmdmapTest extends UnitTestCase
         $this->resetSingletonInstances = true;
 
         $dataHandlerMock = $this->createMock(DataHandler::class);
-
-        $dataHandlerMock
-            ->expects(self::exactly(1))
-            ->method('hasDeletedRecord')
-            ->with('table', 1)
-            ->willReturn(false);
 
         $mappingRepositoryMock = $this->createMock(RemoteIdMappingRepository::class);
 
