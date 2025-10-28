@@ -42,14 +42,17 @@ class ReNamespaceDeferredOperationsUpdateWizard extends AbstractUpdateWizard imp
             ->from(DeferredRecordOperationRepository::TABLE_NAME)
             ->executeQuery();
 
+        $oldRecordRepresentationFqcn = 'Pixelant\\Interest\\Domain\\Model\\Dto\\RecordRepresentation';
+        $oldRecordInstanceIdentifierFqcn = 'Pixelant\\Interest\\Domain\\Model\\Dto\\RecordInstanceIdentifier';
+
         class_alias(
             RecordRepresentation::class,
-            'Pixelant\\Interest\\Domain\\Model\\Dto\\RecordRepresentation'
+            $oldRecordRepresentationFqcn
         );
 
         class_alias(
             RecordInstanceIdentifier::class,
-            'Pixelant\\Interest\\Domain\\Model\\Dto\\RecordInstanceIdentifier'
+            $oldRecordInstanceIdentifierFqcn
         );
 
         $recordCount = 0;
@@ -60,7 +63,19 @@ class ReNamespaceDeferredOperationsUpdateWizard extends AbstractUpdateWizard imp
 
             // Using @unserialize here to catch deprecation errors.
             // phpcs:ignore
-            $updatedRow['arguments'] = serialize(@unserialize($row['arguments']));
+            $unserialized = unserialize($row['arguments'], ['allowed_classes' => [
+                RecordRepresentation::class,
+                RecordInstanceIdentifier::class,
+                $oldRecordRepresentationFqcn,
+                $oldRecordInstanceIdentifierFqcn,
+            ]]);
+
+            // Handle earlier format where metadata was not included.
+            if (is_object($unserialized)) {
+                $unserialized = [$unserialized, []];
+            }
+
+            $updatedRow['arguments'] = serialize($unserialized);
 
             $updatedRow['class'] = str_replace('Pixelant\\Interest\\', 'FriendsOfTYPO3\\Interest\\', $row['class']);
 
