@@ -6,6 +6,8 @@ namespace FriendsOfTYPO3\Interest\Domain\Repository;
 
 use Doctrine\DBAL\Result;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
+use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
 use FriendsOfTYPO3\Interest\Domain\Repository\Exception\InvalidQueryResultException;
 use TYPO3\CMS\Core\Database\Connection;
 
@@ -70,7 +72,10 @@ class DeferredRecordOperationRepository extends AbstractRepository
         foreach ($rows as &$row) {
             $row['_hash'] = md5($row['dependent_remote_id'] . $row['class'] . $row['arguments']);
 
-            $row['arguments'] = unserialize($row['arguments']);
+            $row['arguments'] = unserialize($row['arguments'], ['allowed_classes' => [
+                RecordRepresentation::class,
+                RecordInstanceIdentifier::class,
+            ]]);
         }
 
         return $rows;
