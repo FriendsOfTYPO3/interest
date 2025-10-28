@@ -34,7 +34,7 @@ class ProcessCmdmap
         $pasteUpdate,
         $pasteDatamap
     ): void {
-        if ($command === 'delete' && DatabaseUtility::getRecord($table, $id) === null) {
+        if ($command === 'delete' && !$this->recordExists($table, $id)) {
             /** @var RemoteIdMappingRepository $mappingRepository */
             $mappingRepository = GeneralUtility::makeInstance(RemoteIdMappingRepository::class);
 
@@ -44,5 +44,21 @@ class ProcessCmdmap
                 $mappingRepository->remove($remoteId);
             }
         }
+    }
+
+    /**
+     * Checks if a record exists, also returning false if a delete field is set.
+     */
+    public function recordExists(string $table, int $uid): bool
+    {
+        $row = DatabaseUtility::getRecord($table, $uid);
+
+        $deleteField = $GLOBALS['TCA'][$table]['ctrl']['delete'] ?? null;
+
+        if ($row === null || $deleteField === null || $row[$deleteField] === 1) {
+            return false;
+        }
+
+        return true;
     }
 }

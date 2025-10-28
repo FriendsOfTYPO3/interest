@@ -35,9 +35,17 @@ class ProcessCmdmapTest extends UnitTestCase
 
         GeneralUtility::setSingletonInstance(RemoteIdMappingRepository::class, $mappingRepositoryMock);
 
-        $subject = new ProcessCmdmap();
+        $subjectPartialMock = $this->getMockBuilder(ProcessCmdmap::class)
+            ->onlyMethods(['recordExists'])
+            ->getMock();
 
-        $subject->processCmdmap_postProcess(
+        $subjectPartialMock
+            ->expects(self::exactly(1))
+            ->method('recordExists')
+            ->with('table', 1)
+            ->willReturn(false);
+
+        $subjectPartialMock->processCmdmap_postProcess(
             'delete',
             'table',
             1,
@@ -68,9 +76,17 @@ class ProcessCmdmapTest extends UnitTestCase
 
         GeneralUtility::setSingletonInstance(RemoteIdMappingRepository::class, $mappingRepositoryMock);
 
-        $subject = new ProcessCmdmap();
+        $subjectPartialMock = $this->getMockBuilder(ProcessCmdmap::class)
+            ->onlyMethods(['recordExists'])
+            ->getMock();
 
-        $subject->processCmdmap_postProcess(
+        $subjectPartialMock
+            ->expects(self::exactly(1))
+            ->method('recordExists')
+            ->with('table', 1)
+            ->willReturn(true);
+
+        $subjectPartialMock->processCmdmap_postProcess(
             'delete',
             'table',
             1,
