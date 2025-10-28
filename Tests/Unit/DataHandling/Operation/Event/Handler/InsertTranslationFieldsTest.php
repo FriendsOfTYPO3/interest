@@ -12,11 +12,8 @@ use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
 use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Core\Cache\Frontend\PhpFrontend;
-use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
-use TYPO3\CMS\Core\Schema\FieldTypeFactory;
-use TYPO3\CMS\Core\Schema\RelationMapBuilder;
-use TYPO3\CMS\Core\Schema\TcaSchemaFactory;
+use TYPO3\CMS\Core\Schema\Capability\LanguageAwareSchemaCapability;
+use TYPO3\CMS\Core\Schema\TcaSchema;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -131,33 +128,20 @@ class InsertTranslationFieldsTest extends UnitTestCase
 
     #[Test]
     #[DataProvider('provideDataForInsertsCorrectTranslationFields')]
-    public function insertsCorrectTranslationFields(
-        array $tca,
-        array $setDataFieldForDataHandlerExpects
-    ): void {
-        $cacheMock = $this->createMock(PhpFrontend::class);
-        $cacheMock->method('has')->with(self::isType('string'))->willReturn(false);
-        $schemaFactory = new TcaSchemaFactory(
-            new RelationMapBuilder($this->createMock(FlexFormTools::class)),
-            new FieldTypeFactory(),
-            '',
-            $cacheMock
-        );
-
-        $schemaFactory->load(
-            [
-                'tablename' => [
-                    'ctrl' => $tca,
-                ]
-            ],
-            true
-        );
-
+    public function insertsCorrectTranslationFields(array $setDataFieldForDataHandlerExpects): void {
         $mockLanguage = $this->createMock(SiteLanguage::class);
 
         $mockLanguage
             ->method('getLanguageId')
             ->willReturn(12);
+
+        $mockLanguageAwareSchemaCapability = $this->createMock(LanguageAwareSchemaCapability::class);
+
+        $mockSchema = $this->createMock(TcaSchema::class);
+
+        $mockSchema->isLanguageAware()->willReturn(true);
+
+        $mockSchema->getCapability()->willReturn($mockLanguageAwareSchemaCapability);
 
         $mockMappingRepository = $this->createMock(RemoteIdMappingRepository::class);
 
@@ -176,7 +160,7 @@ class InsertTranslationFieldsTest extends UnitTestCase
 
             $mockOperation
                 ->method('getTable')
-                ->willReturn('tablename');
+                ->willReturn('tt_content');
 
             $mockOperation
                 ->expects(self::exactly(count($setDataFieldForDataHandlerExpects)))
@@ -210,32 +194,20 @@ class InsertTranslationFieldsTest extends UnitTestCase
         return [
             [
                 [
-                    'languageField' => 'languageField1',
-                ],
-                [
-                    ['languageField1', 12],
+                    ['sys_language_uid', 12],
                 ],
             ],
             [
                 [
-                    'languageField' => 'languageField2',
-                    'transOrigPointerField' => 'transOrigPointerField2',
-                ],
-                [
-                    ['languageField2', 12],
-                    ['transOrigPointerField2', 'baseLanguageRemoteId'],
+                    ['sys_language_uid', 12],
+                    ['l18n_parent', 'baseLanguageRemoteId'],
                 ],
             ],
             [
                 [
-                    'languageField' => 'languageField3',
-                    'transOrigPointerField' => 'transOrigPointerField3',
-                    'translationSource' => 'translationSource3',
-                ],
-                [
-                    ['languageField3', 12],
-                    ['transOrigPointerField3', 'baseLanguageRemoteId'],
-                    ['translationSource3', 'baseLanguageRemoteId'],
+                    ['sys_language_uid', 12],
+                    ['l18n_parent', 'baseLanguageRemoteId'],
+                    ['l10n_source', 'baseLanguageRemoteId'],
                 ],
             ],
         ];

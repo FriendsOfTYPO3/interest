@@ -8,6 +8,7 @@ use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\AbstractRecordOperation
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
 use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use FriendsOfTYPO3\Interest\Utility\TcaUtility;
+use TYPO3\CMS\Core\Schema\Capability\TcaSchemaCapability;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -23,6 +24,14 @@ class InsertTranslationFields implements RecordOperationEventHandlerInterface
     {
         $recordOperation = $event->getRecordOperation();
 
+        $recordSchema = $recordOperation->getRecordRepresentation()->getSchema();
+
+        if (!$recordSchema->hasCapability(TcaSchemaCapability::Language)) {
+            return;
+        }
+
+        $languageCapability = $recordSchema->getCapability(TcaSchemaCapability::Language);
+
         if (
             // @extensionScannerIgnoreLine
             $recordOperation->getLanguage() === null
@@ -32,8 +41,7 @@ class InsertTranslationFields implements RecordOperationEventHandlerInterface
                 // @extensionScannerIgnoreLine
                 && $recordOperation->getLanguage()->getLanguageId() === 0
             )
-            || !$recordOperation->getRecordRepresentation()->getSchema()->isLanguageAware()
-            || $recordOperation->isDataFieldSet(TcaUtility::getLanguageField($recordOperation->getTable()))
+            || $recordOperation->isDataFieldSet($languageCapability->getLanguageField()->getName())
         ) {
             return;
         }
@@ -43,27 +51,28 @@ class InsertTranslationFields implements RecordOperationEventHandlerInterface
         $baseLanguageRemoteId = $mappingRepository->removeAspectsFromRemoteId($recordOperation->getRemoteId());
 
         $recordOperation->setDataFieldForDataHandler(
-            $recordOperation->getRecordRepresentation()->getSchema()->getRawConfiguration()['languageField'],
+            $languageCapability->getLanguageField()->getName(),
             // @extensionScannerIgnoreLine
             $recordOperation->getLanguage()->getLanguageId()
         );
 
-        $transOrigPointerField = TcaUtility::getTransOrigPointerField($recordOperation->getTable());
+        $transOriginPointerField = $languageCapability->getTranslationOriginPointerField()->getName();
 
         if (
-            ($transOrigPointerField ?? '') !== ''
-            && !$recordOperation->isDataFieldSet($transOrigPointerField)
+            ($transOriginPointerField ?? '') !== ''
+            && !$recordOperation->isDataFieldSet($transOriginPointerField)
         ) {
-            $recordOperation->setDataFieldForDataHandler($transOrigPointerField, $baseLanguageRemoteId);
+            $recordOperation->setDataFieldForDataHandler($transOriginPointerField, $baseLanguageRemoteId);
         }
 
-        $translationSourceField = TcaUtility::getTranslationSourceField($recordOperation->getTable());
-
-        if (
-            ($translationSourceField ?? '') !== ''
-            && !$recordOperation->isDataFieldSet($translationSourceField)
+         if (
+            $languageCapability->hasTranslationSourceField()
+            && !$recordOperation->isDataFieldSet($languageCapability->getTranslationSourceField()->getName())
         ) {
-            $recordOperation->setDataFieldForDataHandler($translationSourceField, $baseLanguageRemoteId);
+            $recordOperation->setDataFieldForDataHandler(
+                $languageCapability->getTranslationSourceField()->getName(),
+                $baseLanguageRemoteId
+            );
         }
     }
 }
