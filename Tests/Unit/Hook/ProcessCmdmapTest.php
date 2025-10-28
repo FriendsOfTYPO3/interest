@@ -20,12 +20,6 @@ class ProcessCmdmapTest extends UnitTestCase
 
         $dataHandlerMock = $this->createMock(DataHandler::class);
 
-        $dataHandlerMock
-            ->expects(self::exactly(1))
-            ->method('hasDeletedRecord')
-            ->with('table', 1)
-            ->willReturn(true);
-
         $mappingRepositoryMock = $this->createMock(RemoteIdMappingRepository::class);
 
         $mappingRepositoryMock
@@ -41,9 +35,17 @@ class ProcessCmdmapTest extends UnitTestCase
 
         GeneralUtility::setSingletonInstance(RemoteIdMappingRepository::class, $mappingRepositoryMock);
 
-        $subject = new ProcessCmdmap();
+        $subjectPartialMock = $this->getMockBuilder(ProcessCmdmap::class)
+            ->onlyMethods(['recordExists'])
+            ->getMock();
 
-        $subject->processCmdmap_postProcess(
+        $subjectPartialMock
+            ->expects(self::exactly(1))
+            ->method('recordExists')
+            ->with('table', 1)
+            ->willReturn(false);
+
+        $subjectPartialMock->processCmdmap_postProcess(
             'delete',
             'table',
             1,
@@ -61,12 +63,6 @@ class ProcessCmdmapTest extends UnitTestCase
 
         $dataHandlerMock = $this->createMock(DataHandler::class);
 
-        $dataHandlerMock
-            ->expects(self::exactly(1))
-            ->method('hasDeletedRecord')
-            ->with('table', 1)
-            ->willReturn(false);
-
         $mappingRepositoryMock = $this->createMock(RemoteIdMappingRepository::class);
 
         $mappingRepositoryMock
@@ -80,9 +76,17 @@ class ProcessCmdmapTest extends UnitTestCase
 
         GeneralUtility::setSingletonInstance(RemoteIdMappingRepository::class, $mappingRepositoryMock);
 
-        $subject = new ProcessCmdmap();
+        $subjectPartialMock = $this->getMockBuilder(ProcessCmdmap::class)
+            ->onlyMethods(['recordExists'])
+            ->getMock();
 
-        $subject->processCmdmap_postProcess(
+        $subjectPartialMock
+            ->expects(self::exactly(1))
+            ->method('recordExists')
+            ->with('table', 1)
+            ->willReturn(true);
+
+        $subjectPartialMock->processCmdmap_postProcess(
             'delete',
             'table',
             1,
