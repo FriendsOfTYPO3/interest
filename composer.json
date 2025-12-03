@@ -10,9 +10,16 @@
 	"authors": [
 		{
 			"name": "Pixelant",
-			"email": "info@pixelant.net",
-			"homepage": "https://www.pixelant.net",
+			"role": "Former developer"
+		},
+		{
+			"name": "Mathias Bolt Lesniak",
+			"email": "git@mabolek.dev",
 			"role": "Developer"
+		},
+		{
+			"name": "Contributors",
+			"homepage": "https://github.com/FriendsOfTYPO3/interest/graphs/contributors"
 		}
 	],
 	"require": {
