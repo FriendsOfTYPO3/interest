@@ -6,7 +6,6 @@ namespace Pixelant\Interest\Command;
 
 use Pixelant\Interest\Domain\Repository\RemoteIdMappingRepository;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
