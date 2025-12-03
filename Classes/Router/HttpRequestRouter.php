@@ -7,14 +7,11 @@ namespace Pixelant\Interest\Router;
 use Pixelant\Interest\Authentication\HttpBackendUserAuthenticationForTypo3v11;
 use Pixelant\Interest\Authentication\HttpBackendUserAuthenticationForTypo3v12;
 use Pixelant\Interest\DataHandling\Operation\Exception\AbstractException;
-use Pixelant\Interest\Domain\Repository\TokenRepository;
 use Pixelant\Interest\RequestHandler\AuthenticateRequestHandler;
 use Pixelant\Interest\RequestHandler\CreateOrUpdateRequestHandler;
 use Pixelant\Interest\RequestHandler\CreateRequestHandler;
 use Pixelant\Interest\RequestHandler\DeleteRequestHandler;
 use Pixelant\Interest\RequestHandler\Exception\AbstractRequestHandlerException;
-use Pixelant\Interest\RequestHandler\Exception\InvalidArgumentException;
-use Pixelant\Interest\RequestHandler\Exception\UnauthorizedAccessException;
 use Pixelant\Interest\RequestHandler\ExceptionConverter\OperationToRequestHandlerExceptionConverter;
 use Pixelant\Interest\RequestHandler\UpdateRequestHandler;
 use Pixelant\Interest\Router\Event\HttpRequestRouterHandleByEvent;
@@ -77,8 +74,6 @@ class HttpRequestRouter
                 )->handle();
             }
 
-            self::authenticateBearerToken($request);
-
             return self::handleByMethod($request, $entryPointParts);
         } catch (AbstractRequestHandlerException $requestHandlerException) {
             return GeneralUtility::makeInstance(
@@ -106,43 +101,6 @@ class HttpRequestRouter
                 500
             );
         }
-    }
-
-    /**
-     * Authenticates a token provided in the request.
-     *
-     * @param ServerRequestInterface $request
-     * @throws UnauthorizedAccessException
-     * @throws InvalidArgumentException
-     */
-    protected static function authenticateBearerToken(ServerRequestInterface $request): void
-    {
-        $authorizationHeader = $request->getHeader('authorization')[0]
-            ?? $request->getHeader('redirect_http_authorization')[0]
-            ?? '';
-
-        [$scheme, $token] = GeneralUtility::trimExplode(' ', $authorizationHeader, true);
-
-        if (is_string($scheme) && strtolower($scheme) === 'bearer') {
-            $backendUserId = GeneralUtility::makeInstance(TokenRepository::class)
-                ->findBackendUserIdByToken($token);
-
-            if ($backendUserId === 0) {
-                throw new UnauthorizedAccessException(
-                    'Invalid or expired bearer token.',
-                    $request
-                );
-            }
-
-            $GLOBALS['BE_USER']->authenticate($backendUserId);
-
-            return;
-        }
-
-        throw new InvalidArgumentException(
-            'Unknown authorization scheme "' . $scheme . '".',
-            $request
-        );
     }
 
     /**
