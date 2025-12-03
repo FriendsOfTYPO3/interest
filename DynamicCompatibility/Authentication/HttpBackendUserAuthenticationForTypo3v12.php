@@ -19,4 +19,9 @@ class HttpBackendUserAuthenticationForTypo3v12 extends AbstractHttpBackendUserAu
     {
         return $this->internalGetLoginFormData($request);
     }
+    
+    public function checkAuthentication(ServerRequestInterface $request)
+    {
+        $this->checkAuthenticationImplementation($request);
+    }
 }

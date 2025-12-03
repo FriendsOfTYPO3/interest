@@ -35,7 +35,7 @@ abstract class AbstractHttpBackendUserAuthentication extends BackendUserAuthenti
         return $this->user['uid'] ?? 0;
     }
 
-    public function checkAuthentication(ServerRequestInterface $request)
+    protected function checkAuthenticationImplementation(ServerRequestInterface $request)
     {
         $this->authenticateBearerToken($request);
 
