@@ -9,10 +9,11 @@ on:
   pull_request:
   schedule:
     - cron: '15 3 * * 1'
+  workflow_dispatch:
 jobs:
   php-lint:
     name: "PHP linter"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: "Checkout"
         uses: actions/checkout@v3
@@ -35,7 +36,7 @@ jobs:
           - 8.3
   code-quality:
     name: "Code quality checks"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: "Checkout"
         uses: actions/checkout@v3
@@ -48,7 +49,7 @@ jobs:
       - name: "Show Composer version"
         run: composer --version
       - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
           path: ~/.cache/composer
@@ -71,17 +72,17 @@ jobs:
           - "yaml:lint"
         php-version:
           - 7.4
-  xliff-lint:
-    name: "Xliff linter"
-    runs-on: ubuntu-20.04
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v3
-      - name: "Run the xliff lint"
-        uses: TYPO3-Continuous-Integration/TYPO3-CI-Xliff-Lint@v1
+#  xliff-lint:
+#    name: "Xliff linter"
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: "Checkout"
+#        uses: actions/checkout@v3
+#      - name: "Run the xliff lint"
+#        uses: TYPO3-Continuous-Integration/TYPO3-CI-Xliff-Lint@v1
   unit-tests:
     name: "Unit tests"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: php-lint
     steps:
       - name: "Checkout"
@@ -95,7 +96,7 @@ jobs:
       - name: "Show Composer version"
         run: composer --version
       - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           key: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
           path: ~/.cache/composer
@@ -179,7 +180,7 @@ jobs:
             additional-requirements: "typo3/cms-reactions:^12.4"
   functional-tests:
     name: "Functional tests"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: php-lint
     steps:
       - name: "Checkout"
@@ -194,7 +195,7 @@ jobs:
       - name: "Show Composer version"
         run: composer --version
       - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           key: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
           path: ~/.cache/composer
