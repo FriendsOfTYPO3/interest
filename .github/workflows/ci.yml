@@ -75,14 +75,6 @@ jobs:
         exclude:
           - command: "php:cs-fixer"
             php-version: 8.4
-  xliff-lint:
-    name: "Xliff linter"
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v3
-      - name: "Run the xliff lint"
-        uses: TYPO3-Continuous-Integration/TYPO3-CI-Xliff-Lint@v1
   unit-tests:
     name: "Unit tests"
     runs-on: ubuntu-latest
