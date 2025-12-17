@@ -72,9 +72,7 @@ jobs:
           - 8.2
           - 8.3
           - 8.4
-        exclude:
-          - command: "php:cs-fixer"
-            php-version: 8.4
+          - 8.5
   unit-tests:
     name: "Unit tests"
     runs-on: ubuntu-latest
@@ -138,6 +136,12 @@ jobs:
             php-version: 8.4
             composer-dependencies: lowest
           - typo3-version: ^13.4
+            php-version: 8.5
+            composer-dependencies: highest
+          - typo3-version: ^13.4
+            php-version: 8.5
+            composer-dependencies: lowest
+          - typo3-version: ^13.4
             php-version: 8.2
             composer-dependencies: highest
             additional-requirements: "typo3/cms-reactions:^13.4"
@@ -159,6 +163,14 @@ jobs:
             additional-requirements: "typo3/cms-reactions:^13.4"
           - typo3-version: ^13.4
             php-version: 8.4
+            composer-dependencies: lowest
+            additional-requirements: "typo3/cms-reactions:^13.4"
+          - typo3-version: ^13.4
+            php-version: 8.5
+            composer-dependencies: highest
+            additional-requirements: "typo3/cms-reactions:^13.4"
+          - typo3-version: ^13.4
+            php-version: 8.5
             composer-dependencies: lowest
             additional-requirements: "typo3/cms-reactions:^13.4"
   functional-tests:
@@ -232,6 +244,12 @@ jobs:
             php-version: 8.4
             composer-dependencies: lowest
           - typo3-version: ^13.4
+            php-version: 8.5
+            composer-dependencies: highest
+          - typo3-version: ^13.4
+            php-version: 8.5
+            composer-dependencies: lowest
+          - typo3-version: ^13.4
             php-version: 8.2
             composer-dependencies: highest
             additional-requirements: "typo3/cms-reactions:^13.4"
@@ -253,5 +271,13 @@ jobs:
             additional-requirements: "typo3/cms-reactions:^13.4"
           - typo3-version: ^13.4
             php-version: 8.4
+            composer-dependencies: lowest
+            additional-requirements: "typo3/cms-reactions:^13.4"
+          - typo3-version: ^13.4
+            php-version: 8.5
+            composer-dependencies: highest
+            additional-requirements: "typo3/cms-reactions:^13.4"
+          - typo3-version: ^13.4
+            php-version: 8.5
             composer-dependencies: lowest
             additional-requirements: "typo3/cms-reactions:^13.4"
