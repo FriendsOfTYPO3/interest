@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Command;
 
-use Doctrine\DBAL\Driver\Result;
+use Doctrine\DBAL\Result;
 use FriendsOfTYPO3\Interest\DataHandling\DataHandler;
 use FriendsOfTYPO3\Interest\Domain\Repository\Exception\InvalidQueryResultException;
 use FriendsOfTYPO3\Interest\Domain\Repository\PendingRelationsRepository;
