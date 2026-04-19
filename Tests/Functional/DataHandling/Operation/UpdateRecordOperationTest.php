@@ -19,6 +19,8 @@ use PHPUnit\Framework\Attributes\Test;
 
 class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
+    protected array $testExtensionsToLoad = ['friendsoftypo3/interest', 'typo3/cms-install'];
+
     #[Test]
     public function updatingPageChangesFields(): void
     {
