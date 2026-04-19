@@ -29,7 +29,7 @@ class DeferredRecordOperationRepository extends AbstractRepository
             ->insert(self::TABLE_NAME)->values([
                 'crdate' => time(),
                 'dependent_remote_id' => $dependentRemoteId,
-                'class' => get_class($operation),
+                'class' => $operation::class,
                 'arguments' => serialize([$operation->getRecordRepresentation(), $operation->getMetaData()]),
             ])
             ->executeStatement();

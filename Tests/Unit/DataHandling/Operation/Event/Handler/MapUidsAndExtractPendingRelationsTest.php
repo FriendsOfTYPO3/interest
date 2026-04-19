@@ -91,15 +91,11 @@ class MapUidsAndExtractPendingRelationsTest extends UnitTestCase
 
         $mappingRepository
             ->method('exists')
-            ->willReturnCallback(function ($remoteId) use ($remoteIdExistence) {
-                return $remoteIdExistence[$remoteId];
-            });
+            ->willReturnCallback(fn($remoteId) => $remoteIdExistence[$remoteId]);
 
         $mappingRepository
             ->method('get')
-            ->willReturnCallback(function ($remoteId) use ($remoteIdToUid) {
-                return $remoteIdToUid[$remoteId];
-            });
+            ->willReturnCallback(fn($remoteId) => $remoteIdToUid[$remoteId]);
 
         GeneralUtility::setSingletonInstance(RemoteIdMappingRepository::class, $mappingRepository);
 

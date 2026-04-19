@@ -151,7 +151,7 @@ class FixSortingPositionsOnRemoteRelationRecords implements RecordOperationEvent
             $fieldConfiguration['type'] === 'group'
             && (
                 $fieldConfiguration['allowed'] === '*'
-                || str_contains($fieldConfiguration['foreign_table'], ',')
+                || str_contains((string) $fieldConfiguration['foreign_table'], ',')
             )
         );
 
@@ -200,7 +200,7 @@ class FixSortingPositionsOnRemoteRelationRecords implements RecordOperationEvent
             if (
                 $fieldConfiguration['type'] === 'group'
                 && $fieldConfiguration['allowed'] !== '*'
-                && !str_contains($fieldConfiguration['allowed'], ',')
+                && !str_contains((string) $fieldConfiguration['allowed'], ',')
             ) {
                 $foreignTable = $fieldConfiguration['allowed'];
             }
@@ -263,9 +263,7 @@ class FixSortingPositionsOnRemoteRelationRecords implements RecordOperationEvent
             }
 
             $flattenedRelations = array_map(
-                function (int $item) use ($relationTable) {
-                    return $relationTable . '_' . $item;
-                },
+                fn(int $item) => $relationTable . '_' . $item,
                 array_column($relation, 'uid')
             );
         }

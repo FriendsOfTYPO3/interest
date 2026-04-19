@@ -230,7 +230,7 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         foreach ($remoteIdentifiers as $remoteIdentifier) {
             try {
                 $createSysFile((string)$remoteIdentifier);
-            } catch (StopRecordOperationException $e) {
+            } catch (StopRecordOperationException) {
                 continue;
             }
 

@@ -17,6 +17,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class RequestMiddleware implements MiddlewareInterface
 {
+    public function __construct(private readonly EventDispatcher $eventDispatcher, private readonly ConnectionPool $connectionPool)
+    {
+    }
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         /** @var ExtensionConfiguration $extensionConfiguration */
@@ -30,14 +33,14 @@ class RequestMiddleware implements MiddlewareInterface
         if (
             str_starts_with(
                 $request->getRequestTarget(),
-                '/' . trim($entryPoint, '/') . '/'
+                '/' . trim((string) $entryPoint, '/') . '/'
             )
         ) {
             $executionStart = round(microtime(true) * 1000);
 
             $response = HttpRequestRouter::route($request);
 
-            $response = GeneralUtility::makeInstance(EventDispatcher::class)->dispatch(
+            $response = $this->eventDispatcher->dispatch(
                 new HttpResponseEvent($response)
             )->getResponse();
 
@@ -73,7 +76,7 @@ class RequestMiddleware implements MiddlewareInterface
 
             if ($configuration->isDatabaseLoggingEnabled()) {
                 /** @var QueryBuilder $queryBuilder */
-                $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+                $queryBuilder = $this->connectionPool
                     ->getQueryBuilderForTable('tx_interest_log');
 
                 $queryBuilder

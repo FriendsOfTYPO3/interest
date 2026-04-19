@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Tests\Functional\Updates;
 
+use FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation;
 use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
 use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
 use FriendsOfTYPO3\Interest\Domain\Repository\DeferredRecordOperationRepository;
@@ -40,7 +41,7 @@ class ReNamespaceDeferredOperationsUpdateWizardTest extends FunctionalTestCase
     }
 
     #[Test]
-    public function deferredOperationsAreReNamespacedAndUpdatedTest()
+    public function deferredOperationsAreReNamespacedAndUpdatedTest(): void
     {
         $updateWizard = GeneralUtility::makeInstance(ReNamespaceDeferredOperationsUpdateWizard::class);
 
@@ -55,7 +56,7 @@ class ReNamespaceDeferredOperationsUpdateWizardTest extends FunctionalTestCase
         $deferredOperations = $deferredOperationsRepository->get('dependentRemoteId');
 
         foreach ($deferredOperations as $row) {
-            $row['class'] = 'FriendsOfTYPO3\Interest\DataHandling\Operation\CreateRecordOperation';
+            $row['class'] = CreateRecordOperation::class;
 
             $arguments = $row['arguments'];
 

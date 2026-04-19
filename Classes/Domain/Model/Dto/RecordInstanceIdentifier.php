@@ -16,25 +16,13 @@ use TYPO3\CMS\Core\Utility\StringUtility;
 /**
  * DTO to handle record instance identifier.
  */
-class RecordInstanceIdentifier
+class RecordInstanceIdentifier implements \Stringable
 {
     public const LANGUAGE_ASPECT_PREFIX = '|||L';
 
     protected string $table;
 
-    /**
-     * The original remote id from construct.
-     */
-    protected string $remoteId;
-
-    /**
-     * Language to use for processing.
-     */
-    protected ?string $language;
-
     private ?SiteLanguage $siteLanguage = null;
-
-    protected ?string $workspace;
 
     protected ?int $uid = null;
 
@@ -53,14 +41,11 @@ class RecordInstanceIdentifier
      */
     public function __construct(
         string $table,
-        string $remoteId,
-        string $language = '',
-        string $workspace = ''
+        protected string $remoteId,
+        protected ?string $language = '',
+        protected ?string $workspace = ''
     ) {
         $this->table = strtolower($table);
-        $this->remoteId = $remoteId;
-        $this->language = $language;
-        $this->workspace = $workspace;
     }
 
     /**
@@ -76,7 +61,7 @@ class RecordInstanceIdentifier
      */
     public function getLanguage(): ?SiteLanguage
     {
-        if ($this->siteLanguage === null) {
+        if (!$this->siteLanguage instanceof SiteLanguage) {
             $this->siteLanguage = $this->resolveLanguage($this->language);
         }
 
@@ -151,7 +136,7 @@ class RecordInstanceIdentifier
         if (
             !TcaUtility::isLocalizable($this->getTable())
             // @extensionScannerIgnoreLine
-            || $this->getLanguage() === null
+            || !$this->getLanguage() instanceof SiteLanguage
             // @extensionScannerIgnoreLine
             || $this->getLanguage()->getLanguageId() === 0
         ) {
@@ -221,17 +206,17 @@ class RecordInstanceIdentifier
             $hreflang = $siteLanguage->getHreflang();
 
             // In case this is the short form, e.g. "nb" or "sv", not "nb-NO" or "sv-SE".
-            if (strlen($language) === 2) {
-                $hreflang = substr($hreflang, 0, 2);
+            if (strlen((string) $language) === 2) {
+                $hreflang = substr((string) $hreflang, 0, 2);
             }
 
-            if (strtolower($hreflang) === strtolower($language)) {
+            if (strtolower((string) $hreflang) === strtolower((string) $language)) {
                 return $siteLanguage;
             }
         }
 
         throw new InvalidArgumentException(
-            'The language "' . $language . '" is not defined in this TYPO3 instance.'
+            'The language "' . $language . '" is not defined in this TYPO3 instance.', 7236301623
         );
     }
 
@@ -298,11 +283,7 @@ class RecordInstanceIdentifier
 
         // @phpstan-ignore foreach.nonIterable
         foreach ($object as $key => $value) {
-            if ($value instanceof \__PHP_Incomplete_Class) {
-                $result[$key] = $this->extractIncompleteClassObject($value);
-            } else {
-                $result[$key] = $value;
-            }
+            $result[$key] = $value instanceof \__PHP_Incomplete_Class ? $this->extractIncompleteClassObject($value) : $value;
         }
 
         return $result;

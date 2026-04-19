@@ -64,7 +64,7 @@ class ProcessDeferredRecordOperations implements RecordOperationEventHandlerInte
 
                     $deferredOperation();
                     // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
-                } catch (BeforeRecordOperationEventException $exception) {
+                } catch (BeforeRecordOperationEventException) {
                     // Ignore stop exception when processing deferred operations.
                 }
             }

@@ -11,11 +11,8 @@ use Psr\Http\Message\ResponseInterface;
  */
 class HttpResponseEvent
 {
-    protected ResponseInterface $response;
-
-    public function __construct(ResponseInterface $response)
+    public function __construct(protected ResponseInterface $response)
     {
-        $this->response = $response;
     }
 
     /**

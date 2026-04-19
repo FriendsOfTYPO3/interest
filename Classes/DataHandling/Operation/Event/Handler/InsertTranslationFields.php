@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler;
 
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
 use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
@@ -25,10 +26,10 @@ class InsertTranslationFields implements RecordOperationEventHandlerInterface
 
         if (
             // @extensionScannerIgnoreLine
-            $recordOperation->getLanguage() === null
+            !$recordOperation->getLanguage() instanceof SiteLanguage
             || (
                 // @extensionScannerIgnoreLine
-                $recordOperation->getLanguage() !== null
+                $recordOperation->getLanguage() instanceof SiteLanguage
                 // @extensionScannerIgnoreLine
                 && $recordOperation->getLanguage()->getLanguageId() === 0
             )

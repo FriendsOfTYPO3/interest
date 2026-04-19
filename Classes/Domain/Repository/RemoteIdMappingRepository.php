@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Domain\Repository;
 
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use Doctrine\DBAL\Result;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\IdentityConflictException;
@@ -135,7 +136,7 @@ class RemoteIdMappingRepository extends AbstractRepository
                 'remote_id' => $remoteId,
                 'table' => $tableName,
                 'uid_local' => $uid,
-                'record_hash' => $recordOperation === null ? '' : $recordOperation->getHash(),
+                'record_hash' => $recordOperation instanceof AbstractRecordOperation ? $recordOperation->getHash() : '',
                 'crdate' => time(),
                 'tstamp' => time(),
                 'touched' => time(),
@@ -417,7 +418,7 @@ class RemoteIdMappingRepository extends AbstractRepository
             return [];
         }
 
-        $metaData = json_decode($metaData, true) ?? [];
+        $metaData = json_decode((string) $metaData, true) ?? [];
 
         if (!is_array($metaData)) {
             return [];
@@ -450,11 +451,7 @@ class RemoteIdMappingRepository extends AbstractRepository
     {
         $recordExists = $this->exists($remoteId);
 
-        if (!$recordExists) {
-            $metaData = self::$unmappedMetaDataEntries[$remoteId] ?? [];
-        } else {
-            $metaData = $this->getMetaData($remoteId);
-        }
+        $metaData = $recordExists ? $this->getMetaData($remoteId) : self::$unmappedMetaDataEntries[$remoteId] ?? [];
 
         $metaData[$key] = $value;
 
@@ -490,10 +487,10 @@ class RemoteIdMappingRepository extends AbstractRepository
     public function addAspectsToRemoteId(string $remoteId, ?AbstractRecordOperation $recordOperation): string
     {
         if (
-            $recordOperation === null
+            !$recordOperation instanceof AbstractRecordOperation
             || !TcaUtility::isLocalizable($recordOperation->getTable())
             // @extensionScannerIgnoreLine
-            || $recordOperation->getLanguage() === null
+            || !$recordOperation->getLanguage() instanceof SiteLanguage
             // @extensionScannerIgnoreLine
             || $recordOperation->getLanguage()->getLanguageId() === 0
         ) {

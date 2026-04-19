@@ -14,33 +14,14 @@ use FriendsOfTYPO3\Interest\DataHandling\Operation\Message\RequiredMessageInterf
  */
 class RelationFieldValueMessage implements RequiredMessageInterface
 {
-    private string $table;
-
-    private string $field;
-
-    /**
-     * @var int|string
-     */
-    private $id;
-
-    /**
-     * @var int|string|float|array
-     */
-    private $value;
-
     /**
      * @param string $table
      * @param string $field
      * @param int|string $id
      * @param int|string|float|array $value
      */
-    public function __construct(string $table, string $field, $id, $value)
+    public function __construct(private readonly string $table, private readonly string $field, private $id, private $value)
     {
-        $this->table = $table;
-        $this->field = $field;
-        // @extensionScannerIgnoreLine
-        $this->id = $id;
-        $this->value = $value;
     }
 
     /**

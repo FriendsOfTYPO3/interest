@@ -41,7 +41,7 @@ abstract class AbstractRecordOperation
      *
      * @var SiteLanguage|null
      */
-    protected ?SiteLanguage $language;
+    protected ?SiteLanguage $language = null;
 
     /**
      * @var ContentObjectRenderer
@@ -142,7 +142,7 @@ abstract class AbstractRecordOperation
         foreach (array_filter(array_values($this->messageQueue)) as $messageObject) {
             if ($messageObject instanceof RequiredMessageInterface) {
                 throw new IncompleteOperationException(
-                    'All required messages were not retrieved. Found: ' . get_class($messageObject),
+                    'All required messages were not retrieved. Found: ' . $messageObject::class,
                     1695260831
                 );
             }
@@ -161,7 +161,7 @@ abstract class AbstractRecordOperation
             $this->getTable(),
             $this->getRemoteId(),
             // @extensionScannerIgnoreLine
-            $this->getLanguage() === null ? null : $this->getLanguage()->getHreflang(),
+            $this->getLanguage() instanceof SiteLanguage ? $this->getLanguage()->getHreflang() : null,
             null,
             $this->getMetaData(),
         ];
@@ -411,16 +411,16 @@ abstract class AbstractRecordOperation
     public function dispatchMessage(MessageInterface $message): void
     {
         if ($message instanceof ReplacesPreviousMessageInterface) {
-            $this->messageQueue[get_class($message)] = [$message];
+            $this->messageQueue[$message::class] = [$message];
 
             return;
         }
 
-        if (!isset($this->messageQueue[get_class($message)])) {
-            $this->messageQueue[get_class($message)] = [];
+        if (!isset($this->messageQueue[$message::class])) {
+            $this->messageQueue[$message::class] = [];
         }
 
-        $this->messageQueue[get_class($message)][] = $message;
+        $this->messageQueue[$message::class][] = $message;
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler;
 
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\InvalidArgumentException;
@@ -20,7 +21,7 @@ class SetContentObjectRendererLanguage implements RecordOperationEventHandlerInt
     public function __invoke(AbstractRecordOperationEvent $event): void
     {
         // @extensionScannerIgnoreLine
-        if ($event->getRecordOperation()->getLanguage() === null) {
+        if (!$event->getRecordOperation()->getLanguage() instanceof SiteLanguage) {
             // @extensionScannerIgnoreLine
             $event->getRecordOperation()->getContentObjectRenderer()->data['language'] = null;
         } else {

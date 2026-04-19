@@ -54,14 +54,10 @@ class HttpRequestRouter
             )
         );
 
-        if ($entryPoint === '') {
-            $entryPointParts = [];
-        } else {
-            $entryPointParts = explode(
-                '/',
-                $entryPoint
-            );
-        }
+        $entryPointParts = $entryPoint === '' ? [] : explode(
+            '/',
+            $entryPoint
+        );
 
         try {
             if (($entryPointParts[0] ?? null) === 'authenticate') {
@@ -112,8 +108,7 @@ class HttpRequestRouter
 
         Bootstrap::loadExtTables();
 
-        $GLOBALS['LANG'] = $GLOBALS['LANG']
-            ?? GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
+        $GLOBALS['LANG'] ??= GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
     }
 
     /**
@@ -130,13 +125,10 @@ class HttpRequestRouter
             $trace = array_merge(
                 $trace,
                 [
-                    $currentThrowable->getMessage() => array_merge([
-                        [
-                            'file' => $currentThrowable->getFile(),
-                            'line' => $currentThrowable->getLine(),
-                        ],
-                        $throwable->getTrace(),
-                    ]),
+                    $currentThrowable->getMessage() => [[
+                        'file' => $currentThrowable->getFile(),
+                        'line' => $currentThrowable->getLine(),
+                    ], $throwable->getTrace()],
                 ]
             );
 

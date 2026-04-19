@@ -22,7 +22,7 @@ class CreateOrUpdateRequestHandler extends AbstractRecordRequestHandler
                 $recordRepresentation,
                 $this->metaData
             ))();
-        } catch (NotFoundException $exception) {
+        } catch (NotFoundException) {
             (new CreateRecordOperation(
                 $recordRepresentation,
                 $this->metaData

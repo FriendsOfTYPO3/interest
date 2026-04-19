@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 $ll = 'LLL:EXT:interest/Resources/Private/Language/locallang_db.xlf:';
 
 $tca = [
@@ -18,7 +20,6 @@ $tca = [
             '0' => 'ext-interest-mapping',
             '1' => 'ext-interest-mapping-manual',
         ],
-        'searchFields' => 'remote_id',
     ],
     'columns' => [
         'pid' => [
@@ -30,13 +31,13 @@ $tca = [
         'crdate' => [
             'label' => 'crdate',
             'config' => [
-                'type' => 'datetime',
+                'type' => 'datetime', 'searchable' => false,
             ],
         ],
         'tstamp' => [
             'label' => 'tstamp',
             'config' => [
-                'type' => 'datetime',
+                'type' => 'datetime', 'searchable' => false,
             ],
         ],
         'remote_id' => [
@@ -57,6 +58,7 @@ $tca = [
                 'size' => 30,
                 'eval' => 'alphanum_x,trim',
                 'required' => true,
+                'searchable' => false,
             ],
         ],
         'uid_local' => [

@@ -29,7 +29,7 @@ class ConfigurationProvider implements SingletonInterface
         try {
             $this->extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class)
                 ->get('interest');
-        } catch (ExtensionConfigurationExtensionNotConfiguredException $exception) {
+        } catch (ExtensionConfigurationExtensionNotConfiguredException) {
             $this->extensionConfiguration = [];
         }
 
