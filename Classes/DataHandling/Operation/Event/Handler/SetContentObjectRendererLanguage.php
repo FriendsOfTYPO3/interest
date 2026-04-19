@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler;
 
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\InvalidArgumentException;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 /**
  * Sets the language in the ContentObjectRenderer's data array.

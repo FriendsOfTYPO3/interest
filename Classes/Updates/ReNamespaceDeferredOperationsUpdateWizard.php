@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Updates;
 
-use TYPO3\CMS\Core\Attribute\UpgradeWizard;
-use TYPO3\CMS\Core\Upgrades\ChattyInterface;
 use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordInstanceIdentifier;
 use FriendsOfTYPO3\Interest\Domain\Model\Dto\RecordRepresentation;
 use FriendsOfTYPO3\Interest\Domain\Repository\DeferredRecordOperationRepository;
 use Symfony\Component\Console\Output\OutputInterface;
+use TYPO3\CMS\Core\Attribute\UpgradeWizard;
+use TYPO3\CMS\Core\Upgrades\ChattyInterface;
 
 #[UpgradeWizard('interest_reNamespaceDeferredOperations')]
 class ReNamespaceDeferredOperationsUpdateWizard extends AbstractUpdateWizard implements ChattyInterface

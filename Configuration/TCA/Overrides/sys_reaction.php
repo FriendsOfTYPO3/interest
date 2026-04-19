@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use FriendsOfTYPO3\Interest\Reaction\CreateUpdateDeleteReaction;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 defined('TYPO3') || die();
 

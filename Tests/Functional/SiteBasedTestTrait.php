@@ -132,7 +132,6 @@ trait SiteBasedTestTrait
             'fallbackType' => $fallbackType ?? ($fallbackIdentifiers === [] ? 'strict' : 'fallback'),
         ];
 
-
         if ($fallbackIdentifiers !== []) {
             $fallbackIds = array_map(
                 function (string $fallbackIdentifier) {

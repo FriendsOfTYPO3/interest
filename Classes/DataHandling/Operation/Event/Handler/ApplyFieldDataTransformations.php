@@ -29,7 +29,7 @@ class ApplyFieldDataTransformations implements RecordOperationEventHandlerInterf
         foreach (
             $settings['transformations.'][$recordOperation->getTable() . '.'] ?? [] as $fieldName => $configuration
         ) {
-            $fieldName = substr((string) $fieldName, 0, -1);
+            $fieldName = substr((string)$fieldName, 0, -1);
 
             $recordOperation->setDataFieldForDataHandler(
                 $fieldName,

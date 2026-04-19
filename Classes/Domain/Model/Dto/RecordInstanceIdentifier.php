@@ -206,17 +206,18 @@ class RecordInstanceIdentifier implements \Stringable
             $hreflang = $siteLanguage->getHreflang();
 
             // In case this is the short form, e.g. "nb" or "sv", not "nb-NO" or "sv-SE".
-            if (strlen((string) $language) === 2) {
-                $hreflang = substr((string) $hreflang, 0, 2);
+            if (strlen((string)$language) === 2) {
+                $hreflang = substr((string)$hreflang, 0, 2);
             }
 
-            if (strtolower((string) $hreflang) === strtolower((string) $language)) {
+            if (strtolower((string)$hreflang) === strtolower((string)$language)) {
                 return $siteLanguage;
             }
         }
 
         throw new InvalidArgumentException(
-            'The language "' . $language . '" is not defined in this TYPO3 instance.', 7236301623
+            'The language "' . $language . '" is not defined in this TYPO3 instance.',
+            7236301623
         );
     }
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Domain\Repository;
 
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use Doctrine\DBAL\Result;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\AbstractRecordOperation;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Exception\IdentityConflictException;
@@ -12,6 +11,7 @@ use FriendsOfTYPO3\Interest\Domain\Repository\Exception\InvalidQueryResultExcept
 use FriendsOfTYPO3\Interest\Utility\DatabaseUtility;
 use FriendsOfTYPO3\Interest\Utility\TcaUtility;
 use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
 /**
  * Repository for interaction with the database table tx_interest_remote_id_mapping.
@@ -418,7 +418,7 @@ class RemoteIdMappingRepository extends AbstractRepository
             return [];
         }
 
-        $metaData = json_decode((string) $metaData, true) ?? [];
+        $metaData = json_decode((string)$metaData, true) ?? [];
 
         if (!is_array($metaData)) {
             return [];

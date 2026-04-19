@@ -104,7 +104,7 @@ abstract class AbstractRecordCommandController extends Command
     protected function parseData(InputInterface $input)
     {
         if ($input->getOption('data') !== null) {
-            $data = json_decode((string) $input->getOption('data'), true);
+            $data = json_decode((string)$input->getOption('data'), true);
 
             if (!is_array($data)) {
                 throw new InvalidOptionException(
@@ -129,7 +129,7 @@ abstract class AbstractRecordCommandController extends Command
     protected function parseMetaData(InputInterface $input)
     {
         if ($input->getOption('metaData') !== null) {
-            $data = json_decode((string) $input->getOption('metaData'), true);
+            $data = json_decode((string)$input->getOption('metaData'), true);
 
             if (!is_array($data)) {
                 throw new InvalidOptionException(

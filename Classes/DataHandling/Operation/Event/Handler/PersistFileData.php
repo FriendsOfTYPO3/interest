@@ -402,7 +402,7 @@ class PersistFileData implements RecordOperationEventHandlerInterface
 
         $fileInfo = PathUtility::pathinfo($fileName);
 
-        $originalExtension = (string) ($fileInfo['extension'] ?? '') !== '' ? '.' . $fileInfo['extension'] : '';
+        $originalExtension = (string)($fileInfo['extension'] ?? '') !== '' ? '.' . $fileInfo['extension'] : '';
 
         $fileName = $fileInfo['filename'];
 

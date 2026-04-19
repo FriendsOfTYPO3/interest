@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Updates;
 
-use TYPO3\CMS\Core\Attribute\UpgradeWizard;
-use TYPO3\CMS\Core\Upgrades\ChattyInterface;
 use FriendsOfTYPO3\Interest\Domain\Repository\PendingRelationsRepository;
 use Symfony\Component\Console\Output\OutputInterface;
+use TYPO3\CMS\Core\Attribute\UpgradeWizard;
+use TYPO3\CMS\Core\Upgrades\ChattyInterface;
 
 #[UpgradeWizard('interest_removePendingRelationsWithEmptyRemoteId')]
 class RemovePendingRelationsWithEmptyRemoteIdUpdateWizard extends AbstractUpdateWizard implements ChattyInterface

@@ -33,7 +33,7 @@ class RequestMiddleware implements MiddlewareInterface
         if (
             str_starts_with(
                 $request->getRequestTarget(),
-                '/' . trim((string) $entryPoint, '/') . '/'
+                '/' . trim((string)$entryPoint, '/') . '/'
             )
         ) {
             $executionStart = round(microtime(true) * 1000);

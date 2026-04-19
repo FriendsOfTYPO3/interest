@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\Updates;
 
-use TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 abstract class AbstractUpdateWizard implements UpgradeWizardInterface

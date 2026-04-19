@@ -68,11 +68,11 @@ class CreateUpdateDeleteReaction implements ReactionInterface
         }
 
         $event = $this->eventDispatcher->dispatch(
-            new HttpRequestRouterHandleByEvent((clone $request)->withMethod(strtoupper((string) $payload['method'])), [])
+            new HttpRequestRouterHandleByEvent((clone $request)->withMethod(strtoupper((string)$payload['method'])), [])
         );
 
         try {
-            switch (strtoupper((string) $event->getRequest()->getMethod())) {
+            switch (strtoupper((string)$event->getRequest()->getMethod())) {
                 case 'POST':
                     return GeneralUtility::makeInstance(
                         CreateRequestHandler::class,

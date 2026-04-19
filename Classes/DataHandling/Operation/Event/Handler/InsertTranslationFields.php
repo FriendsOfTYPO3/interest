@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Interest\DataHandling\Operation\Event\Handler;
 
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\AbstractRecordOperationEvent;
 use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationEventHandlerInterface;
 use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use FriendsOfTYPO3\Interest\Utility\TcaUtility;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**

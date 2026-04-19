@@ -97,7 +97,7 @@ class RelationSortingAsMetaData implements RecordOperationEventHandlerInterface
             }
 
             if (!is_array($sortingIntent)) {
-                $sortingIntent = explode(',', (string) $sortingIntent);
+                $sortingIntent = explode(',', (string)$sortingIntent);
             }
 
             $sortingIntents[$fieldName] = $sortingIntent;
