@@ -20,8 +20,12 @@ class RelationFieldValueMessage implements RequiredMessageInterface
      * @param int|string $id
      * @param int|string|float|array $value
      */
-    public function __construct(private readonly string $table, private readonly string $field, private $id, private $value)
-    {
+    public function __construct(
+        private readonly string $table,
+        private readonly string $field,
+        private $id,
+        private $value
+    ) {
     }
 
     /**

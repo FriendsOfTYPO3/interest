@@ -59,7 +59,7 @@ class PendingRelationsRepository extends AbstractRepository
     {
         $this->removeLocal($table, $field, $uid);
 
-        $remoteIds = array_filter($remoteIds);
+        $remoteIds = array_filter($remoteIds, 'empty');
 
         foreach ($remoteIds as $remoteId) {
             $this->setSingle($table, $field, $uid, $remoteId);

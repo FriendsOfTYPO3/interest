@@ -109,7 +109,10 @@ class RegisterValuesOfRelationFieldsTest extends UnitTestCase
                 fn(AbstractRecordOperation $recordOperation, string $field): array => match ($field) {
                     'fieldWithForeignField' => ['foreign_field' => 'foreignFieldName'],
                     'fieldWithoutForeignField' => [],
-                    default => throw new \UnexpectedValueException('Unexpected field name in test: ' . $field, 6646435601),
+                    default => throw new \UnexpectedValueException(
+                        'Unexpected field name in test: ' . $field,
+                        6646435601
+                    ),
                 }
             );
 

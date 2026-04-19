@@ -17,8 +17,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class RequestMiddleware implements MiddlewareInterface
 {
-    public function __construct(private readonly EventDispatcher $eventDispatcher, private readonly ConnectionPool $connectionPool)
-    {
+    public function __construct(
+        private readonly EventDispatcher $eventDispatcher,
+        private readonly ConnectionPool $connectionPool
+    ) {
     }
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

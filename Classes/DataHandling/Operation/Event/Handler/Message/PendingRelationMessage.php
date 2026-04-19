@@ -21,8 +21,11 @@ class PendingRelationMessage implements RequiredMessageInterface
      * @param string $field
      * @param string[] $remoteIds The pointing remote IDs in a pending relation to record $uid in $field of $table.
      */
-    public function __construct(private readonly string $table, private readonly string $field, private readonly array $remoteIds)
-    {
+    public function __construct(
+        private readonly string $table,
+        private readonly string $field,
+        private readonly array $remoteIds
+    ) {
     }
 
     /**

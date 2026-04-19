@@ -284,7 +284,9 @@ class RecordInstanceIdentifier implements \Stringable
 
         // @phpstan-ignore foreach.nonIterable
         foreach ($object as $key => $value) {
-            $result[$key] = $value instanceof \__PHP_Incomplete_Class ? $this->extractIncompleteClassObject($value) : $value;
+            $result[$key] = $value instanceof \__PHP_Incomplete_Class
+                ? $this->extractIncompleteClassObject($value)
+                : $value;
         }
 
         return $result;

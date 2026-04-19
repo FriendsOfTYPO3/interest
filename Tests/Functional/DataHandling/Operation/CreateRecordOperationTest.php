@@ -22,9 +22,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
-    public function __construct(private readonly ResourceFactory $resourceFactory)
-    {
-    }
     #[Test]
     public function creatingPageResultsInPageRecord(): void
     {
@@ -388,7 +385,7 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
 
         $fileId = $mappingRepository->get('EmptyFile');
 
-        $file = $this->resourceFactory->getFileObject($fileId);
+        $file = GeneralUtility::makeInstance(ResourceFactory::class)->getFileObject($fileId);
 
         self::assertIsObject($file, 'File object was found');
         // @extensionScannerIgnoreLine

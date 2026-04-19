@@ -42,8 +42,10 @@ class PersistFileData implements RecordOperationEventHandlerInterface
     protected RemoteIdMappingRepository $mappingRepository;
 
     protected AbstractRecordOperationEvent $event;
-    public function __construct(protected ResourceFactory $resourceFactory, private readonly OnlineMediaHelperRegistry $onlineMediaHelperRegistry)
-    {
+    public function __construct(
+        protected ResourceFactory $resourceFactory,
+        private readonly OnlineMediaHelperRegistry $onlineMediaHelperRegistry
+    ) {
     }
 
     /**
@@ -231,7 +233,11 @@ class PersistFileData implements RecordOperationEventHandlerInterface
             $response = $httpClient->request($url, 'GET', ['headers' => $headers]);
         } catch (ClientException $exception) {
             if ($exception->getCode() >= 400) {
-                throw new NotFoundException('Request failed. URL: "' . $url . '" Message: "' . $exception->getMessage() . '"', 1634667759711, $exception);
+                throw new NotFoundException(
+                    'Request failed. URL: "' . $url . '" Message: "' . $exception->getMessage() . '"',
+                    1634667759711,
+                    $exception
+                );
             }
 
             throw $exception;
@@ -402,7 +408,7 @@ class PersistFileData implements RecordOperationEventHandlerInterface
 
         $fileInfo = PathUtility::pathinfo($fileName);
 
-        $originalExtension = (string)($fileInfo['extension'] ?? '') !== '' ? '.' . $fileInfo['extension'] : '';
+        $originalExtension = ($fileInfo['extension'] ?? '') !== '' ? '.' . $fileInfo['extension'] : '';
 
         $fileName = $fileInfo['filename'];
 

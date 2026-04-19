@@ -57,8 +57,8 @@
 	"suggest": {
 		"typo3/cms-reactions": "To use TYPO3 reactions as entry point and for authentication."
 	},
-	"prefer-stable": true,
 	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"autoload": {
 		"psr-4": {
 			"FriendsOfTYPO3\\Interest\\": "Classes/"

@@ -221,7 +221,15 @@ class TcaUtility
         ?string $remoteId = null
     ): bool {
         if (
-            in_array($field, ['pid', self::getTranslationSourceField($table), self::getTransOrigPointerField($table)], true)
+            in_array(
+                $field,
+                [
+                    'pid',
+                    self::getTranslationSourceField($table),
+                    self::getTransOrigPointerField($table),
+                ],
+                true
+            )
         ) {
             return true;
         }
