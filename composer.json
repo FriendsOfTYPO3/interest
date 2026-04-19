@@ -90,6 +90,10 @@
 		"typo3/cms": {
 			"app-dir": ".Build",
 			"extension-key": "interest",
+			"Package": {
+				"providesPackages": {}
+			},
+			"version": "4.0.0-dev",
 			"web-dir": ".Build/public"
 		}
 	},
