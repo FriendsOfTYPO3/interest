@@ -50,7 +50,6 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         parent::tearDown();
     }
 
-
     #[Test]
     public function returnEarlyIfDeleteOperation(): void
     {

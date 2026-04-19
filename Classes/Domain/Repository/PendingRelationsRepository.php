@@ -59,7 +59,8 @@ class PendingRelationsRepository extends AbstractRepository
     {
         $this->removeLocal($table, $field, $uid);
 
-        $remoteIds = array_filter($remoteIds, fn (string $remoteId) => empty($remoteId) === false);
+        // @phpstan-ignore empty.notAllowed
+        $remoteIds = array_filter($remoteIds, fn(string $remoteId) => empty($remoteId) === false);
 
         foreach ($remoteIds as $remoteId) {
             $this->setSingle($table, $field, $uid, $remoteId);

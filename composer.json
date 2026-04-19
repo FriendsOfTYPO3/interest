@@ -88,11 +88,11 @@
 			"dev-master": "0.0.x-dev"
 		},
 		"typo3/cms": {
-			"app-dir": ".Build",
-			"extension-key": "interest",
 			"Package": {
 				"providesPackages": {}
 			},
+			"app-dir": ".Build",
+			"extension-key": "interest",
 			"version": "4.0.0-dev",
 			"web-dir": ".Build/public"
 		}
