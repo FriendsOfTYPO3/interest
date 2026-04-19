@@ -29,7 +29,7 @@ class RemoveEmptyValuesFromRelationFieldArrays implements RecordOperationEventHa
 
             $event->getRecordOperation()->setDataFieldForDataHandler(
                 $fieldName,
-                array_values(array_filter($fieldValue, 'empty'))
+                array_values(array_filter($fieldValue, fn ($value) => empty($value) === false))
             );
         }
     }
