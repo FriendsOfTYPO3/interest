@@ -27,10 +27,10 @@
 		"ext-json": "*",
 		"ext-pdo": "*",
 		"symfony/console": "^7.1.4",
-		"typo3/cms-core": "dev-main",
-		"typo3/cms-fluid": "dev-main",
-		"typo3/cms-frontend": "dev-main",
-		"typo3/cms-install": "dev-main"
+		"typo3/cms-core": "^14.3",
+		"typo3/cms-fluid": "^14.3",
+		"typo3/cms-frontend": "^14.3",
+		"typo3/cms-install": "^14.3"
 	},
 	"require-dev": {
 		"ergebnis/composer-normalize": "^2.44",
