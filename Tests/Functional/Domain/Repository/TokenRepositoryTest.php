@@ -6,7 +6,6 @@ namespace FriendsOfTYPO3\Interest\Tests\Functional\Domain\Repository;
 
 use FriendsOfTYPO3\Interest\Domain\Repository\TokenRepository;
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class TokenRepositoryTest extends FunctionalTestCase
