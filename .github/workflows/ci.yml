@@ -100,7 +100,7 @@ jobs:
           TYPO3: "${{ matrix.typo3-version }}"
           ADDITIONAL_REQUIREMENTS: "${{ matrix.additional-requirements }}"
         run: |
-          composer require --no-ansi --no-interaction --no-progress --no-install typo3/minimal:"$TYPO3" $ADDITIONAL_REQUIREMENTS
+          composer require --no-ansi --no-interaction --no-progress --no-install --dev typo3/minimal:"$TYPO3" $ADDITIONAL_REQUIREMENTS
           composer show
       - name: "Install lowest dependencies with composer"
         if: "matrix.composer-dependencies == 'lowest'"
@@ -206,12 +206,12 @@ jobs:
       - name: "Install lowest dependencies with composer"
         if: "matrix.composer-dependencies == 'lowest'"
         run: |
-          composer update --no-ansi --no-interaction --no-progress --with-dependencies --prefer-lowest typo3/minimal:"$TYPO3" $ADDITIONAL_REQUIREMENTS
+          composer update --no-ansi --no-interaction --no-progress --with-dependencies --prefer-lowest --dev typo3/minimal:"$TYPO3" $ADDITIONAL_REQUIREMENTS
           composer show
       - name: "Install highest dependencies with composer"
         if: "matrix.composer-dependencies == 'highest'"
         run: |
-          composer update --no-ansi --no-interaction --no-progress --with-dependencies typo3/minimal:"$TYPO3" $ADDITIONAL_REQUIREMENTS
+          composer update --no-ansi --no-interaction --no-progress --with-dependencies --dev typo3/minimal:"$TYPO3" $ADDITIONAL_REQUIREMENTS
           composer show
       - name: "Start MySQL"
         run: "sudo /etc/init.d/mysql start"
