@@ -23,13 +23,15 @@ EXT:interest
    import, data, cli, rest, datahandler
 
 :Copyright:
-   2023 by Pixelant.net
+   * 2023–2024 by Pixelant.net
+   * 2025– by Mathias Bolt Lesniak
 
 :Authors:
    * Pixelant.net
+   * Mathias Bolt Lesniak
 
 :Email:
-   info@pixelant.net
+   git@mabolek.dev
 
 :License:
    This extension is published under the
