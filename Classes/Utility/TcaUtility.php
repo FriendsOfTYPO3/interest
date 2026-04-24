@@ -221,9 +221,15 @@ class TcaUtility
         ?string $remoteId = null
     ): bool {
         if (
-            $field === 'pid'
-            || $field === self::getTranslationSourceField($table)
-            || $field === self::getTransOrigPointerField($table)
+            in_array(
+                $field,
+                [
+                    'pid',
+                    self::getTranslationSourceField($table),
+                    self::getTransOrigPointerField($table),
+                ],
+                true
+            )
         ) {
             return true;
         }
@@ -273,7 +279,7 @@ class TcaUtility
             $tcaConfiguration['type'] === 'group'
             && (
                 $tcaConfiguration['allowed'] === '*'
-                || str_contains(',', $tcaConfiguration['allowed'])
+                || str_contains(',', (string)$tcaConfiguration['allowed'])
             )
         ) {
             $prefixWithTable = true;

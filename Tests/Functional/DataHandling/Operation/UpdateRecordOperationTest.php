@@ -19,6 +19,8 @@ use PHPUnit\Framework\Attributes\Test;
 
 class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
+    protected array $testExtensionsToLoad = ['friendsoftypo3/interest'];
+
     #[Test]
     public function updatingPageChangesFields(): void
     {
@@ -230,7 +232,7 @@ class UpdateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
         foreach ($remoteIdentifiers as $remoteIdentifier) {
             try {
                 $createSysFile((string)$remoteIdentifier);
-            } catch (StopRecordOperationException $e) {
+            } catch (StopRecordOperationException) {
                 continue;
             }
 

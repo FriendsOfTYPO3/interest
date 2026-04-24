@@ -17,6 +17,8 @@ use PHPUnit\Framework\Attributes\Test;
 
 class DeleteRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
+    protected array $testExtensionsToLoad = ['friendsoftypo3/interest'];
+
     #[Test]
     public function deletingPageSetsDeletedField(): void
     {

@@ -32,6 +32,7 @@ jobs:
           - 8.2
           - 8.3
           - 8.4
+          - 8.5
   code-quality:
     name: "Code quality checks"
     runs-on: ubuntu-latest
@@ -99,7 +100,7 @@ jobs:
           TYPO3: "${{ matrix.typo3-version }}"
           ADDITIONAL_REQUIREMENTS: "${{ matrix.additional-requirements }}"
         run: |
-          composer require --no-ansi --no-interaction --no-progress --no-install typo3/minimal:"$TYPO3" $ADDITIONAL_REQUIREMENTS
+          composer require --no-ansi --no-interaction --no-progress --no-install --dev typo3/minimal:"$TYPO3" $ADDITIONAL_REQUIREMENTS
           composer show
       - name: "Install lowest dependencies with composer"
         if: "matrix.composer-dependencies == 'lowest'"
@@ -117,62 +118,62 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.2
             composer-dependencies: highest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.2
             composer-dependencies: lowest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.3
             composer-dependencies: highest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.3
             composer-dependencies: lowest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.4
             composer-dependencies: highest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.4
             composer-dependencies: lowest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.5
             composer-dependencies: highest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.5
             composer-dependencies: lowest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.2
             composer-dependencies: highest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.2
             composer-dependencies: lowest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.3
             composer-dependencies: highest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.3
             composer-dependencies: lowest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.4
             composer-dependencies: highest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.4
             composer-dependencies: lowest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.5
             composer-dependencies: highest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.5
             composer-dependencies: lowest
-            additional-requirements: "typo3/cms-reactions:^13.4"
+            additional-requirements: "typo3/cms-reactions:^14.0"
   functional-tests:
     name: "Functional tests"
     runs-on: ubuntu-latest
@@ -200,17 +201,17 @@ jobs:
           TYPO3: "${{ matrix.typo3-version }}"
           ADDITIONAL_REQUIREMENTS: "${{ matrix.additional-requirements }}"
         run: |
-          composer require --no-ansi --no-interaction --no-progress --no-install typo3/minimal:"$TYPO3" $ADDITIONAL_REQUIREMENTS
+          composer require --no-ansi --no-interaction --no-progress --no-install --dev typo3/minimal:"$TYPO3" $ADDITIONAL_REQUIREMENTS
           composer show
       - name: "Install lowest dependencies with composer"
         if: "matrix.composer-dependencies == 'lowest'"
         run: |
-          composer update --no-ansi --no-interaction --no-progress --with-dependencies --prefer-lowest typo3/minimal:"$TYPO3" $ADDITIONAL_REQUIREMENTS
+          composer update --no-ansi --no-interaction --no-progress --with-dependencies --prefer-lowest typo3/minimal:"$TYPO3"
           composer show
       - name: "Install highest dependencies with composer"
         if: "matrix.composer-dependencies == 'highest'"
         run: |
-          composer update --no-ansi --no-interaction --no-progress --with-dependencies typo3/minimal:"$TYPO3" $ADDITIONAL_REQUIREMENTS
+          composer update --no-ansi --no-interaction --no-progress --with-dependencies typo3/minimal:"$TYPO3"
           composer show
       - name: "Start MySQL"
         run: "sudo /etc/init.d/mysql start"
@@ -225,59 +226,59 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.2
             composer-dependencies: highest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.2
             composer-dependencies: lowest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.3
             composer-dependencies: highest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.3
             composer-dependencies: lowest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.4
             composer-dependencies: highest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.4
             composer-dependencies: lowest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.5
             composer-dependencies: highest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.5
             composer-dependencies: lowest
-          - typo3-version: ^13.4
+          - typo3-version: ^14.0
             php-version: 8.2
             composer-dependencies: highest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.2
             composer-dependencies: lowest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.3
             composer-dependencies: highest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.3
             composer-dependencies: lowest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.4
             composer-dependencies: highest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.4
             composer-dependencies: lowest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.5
             composer-dependencies: highest
-            additional-requirements: "typo3/cms-reactions:^13.4"
-          - typo3-version: ^13.4
+            additional-requirements: "typo3/cms-reactions:^14.0"
+          - typo3-version: ^14.0
             php-version: 8.5
             composer-dependencies: lowest
-            additional-requirements: "typo3/cms-reactions:^13.4"
+            additional-requirements: "typo3/cms-reactions:^14.0"

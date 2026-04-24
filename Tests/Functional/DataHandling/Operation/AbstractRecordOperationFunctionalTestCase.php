@@ -20,11 +20,6 @@ abstract class AbstractRecordOperationFunctionalTestCase extends FunctionalTestC
         'fr' => ['id' => 3, 'title' => 'French', 'locale' => 'fr_FR.UTF-8'],
     ];
 
-    /**
-     * @var array<non-empty-string>
-     */
-    protected array $testExtensionsToLoad = ['typo3conf/ext/interest'];
-
     protected function setUp(): void
     {
         parent::setUp();

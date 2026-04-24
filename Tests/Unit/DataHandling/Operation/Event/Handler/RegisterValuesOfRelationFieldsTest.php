@@ -106,15 +106,13 @@ class RegisterValuesOfRelationFieldsTest extends UnitTestCase
             ->expects(self::exactly(2))
             ->method('getTcaFieldConfigurationAndRespectColumnOverrides')
             ->willReturnCallback(
-                function (AbstractRecordOperation $recordOperation, string $field): array {
-                    switch ($field) {
-                        case 'fieldWithForeignField':
-                            return ['foreign_field' => 'foreignFieldName'];
-                        case 'fieldWithoutForeignField':
-                            return [];
-                        default:
-                            throw new \UnexpectedValueException('Unexpected field name in test: ' . $field);
-                    }
+                fn(AbstractRecordOperation $recordOperation, string $field): array => match ($field) {
+                    'fieldWithForeignField' => ['foreign_field' => 'foreignFieldName'],
+                    'fieldWithoutForeignField' => [],
+                    default => throw new \UnexpectedValueException(
+                        'Unexpected field name in test: ' . $field,
+                        6646435601
+                    ),
                 }
             );
 

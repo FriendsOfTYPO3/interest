@@ -20,7 +20,7 @@ class GenerateRecordOperationHash implements RecordOperationEventHandlerInterfac
     public function __invoke(AbstractRecordOperationEvent $event): void
     {
         $event->getRecordOperation()->setHash(
-            md5(get_class($event->getRecordOperation()) . serialize($event->getRecordOperation()->getArguments()))
+            md5($event->getRecordOperation()::class . serialize($event->getRecordOperation()->getArguments()))
         );
     }
 }

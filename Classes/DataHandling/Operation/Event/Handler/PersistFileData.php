@@ -41,9 +41,12 @@ class PersistFileData implements RecordOperationEventHandlerInterface
 {
     protected RemoteIdMappingRepository $mappingRepository;
 
-    protected ResourceFactory $resourceFactory;
-
     protected AbstractRecordOperationEvent $event;
+    public function __construct(
+        protected ResourceFactory $resourceFactory,
+        private readonly OnlineMediaHelperRegistry $onlineMediaHelperRegistry
+    ) {
+    }
 
     /**
      * @param AbstractRecordOperationEvent $event
@@ -80,7 +83,7 @@ class PersistFileData implements RecordOperationEventHandlerInterface
             $settings['persistence.']['fileUploadFolderPath.'] ?? []
         );
 
-        $this->resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
+        $this->resourceFactory = $this->resourceFactory;
 
         $storage = GeneralUtility::makeInstance(StorageRepository::class)->findByCombinedIdentifier($storagePath);
 
@@ -89,7 +92,7 @@ class PersistFileData implements RecordOperationEventHandlerInterface
         $replaceFile = null;
 
         if (
-            get_class($this->event->getRecordOperation()) === CreateRecordOperation::class
+            $this->event->getRecordOperation()::class === CreateRecordOperation::class
             && $storage->hasFileInFolder($fileBaseName, $downloadFolder)
         ) {
             [$fileBaseName, $replaceFile] = $this->handleExistingFile(
@@ -145,7 +148,7 @@ class PersistFileData implements RecordOperationEventHandlerInterface
         Folder $downloadFolder,
         string $fileBaseName
     ): File {
-        if (get_class($this->event->getRecordOperation()) === CreateRecordOperation::class) {
+        if ($this->event->getRecordOperation()::class === CreateRecordOperation::class) {
             return $downloadFolder->createFile($fileBaseName);
         }
 
@@ -153,7 +156,7 @@ class PersistFileData implements RecordOperationEventHandlerInterface
             $file = $this->resourceFactory->getFileObject(
                 $this->mappingRepository->get($this->event->getRecordOperation()->getRemoteId())
             );
-        } catch (FileDoesNotExistException $exception) {
+        } catch (FileDoesNotExistException) {
             if ($this->mappingRepository->get($this->event->getRecordOperation()->getRemoteId()) === 0) {
                 throw new NotFoundException(
                     'The file with remote ID "' . $this->event->getRecordOperation()->getRemoteId()
@@ -232,7 +235,8 @@ class PersistFileData implements RecordOperationEventHandlerInterface
             if ($exception->getCode() >= 400) {
                 throw new NotFoundException(
                     'Request failed. URL: "' . $url . '" Message: "' . $exception->getMessage() . '"',
-                    1634667759711
+                    1634667759711,
+                    $exception
                 );
             }
 
@@ -284,7 +288,7 @@ class PersistFileData implements RecordOperationEventHandlerInterface
     ) {
         try {
             $downloadFolder = $this->resourceFactory->getFolderObjectFromCombinedIdentifier($storagePath);
-        } catch (FolderDoesNotExistException $exception) {
+        } catch (FolderDoesNotExistException) {
             [, $folderPath] = explode(':', $storagePath);
 
             $downloadFolder = $storage->createFolder($folderPath);
@@ -296,12 +300,7 @@ class PersistFileData implements RecordOperationEventHandlerInterface
         );
 
         if ($hashedSubfolders > 0) {
-            if ($fileBaseName === '') {
-                $fileNameHash = bin2hex(random_bytes($hashedSubfolders));
-            } else {
-                $fileNameHash = md5($fileBaseName);
-            }
-
+            $fileNameHash = $fileBaseName === '' ? bin2hex(random_bytes($hashedSubfolders)) : md5($fileBaseName);
             for ($i = 0; $i < $hashedSubfolders; $i++) {
                 $subfolderName = substr($fileNameHash, $i, 1);
 
@@ -328,7 +327,7 @@ class PersistFileData implements RecordOperationEventHandlerInterface
      */
     protected function getFileFromMediaUrl(string $url, Folder $downloadFolder, string $fileBaseName): ?File
     {
-        $onlineMediaHelperRegistry = GeneralUtility::makeInstance(OnlineMediaHelperRegistry::class);
+        $onlineMediaHelperRegistry = $this->onlineMediaHelperRegistry;
 
         $file = $onlineMediaHelperRegistry->transformUrlToFile(
             $url,
@@ -363,7 +362,7 @@ class PersistFileData implements RecordOperationEventHandlerInterface
         } elseif (($data['url'] ?? '') !== '') {
             $file = $this->getFileFromMediaUrl($data['url'], $downloadFolder, $fileBaseName);
 
-            if ($file === null) {
+            if (!$file instanceof File) {
                 $fileContent = $this->fetchContentFromUrl($data['url']);
             }
         } else {
@@ -371,18 +370,18 @@ class PersistFileData implements RecordOperationEventHandlerInterface
         }
 
         // @extensionScannerIgnoreLine
-        if ($fileContent === '' || ($file !== null && $file->getSize() > 0)) {
+        if ($fileContent === '' || ($file instanceof File && $file->getSize() > 0)) {
             $this->handleEmptyFile();
         }
 
-        if ($fileBaseName === '' && $file === null) {
+        if ($fileBaseName === '' && !$file instanceof File) {
             throw new InvalidFileNameException(
                 'Empty file name.',
                 1643987693168
             );
         }
 
-        if ($file === null) {
+        if (!$file instanceof File) {
             $file = $this->createFileObject($downloadFolder, $fileBaseName);
 
             $file->setContents($fileContent);
@@ -409,7 +408,7 @@ class PersistFileData implements RecordOperationEventHandlerInterface
 
         $fileInfo = PathUtility::pathinfo($fileName);
 
-        $originalExtension = strlen($fileInfo['extension'] ?? '') > 0 ? '.' . $fileInfo['extension'] : '';
+        $originalExtension = ($fileInfo['extension'] ?? '') !== '' ? '.' . $fileInfo['extension'] : '';
 
         $fileName = $fileInfo['filename'];
 

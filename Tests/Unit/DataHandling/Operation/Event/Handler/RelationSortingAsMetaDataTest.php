@@ -12,12 +12,43 @@ use FriendsOfTYPO3\Interest\DataHandling\Operation\Event\RecordOperationSetupEve
 use FriendsOfTYPO3\Interest\DataHandling\Operation\UpdateRecordOperation;
 use FriendsOfTYPO3\Interest\Domain\Repository\RemoteIdMappingRepository;
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Cache\Frontend\PhpFrontend;
+use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
+use TYPO3\CMS\Core\Schema\FieldTypeFactory;
+use TYPO3\CMS\Core\Schema\RelationMapBuilder;
+use TYPO3\CMS\Core\Schema\TcaSchemaBuilder;
+use TYPO3\CMS\Core\Schema\TcaSchemaFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class RelationSortingAsMetaDataTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
+
+    private TcaSchemaFactory $tcaSchemaFactory;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $cacheMock = $this->createMock(PhpFrontend::class);
+        $cacheMock->method('has')->with(self::isString())->willReturn(false);
+        $this->tcaSchemaFactory = new TcaSchemaFactory(
+            new TcaSchemaBuilder(
+                new RelationMapBuilder($this->createMock(FlexFormTools::class)),
+                new FieldTypeFactory(),
+            ),
+            '',
+            $cacheMock
+        );
+    }
+
+    protected function tearDown(): void
+    {
+        GeneralUtility::purgeInstances();
+
+        parent::tearDown();
+    }
 
     #[Test]
     public function returnEarlyIfDeleteOperation(): void
@@ -120,6 +151,8 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         ];
 
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
+            GeneralUtility::addInstance(TcaSchemaFactory::class, $this->tcaSchemaFactory);
+
             $mockOperation = $this->createMock($operationClass);
 
             $mockOperation
@@ -185,6 +218,11 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
         ];
 
         foreach ([CreateRecordOperation::class, UpdateRecordOperation::class] as $operationClass) {
+            GeneralUtility::addInstance(TcaSchemaFactory::class, $this->tcaSchemaFactory);
+            GeneralUtility::addInstance(TcaSchemaFactory::class, $this->tcaSchemaFactory);
+            GeneralUtility::addInstance(TcaSchemaFactory::class, $this->tcaSchemaFactory);
+            GeneralUtility::addInstance(TcaSchemaFactory::class, $this->tcaSchemaFactory);
+
             $mockRepository = $this->createMock(RemoteIdMappingRepository::class);
 
             $mockRepository
@@ -245,5 +283,7 @@ class RelationSortingAsMetaDataTest extends UnitTestCase
                 ],
             ],
         ];
+
+        $this->tcaSchemaFactory->rebuild($GLOBALS['TCA']);
     }
 }

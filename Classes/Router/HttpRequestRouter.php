@@ -17,18 +17,12 @@ use FriendsOfTYPO3\Interest\Router\Event\HttpRequestRouterHandleByEvent;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
-use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Core\Environment;
-use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
-use TYPO3\CMS\Core\Routing\PageArguments;
-use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Routes requests to the correct handler and converts exceptions to responses.
@@ -54,14 +48,10 @@ class HttpRequestRouter
             )
         );
 
-        if ($entryPoint === '') {
-            $entryPointParts = [];
-        } else {
-            $entryPointParts = explode(
-                '/',
-                $entryPoint
-            );
-        }
+        $entryPointParts = $entryPoint === '' ? [] : explode(
+            '/',
+            $entryPoint
+        );
 
         try {
             if (($entryPointParts[0] ?? null) === 'authenticate') {
@@ -108,12 +98,9 @@ class HttpRequestRouter
     {
         Bootstrap::initializeBackendUser(HttpBackendUserAuthentication::class, $request);
 
-        self::bootFrontendController($request);
-
         Bootstrap::loadExtTables();
 
-        $GLOBALS['LANG'] = $GLOBALS['LANG']
-            ?? GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
+        $GLOBALS['LANG'] ??= GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
     }
 
     /**
@@ -130,13 +117,10 @@ class HttpRequestRouter
             $trace = array_merge(
                 $trace,
                 [
-                    $currentThrowable->getMessage() => array_merge([
-                        [
-                            'file' => $currentThrowable->getFile(),
-                            'line' => $currentThrowable->getLine(),
-                        ],
-                        $throwable->getTrace(),
-                    ]),
+                    $currentThrowable->getMessage() => [[
+                        'file' => $currentThrowable->getFile(),
+                        'line' => $currentThrowable->getLine(),
+                    ], $throwable->getTrace()],
                 ]
             );
 
@@ -200,33 +184,5 @@ class HttpRequestRouter
             ],
             405
         );
-    }
-
-    /**
-     * Booting up TSFE to make TSFE->sys_page available for ResourceFactory.
-     *
-     * @param ServerRequestInterface $request
-     */
-    protected static function bootFrontendController(ServerRequestInterface $request): void
-    {
-        /** @var Site $site */
-        $site = $request->getAttribute('site', null);
-        $frontendUser = GeneralUtility::makeInstance(FrontendUserAuthentication::class);
-        $controller = GeneralUtility::makeInstance(
-            TypoScriptFrontendController::class,
-            GeneralUtility::makeInstance(Context::class),
-            $site,
-            $site->getDefaultLanguage(),
-            new PageArguments($site->getRootPageId(), '0', []),
-            $frontendUser
-        );
-        if (!isset($GLOBALS['TSFE']) || !$GLOBALS['TSFE'] instanceof TypoScriptFrontendController) {
-            $GLOBALS['TSFE'] = $controller;
-        }
-        // @extensionScannerIgnoreLine
-        if (!$GLOBALS['TSFE']->sys_page instanceof PageRepository) {
-            // @extensionScannerIgnoreLine
-            $GLOBALS['TSFE']->sys_page = GeneralUtility::makeInstance(PageRepository::class);
-        }
     }
 }

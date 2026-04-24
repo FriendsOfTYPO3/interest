@@ -11,14 +11,11 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 class TokenRepositoryTest extends FunctionalTestCase
 {
     /**
-     * @var array<non-empty-string>
-     */
-    protected array $testExtensionsToLoad = ['typo3conf/ext/interest'];
-
-    /**
      * @var TokenRepository
      */
     protected $subject;
+
+    protected array $testExtensionsToLoad = ['friendsoftypo3/interest'];
 
     protected function setUp(): void
     {

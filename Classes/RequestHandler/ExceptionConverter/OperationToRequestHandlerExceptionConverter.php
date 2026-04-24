@@ -41,8 +41,8 @@ final class OperationToRequestHandlerExceptionConverter
         AbstractException $exception,
         ServerRequestInterface $request
     ): \Throwable {
-        if (array_key_exists(get_class($exception), self::EXCEPTION_MAP)) {
-            $newExceptionFqcn = self::EXCEPTION_MAP[get_class($exception)];
+        if (array_key_exists($exception::class, self::EXCEPTION_MAP)) {
+            $newExceptionFqcn = self::EXCEPTION_MAP[$exception::class];
 
             return new $newExceptionFqcn(
                 sprintf('%s (%s)', $exception->getMessage(), $exception->getCode()),

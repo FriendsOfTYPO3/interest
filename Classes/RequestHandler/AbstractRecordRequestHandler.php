@@ -353,7 +353,7 @@ abstract class AbstractRecordRequestHandler extends AbstractRequestHandler
                                     )
                                 )
                             );
-                        } catch (StopRecordOperationException $exception) {
+                        } catch (StopRecordOperationException) {
                             continue;
                         } catch (AbstractException $exception) {
                             $exceptions[$table][$remoteId][$language][$workspace] = $exception;
@@ -379,11 +379,7 @@ abstract class AbstractRecordRequestHandler extends AbstractRequestHandler
             $body = $this->getRequest()->getBody()->getContents();
         }
 
-        if ($body === '') {
-            $parsedBody = [];
-        } else {
-            $parsedBody = json_decode($body, true, 512, JSON_THROW_ON_ERROR) ?? [];
-        }
+        $parsedBody = $body === '' ? [] : json_decode($body, true, 512, JSON_THROW_ON_ERROR) ?? [];
 
         return $parsedBody;
     }

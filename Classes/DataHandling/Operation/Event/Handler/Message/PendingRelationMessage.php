@@ -16,25 +16,16 @@ use FriendsOfTYPO3\Interest\DataHandling\Operation\Message\RequiredMessageInterf
  */
 class PendingRelationMessage implements RequiredMessageInterface
 {
-    private string $table;
-
-    private string $field;
-
-    /**
-     * @var string[]
-     */
-    private array $remoteIds;
-
     /**
      * @param string $table
      * @param string $field
      * @param string[] $remoteIds The pointing remote IDs in a pending relation to record $uid in $field of $table.
      */
-    public function __construct(string $table, string $field, array $remoteIds)
-    {
-        $this->table = $table;
-        $this->field = $field;
-        $this->remoteIds = $remoteIds;
+    public function __construct(
+        private readonly string $table,
+        private readonly string $field,
+        private readonly array $remoteIds
+    ) {
     }
 
     /**

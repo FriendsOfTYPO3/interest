@@ -6,8 +6,8 @@ namespace FriendsOfTYPO3\Interest\Updates;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 abstract class AbstractUpdateWizard implements UpgradeWizardInterface
 {

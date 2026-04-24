@@ -21,6 +21,9 @@ use TYPO3\CMS\Reactions\Reaction\ReactionInterface;
 
 class CreateUpdateDeleteReaction implements ReactionInterface
 {
+    public function __construct(private readonly EventDispatcher $eventDispatcher)
+    {
+    }
     public static function getType(): string
     {
         return 'interest-create-update-delete';
@@ -64,12 +67,12 @@ class CreateUpdateDeleteReaction implements ReactionInterface
             );
         }
 
-        $event = GeneralUtility::makeInstance(EventDispatcher::class)->dispatch(
-            new HttpRequestRouterHandleByEvent((clone $request)->withMethod(strtoupper($payload['method'])), [])
+        $event = $this->eventDispatcher->dispatch(
+            new HttpRequestRouterHandleByEvent((clone $request)->withMethod(strtoupper((string)$payload['method'])), [])
         );
 
         try {
-            switch (strtoupper($event->getRequest()->getMethod())) {
+            switch (strtoupper((string)$event->getRequest()->getMethod())) {
                 case 'POST':
                     return GeneralUtility::makeInstance(
                         CreateRequestHandler::class,

@@ -11,18 +11,12 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class HttpRequestRouterHandleByEvent
 {
-    protected ServerRequestInterface $request;
-
-    protected array $entryPointParts;
-
     /**
      * @param ServerRequestInterface $request
      * @param array $entryPointParts
      */
-    public function __construct(ServerRequestInterface $request, array $entryPointParts)
+    public function __construct(protected ServerRequestInterface $request, protected array $entryPointParts)
     {
-        $this->request = $request;
-        $this->entryPointParts = $entryPointParts;
     }
 
     /**

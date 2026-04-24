@@ -22,6 +22,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCase
 {
+    protected array $testExtensionsToLoad = ['friendsoftypo3/interest'];
+
     #[Test]
     public function creatingPageResultsInPageRecord(): void
     {
@@ -262,7 +264,7 @@ class CreateRecordOperationTest extends AbstractRecordOperationFunctionalTestCas
             foreach ($functions as $function) {
                 try {
                     $function($iteration);
-                } catch (StopRecordOperationException $e) {
+                } catch (StopRecordOperationException) {
                     continue;
                 }
             }

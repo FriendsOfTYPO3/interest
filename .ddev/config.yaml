@@ -1,10 +1,8 @@
-name: interest
+name: interest4
 type: php
 docroot: ""
 php_version: "8.2"
 webserver_type: nginx-fpm
-#router_http_port: "8081"
-#router_https_port: "4434"
 xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
@@ -15,7 +13,6 @@ mutagen_enabled: false
 hooks:
   post-start:
   - exec: composer install --no-progress
-  - exec: export PHP_IDE_CONFIG="serverName=interest.ddev.site"
 omit_containers: [ddev-ssh-agent]
 webimage_extra_packages: [parallel]
 use_dns_when_possible: true

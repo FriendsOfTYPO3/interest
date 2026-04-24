@@ -41,8 +41,8 @@ trait SiteBasedTestTrait
 {
     protected static function failIfArrayIsNotEmpty(array $items): void
     {
-        // @phpstan-ignore empty.notAllowed
-        if (empty($items)) {
+
+        if ($items === []) {
             return;
         }
 
@@ -59,12 +59,12 @@ trait SiteBasedTestTrait
         array $errorHandling = []
     ): void {
         $configuration = $site;
-        // @phpstan-ignore empty.notAllowed
-        if (!empty($languages)) {
+
+        if ($languages !== []) {
             $configuration['languages'] = $languages;
         }
-        // @phpstan-ignore empty.notAllowed
-        if (!empty($errorHandling)) {
+
+        if ($errorHandling !== []) {
             $configuration['errorHandling'] = $errorHandling;
         }
         $siteWriter = $this->get(SiteWriter::class);
@@ -128,12 +128,11 @@ trait SiteBasedTestTrait
             'base' => $base,
             'locale' => $preset['locale'],
             'flag' => $preset['iso'] ?? '',
-            // @phpstan-ignore empty.notAllowed
-            'fallbackType' => $fallbackType ?? (empty($fallbackIdentifiers) ? 'strict' : 'fallback'),
+
+            'fallbackType' => $fallbackType ?? ($fallbackIdentifiers === [] ? 'strict' : 'fallback'),
         ];
 
-        // @phpstan-ignore empty.notAllowed
-        if (!empty($fallbackIdentifiers)) {
+        if ($fallbackIdentifiers !== []) {
             $fallbackIds = array_map(
                 function (string $fallbackIdentifier) {
                     $preset = $this->resolveLanguagePreset($fallbackIdentifier);
@@ -188,7 +187,7 @@ trait SiteBasedTestTrait
         InstructionInterface $current,
         InstructionInterface $other
     ): InstructionInterface {
-        if (get_class($current) !== get_class($other)) {
+        if ($current::class !== $other::class) {
             throw new \LogicException('Cannot merge different instruction types', 1565863174);
         }
 

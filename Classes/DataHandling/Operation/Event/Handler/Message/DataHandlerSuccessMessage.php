@@ -15,14 +15,11 @@ use FriendsOfTYPO3\Interest\DataHandling\Operation\Message\ReplacesPreviousMessa
  */
 class DataHandlerSuccessMessage implements ReplacesPreviousMessageInterface
 {
-    private bool $success;
-
     /**
      * @param bool $success
      */
-    public function __construct(bool $success)
+    public function __construct(private readonly bool $success)
     {
-        $this->success = $success;
     }
 
     /**

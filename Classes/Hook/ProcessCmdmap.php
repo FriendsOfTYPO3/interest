@@ -54,11 +54,6 @@ class ProcessCmdmap
         $row = DatabaseUtility::getRecord($table, $uid);
 
         $deleteField = $GLOBALS['TCA'][$table]['ctrl']['delete'] ?? null;
-
-        if ($row === null || $deleteField === null || $row[$deleteField] === 1) {
-            return false;
-        }
-
-        return true;
+        return !($row === null || $deleteField === null || $row[$deleteField] === 1);
     }
 }

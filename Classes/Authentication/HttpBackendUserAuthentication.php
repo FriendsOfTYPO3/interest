@@ -33,7 +33,7 @@ class HttpBackendUserAuthentication extends BackendUserAuthentication
         return $this->user['uid'] ?? 0;
     }
 
-    public function checkAuthentication(ServerRequestInterface $request)
+    public function checkAuthentication(ServerRequestInterface $request): void
     {
         $this->authenticateBearerToken($request);
 
