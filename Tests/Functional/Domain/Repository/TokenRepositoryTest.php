@@ -6,6 +6,7 @@ namespace FriendsOfTYPO3\Interest\Tests\Functional\Domain\Repository;
 
 use FriendsOfTYPO3\Interest\Domain\Repository\TokenRepository;
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class TokenRepositoryTest extends FunctionalTestCase
@@ -15,7 +16,7 @@ class TokenRepositoryTest extends FunctionalTestCase
      */
     protected $subject;
 
-    protected array $testExtensionsToLoad = ['friendsoftypo3/interest', 'typo3/cms-install'];
+    protected array $testExtensionsToLoad = ['friendsoftypo3/interest'];
 
     protected function setUp(): void
     {

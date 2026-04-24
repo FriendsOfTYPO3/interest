@@ -23,7 +23,7 @@ class ReNamespaceDeferredOperationsUpdateWizardTest extends FunctionalTestCase
         'en' => ['id' => 0, 'title' => 'English', 'locale' => 'en_US.UTF-8'],
     ];
 
-    protected array $testExtensionsToLoad = ['friendsoftypo3/interest', 'typo3/cms-install'];
+    protected array $testExtensionsToLoad = ['friendsoftypo3/interest'];
 
     protected function setUp(): void
     {

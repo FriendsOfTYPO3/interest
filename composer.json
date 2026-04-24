@@ -28,9 +28,7 @@
 		"ext-pdo": "*",
 		"symfony/console": "^7.1.4",
 		"typo3/cms-core": "^14.3",
-		"typo3/cms-fluid": "^14.3",
-		"typo3/cms-frontend": "^14.3",
-		"typo3/cms-install": "^14.3"
+		"typo3/cms-frontend": "^14.3"
 	},
 	"require-dev": {
 		"ergebnis/composer-normalize": "^2.44",
@@ -48,7 +46,7 @@
 		"squizlabs/php_codesniffer": "^3.10.3",
 		"symfony/yaml": "^7.1.4",
 		"typo3/coding-standards": "^0.8.0",
-		"typo3/testing-framework": "dev-main"
+		"typo3/testing-framework": "^9.5.0"
 	},
 	"replace": {
 		"pixelant/interest": "*",
