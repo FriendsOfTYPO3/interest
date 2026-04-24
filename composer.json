@@ -26,7 +26,7 @@
 		"php": "^8.2",
 		"ext-json": "*",
 		"ext-pdo": "*",
-		"symfony/console": "^7.1.4",
+		"symfony/console": "^7.4.8",
 		"typo3/cms-core": "^14.3",
 		"typo3/cms-frontend": "^14.3"
 	},
