@@ -91,7 +91,7 @@
 			},
 			"app-dir": ".Build",
 			"extension-key": "interest",
-			"version": "4.0.0",
+			"version": "4.0.1",
 			"web-dir": ".Build/public"
 		}
 	},
