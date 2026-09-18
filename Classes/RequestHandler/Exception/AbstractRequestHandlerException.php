@@ -20,8 +20,7 @@ abstract class AbstractRequestHandlerException extends GuzzleRequestException
      */
     public function __construct(string $message, RequestInterface $request)
     {
-        parent::__construct($message, $request, null);
-        $this->code = static::RESPONSE_CODE;
+        parent::__construct($message, $request, static::RESPONSE_CODE);
     }
 
     /**
