@@ -214,7 +214,7 @@ jobs:
           composer update --no-ansi --no-interaction --no-progress --with-dependencies typo3/minimal:"$TYPO3"
           composer show
       - name: "Start MySQL"
-        run: "sudo /etc/init.d/mysql start"
+        run: "sudo systemctl start mysql"
       - name: "Run functional tests"
         run: |
           export typo3DatabaseName="typo3";
